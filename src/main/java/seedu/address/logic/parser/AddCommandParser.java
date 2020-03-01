@@ -34,7 +34,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_REMARK, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_REMARK, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -51,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         boolean remarkIsPresent = remarkString.isPresent();
         Remark remark;
         if (remarkIsPresent) {
-            remark = ParserUtil.parseRemark(remarkString.get()); //TODO
+            remark = ParserUtil.parseRemark(remarkString.get());
         } else {
             remark = new Remark("");
         }
