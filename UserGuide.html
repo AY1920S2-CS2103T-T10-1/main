@@ -11,7 +11,7 @@
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#quick-start">2. Quick Start</a></li>
-<li><a href="#Features">3. Features</a>
+<li><a href="#Features">3. Inherited Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-a-recipe-code-add-code">3.2. Adding a recipe: <code>add</code></a></li>
@@ -26,16 +26,30 @@
 <li><a href="#saving-the-data">3.11. Saving the data</a></li>
 </ul>
 </li>
-<li><a href="#advanced-features">4. Advanced Features</a>
+<li><a href="#filter-feature">4. Filter Feature</a></li>
+<li><a href="#plan-feature">5. Plan Feature</a>
 <ul class="sectlevel2">
-<li><a href="#filter">4.1. Filter</a></li>
-<li><a href="#planning">4.2. Planning</a></li>
-<li><a href="#goal">4.3. Goal</a></li>
-<li><a href="#motivation">4.4. Motivation</a></li>
+<li><a href="#set-a-recipe-to-be-cooked-on-a-certain-day-code-set-code">5.1. Set a recipe to be cooked on a certain day: <code>set</code></a></li>
+<li><a href="#see-planned-recipes-code-planned-code">5.2. See planned recipes: <code>planned</code></a></li>
+<li><a href="#get-ingredient-list-code-get-code">5.3. Get ingredient list: <code>get</code></a></li>
 </ul>
 </li>
-<li><a href="#faq">5. FAQ</a></li>
-<li><a href="#command-summary">6. Command Summary</a></li>
+<li><a href="#goal-feature">6. Goal Feature</a>
+<ul class="sectlevel2">
+<li><a href="#add-a-custom-goal-to-track-code-addgoal-code">6.1. Add a custom goal to track: <code>addGoal</code></a></li>
+<li><a href="#remove-goal-code-removegoal-code">6.2. Remove goal: <code>removeGoal</code></a></li>
+<li><a href="#list-goals-being-tracked-code-listgoals-code">6.3. List goals being tracked: <code>listGoals</code></a></li>
+<li><a href="#track-cooked-meals-code-cooked-code">6.4. Track cooked meals: <code>cooked</code></a></li>
+<li><a href="#show-graph-of-goals-code-chart-code">6.5. Show graph of goals: <code>chart</code></a></li>
+</ul>
+</li>
+<li><a href="#motivation-feature">7. Motivation Feature</a>
+<ul class="sectlevel2">
+<li><a href="#suggest-a-recipe-based-on-current-goal-code-suggest-code">7.1. Suggest a recipe based on current goal: <code>suggest</code></a></li>
+</ul>
+</li>
+<li><a href="#faq">8. FAQ</a></li>
+<li><a href="#command-summary">9. Command Summary</a></li>
 </ul>
 </div>
 </div>
@@ -93,14 +107,14 @@ e.g. Entering <strong><code>help</code></strong> will open the help window.</p>
 </div>
 </li>
 <li>
-<p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
+<p>Refer to <a href="#Features">Section 3, &#8220;Inherited Features&#8221;</a> for details of each command.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
+<h2 id="Features"><a class="link" href="#Features">3. Inherited Features</a></h2>
 <div class="sectionbody">
 <div class="exampleblock">
 <div class="content">
@@ -243,31 +257,31 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="advanced-features"><a class="link" href="#advanced-features">4. Advanced Features</a></h2>
+<h2 id="filter-feature"><a class="link" href="#filter-feature">4. Filter Feature</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="filter"><a class="link" href="#filter">4.1. Filter</a></h3>
 
 </div>
+</div>
+<div class="sect1">
+<h2 id="plan-feature"><a class="link" href="#plan-feature">5. Plan Feature</a></h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="planning"><a class="link" href="#planning">4.2. Planning</a></h3>
-<div class="sect3">
-<h4 id="set-a-recipe-to-be-cooked-on-a-certain-day-code-set-code"><a class="link" href="#set-a-recipe-to-be-cooked-on-a-certain-day-code-set-code">4.2.1. Set a recipe to be cooked on a certain day: <code>set</code></a></h4>
+<h3 id="set-a-recipe-to-be-cooked-on-a-certain-day-code-set-code"><a class="link" href="#set-a-recipe-to-be-cooked-on-a-certain-day-code-set-code">5.1. Set a recipe to be cooked on a certain day: <code>set</code></a></h3>
 <div class="paragraph">
 <p>Set a recipe that you would like to cook on a certain day.<br>
 Format: <code>set RECIPE_INDEX d/YYYY-MM-DD</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="see-planned-recipes-code-planned-code"><a class="link" href="#see-planned-recipes-code-planned-code">4.2.2. See planned recipes: <code>planned</code></a></h4>
+<div class="sect2">
+<h3 id="see-planned-recipes-code-planned-code"><a class="link" href="#see-planned-recipes-code-planned-code">5.2. See planned recipes: <code>planned</code></a></h3>
 <div class="paragraph">
 <p>Check the recipes you have planned out during a period of time or within the next few days.<br>
 Format: planned d/YYYY-MM-DD to d/YYYY-MM-DD
 Format: planned NUM_OF_DAYS</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-ingredient-list-code-get-code"><a class="link" href="#get-ingredient-list-code-get-code">4.2.3. Get ingredient list: <code>get</code></a></h4>
+<div class="sect2">
+<h3 id="get-ingredient-list-code-get-code"><a class="link" href="#get-ingredient-list-code-get-code">5.3. Get ingredient list: <code>get</code></a></h3>
 <div class="paragraph">
 <p>Gives you the list of ingredients needed for the recipes that you have planned during a period of time or within the next few days.<br>
 Format: get d/YYYY-MM-DD to d/YYYY-MM-DD
@@ -275,48 +289,52 @@ Format: get NUM_OF_DAYS</p>
 </div>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="goal-feature"><a class="link" href="#goal-feature">6. Goal Feature</a></h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="goal"><a class="link" href="#goal">4.3. Goal</a></h3>
-<div class="sect3">
-<h4 id="add-a-custom-goal-to-track-code-addgoal-code"><a class="link" href="#add-a-custom-goal-to-track-code-addgoal-code">4.3.1. Add a custom goal to track: <code>addGoal</code></a></h4>
+<h3 id="add-a-custom-goal-to-track-code-addgoal-code"><a class="link" href="#add-a-custom-goal-to-track-code-addgoal-code">6.1. Add a custom goal to track: <code>addGoal</code></a></h3>
 <div class="paragraph">
 <p>Adds a goal chosen by user from the given goals to start tracking progress.<br>
 Format: <code>addGoal g/GOAL</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="remove-goal-code-removegoal-code"><a class="link" href="#remove-goal-code-removegoal-code">4.3.2. Remove goal: <code>removeGoal</code></a></h4>
+<div class="sect2">
+<h3 id="remove-goal-code-removegoal-code"><a class="link" href="#remove-goal-code-removegoal-code">6.2. Remove goal: <code>removeGoal</code></a></h3>
 <div class="paragraph">
 <p>Removes a goal that the user had selected. This goal will no longer be tracked.<br>
 Format: <code>removeGoal g/GOAL</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="list-goals-being-tracked-code-listgoals-code"><a class="link" href="#list-goals-being-tracked-code-listgoals-code">4.3.3. List goals being tracked: <code>listGoals</code></a></h4>
+<div class="sect2">
+<h3 id="list-goals-being-tracked-code-listgoals-code"><a class="link" href="#list-goals-being-tracked-code-listgoals-code">6.3. List goals being tracked: <code>listGoals</code></a></h3>
 <div class="paragraph">
 <p>List all current goals being tracked by the user.<br>
 Format: <code>listGoals</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="track-cooked-meals-code-cooked-code"><a class="link" href="#track-cooked-meals-code-cooked-code">4.3.4. Track cooked meals: <code>cooked</code></a></h4>
+<div class="sect2">
+<h3 id="track-cooked-meals-code-cooked-code"><a class="link" href="#track-cooked-meals-code-cooked-code">6.4. Track cooked meals: <code>cooked</code></a></h3>
 <div class="paragraph">
 <p>Tracks all cooked meals and added to the progress of their respective goals.<br>
 Format: <code>cooked n/NAME g/GOAL</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="show-graph-of-goals-code-chart-code"><a class="link" href="#show-graph-of-goals-code-chart-code">4.3.5. Show graph of goals: <code>chart</code></a></h4>
+<div class="sect2">
+<h3 id="show-graph-of-goals-code-chart-code"><a class="link" href="#show-graph-of-goals-code-chart-code">6.5. Show graph of goals: <code>chart</code></a></h3>
 <div class="paragraph">
 <p>Shows weekly progress of respective goal through graph.<br>
 Format: <code>chart g/GOAL</code></p>
 </div>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="motivation-feature"><a class="link" href="#motivation-feature">7. Motivation Feature</a></h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="motivation"><a class="link" href="#motivation">4.4. Motivation</a></h3>
-<div class="sect3">
-<h4 id="suggest-a-recipe-based-on-current-goal-code-suggest-code"><a class="link" href="#suggest-a-recipe-based-on-current-goal-code-suggest-code">4.4.1. Suggest a recipe based on current goal: <code>suggest</code></a></h4>
+<h3 id="suggest-a-recipe-based-on-current-goal-code-suggest-code"><a class="link" href="#suggest-a-recipe-based-on-current-goal-code-suggest-code">7.1. Suggest a recipe based on current goal: <code>suggest</code></a></h3>
 <div class="paragraph">
 <p>Gives you a random recipe which falls under the goal you have chosen.<br>
 Format: suggest</p>
@@ -324,9 +342,8 @@ Format: suggest</p>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">5. FAQ</a></h2>
+<h2 id="faq"><a class="link" href="#faq">8. FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
@@ -335,7 +352,7 @@ Format: suggest</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">9. Command Summary</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -367,4 +384,4 @@ e.g. <code>find Spicy Chicken</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-07 14:15:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-10 12:13:40 UTC</div></div></div></body></html>
