@@ -26,7 +26,14 @@
 <li><a href="#saving-the-data">3.11. Saving the data</a></li>
 </ul>
 </li>
-<li><a href="#filter-feature">4. Filter Feature</a></li>
+<li><a href="#filter-feature">4. Filter Feature</a>
+<ul class="sectlevel2">
+<li><a href="#filter-by-ingredients">4.1. Filter by ingredients</a></li>
+<li><a href="#filter-by-goals">4.2. Filter by goals</a></li>
+<li><a href="#filter-by-favourites">4.3. Filter by favourites</a></li>
+<li><a href="#filter-by-preparation-time">4.4. Filter by preparation time</a></li>
+</ul>
+</li>
 <li><a href="#plan-feature">5. Plan Feature</a>
 <ul class="sectlevel2">
 <li><a href="#set-a-recipe-to-be-cooked-on-a-certain-day-code-set-code">5.1. Set a recipe to be cooked on a certain day: <code>set</code></a></li>
@@ -171,10 +178,10 @@ The time taken for the meal to be cooked is measured in minutes (min).
 <div class="ulist">
 <ul>
 <li>
-<p>`add n/Spicy Chicken t/30 ip/300, Chicken Wings io/50, Ketchup io/50, Garlic Chili Sauce</p>
+<p><code>add n/Spicy Chicken t/30 ip/300, Chicken Wings io/50, Ketchup io/50, Garlic Chili Sauce</code></p>
 </li>
 <li>
-<p>`add n/Everyday Salad Bowl t/10 iv/100, Romaine Lettuce iv/100, Cherry Tomato iv/100, Cucumber, io/30, Salad Dressing g/Herbivore</p>
+<p><code>add n/Everyday Salad Bowl t/10 iv/100, Romaine Lettuce iv/100, Cherry Tomato iv/100, Cucumber, io/30, Salad Dressing g/Herbivore</code></p>
 </li>
 </ul>
 </div>
@@ -259,7 +266,34 @@ There is no need to save manually.</p>
 <div class="sect1">
 <h2 id="filter-feature"><a class="link" href="#filter-feature">4. Filter Feature</a></h2>
 <div class="sectionbody">
-
+<div class="sect2">
+<h3 id="filter-by-ingredients"><a class="link" href="#filter-by-ingredients">4.1. Filter by ingredients</a></h3>
+<div class="paragraph">
+<p>Finds recipes that contains the specified ingredients.<br>
+Format: <code>filter [i/INGREDIENT 1, INGREDIENT 2, &#8230;&#8203;]</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filter-by-goals"><a class="link" href="#filter-by-goals">4.2. Filter by goals</a></h3>
+<div class="paragraph">
+<p>Finds recipes that are tagged with the specified goal.<br>
+Format: <code>filter [g/GOAL]</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filter-by-favourites"><a class="link" href="#filter-by-favourites">4.3. Filter by favourites</a></h3>
+<div class="paragraph">
+<p>Finds recipes that are tagged as favourites.<br>
+Format: <code>filter favourites</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filter-by-preparation-time"><a class="link" href="#filter-by-preparation-time">4.4. Filter by preparation time</a></h3>
+<div class="paragraph">
+<p>Finds recipes that have preparation time less than or equals to the specified time (in minutes).<br>
+Format: <code>filter [t/TIME]</code></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -384,4 +418,4 @@ e.g. <code>find Spicy Chicken</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-11 02:34:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-11 15:59:51 UTC</div></div></div></body></html>
