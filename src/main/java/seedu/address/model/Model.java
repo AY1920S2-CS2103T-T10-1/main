@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' recipe book file path.
+     * Returns the user prefs' address book file path.
      */
-    Path getRecipeBookFilePath();
+    Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' recipe book file path.
+     * Sets the user prefs' address book file path.
      */
-    void setRecipeBookFilePath(Path recipeBookFilePath);
+    void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces recipe book data with the data in {@code recipeBook}.
+     * Replaces address book data with the data in {@code addressBook}.
      */
-    void setRecipeBook(ReadOnlyRecipeBook recipeBook);
+    void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the RecipeBook */
-    ReadOnlyRecipeBook getRecipeBook();
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a recipe with the same identity as {@code recipe} exists in the recipe book.
+     * Returns true if a recipe with the same identity as {@code recipe} exists in the address book.
      */
     boolean hasRecipe(Recipe recipe);
 
     /**
      * Deletes the given recipe.
-     * The recipe must exist in the recipe book.
+     * The recipe must exist in the address book.
      */
     void deleteRecipe(Recipe target);
 
     /**
      * Adds the given recipe.
-     * {@code recipe} must not already exist in the recipe book.
+     * {@code recipe} must not already exist in the address book.
      */
     void addRecipe(Recipe recipe);
 
     /**
      * Replaces the given recipe {@code target} with {@code editedRecipe}.
-     * {@code target} must exist in the recipe book.
-     * The recipe identity of {@code editedRecipe} must not be the same as another existing recipe in the recipe book.
+     * {@code target} must exist in the address book.
+     * The recipe identity of {@code editedRecipe} must not be the same as another existing recipe in the address book.
      */
     void setRecipe(Recipe target, Recipe editedRecipe);
 

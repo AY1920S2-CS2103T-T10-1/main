@@ -12,7 +12,7 @@ import seedu.address.model.recipe.UniqueRecipeList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameRecipe comparison)
  */
-public class RecipeBook implements ReadOnlyRecipeBook {
+public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueRecipeList recipes;
 
@@ -27,12 +27,12 @@ public class RecipeBook implements ReadOnlyRecipeBook {
         recipes = new UniqueRecipeList();
     }
 
-    public RecipeBook() {}
+    public AddressBook() {}
 
     /**
-     * Creates a RecipeBook using the Recipes in the {@code toBeCopied}
+     * Creates an AddressBook using the Recipes in the {@code toBeCopied}
      */
-    public RecipeBook(ReadOnlyRecipeBook toBeCopied) {
+    public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,10 +48,9 @@ public class RecipeBook implements ReadOnlyRecipeBook {
     }
 
     /**
-     * Resets the existing data of this {@code RecipeBook} with {@code newData}.
-     * @param newData
+     * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyRecipeBook newData) {
+    public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setRecipes(newData.getRecipeList());
@@ -87,8 +86,8 @@ public class RecipeBook implements ReadOnlyRecipeBook {
     }
 
     /**
-     * Removes {@code key} from this {@code RecipeBook}.
-     * {@code key} must exist in the recipe book.
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
      */
     public void removeRecipe(Recipe key) {
         recipes.remove(key);
@@ -110,8 +109,8 @@ public class RecipeBook implements ReadOnlyRecipeBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof RecipeBook // instanceof handles nulls
-                && recipes.equals(((RecipeBook) other).recipes));
+                || (other instanceof AddressBook // instanceof handles nulls
+                && recipes.equals(((AddressBook) other).recipes));
     }
 
     @Override

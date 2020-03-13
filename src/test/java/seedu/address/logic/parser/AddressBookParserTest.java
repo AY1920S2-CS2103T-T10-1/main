@@ -29,9 +29,9 @@ import seedu.address.testutil.EditRecipeDescriptorBuilder;
 import seedu.address.testutil.RecipeBuilder;
 import seedu.address.testutil.RecipeUtil;
 
-public class RecipeBookParserTest {
+public class AddressBookParserTest {
 
-    private final RecipeBookParser parser = new RecipeBookParser();
+    private final AddressBookParser parser = new AddressBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {
