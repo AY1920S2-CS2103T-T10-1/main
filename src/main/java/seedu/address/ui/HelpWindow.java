@@ -26,7 +26,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "\n list - list all recipes"
             + "\n switch - switch tabs"
             + "\n exit - to leave HYBB"
-            + USERGUIDE_URL;
+            + "\n" + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

@@ -280,7 +280,7 @@ public class TypicalRecipes {
                     "Stir and remove to serving bowls. This method works best if started before you go to bed.")
             .withGoals("Wholesome Wholemeal").build();
 
-    // Manually added - Recipe's details found in {@code CommandTestUtil}
+    //Manually added - Recipe's details found in {@code CommandTestUtil}
     public static final Recipe TURKEY_SANDWICH = new RecipeBuilder().withName(VALID_NAME_TURKEY_SANDWICH)
             .withTime(VALID_TIME_TURKEY_SANDWICH)
             .withGrains(VALID_GRAIN_TURKEY_SANDWICH)
