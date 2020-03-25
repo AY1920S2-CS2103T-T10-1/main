@@ -1,5 +1,4 @@
 {
-  "_comment": "RecipeBook save file which contains the same Recipe values as in TypicalRecipes#getTypicalAddressBook()",
   "recipes" : [ {
     "name" : "Vegan Thai Green Curry Soup",
     "time" : "35",
