@@ -17,7 +17,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
     public static final String HELP_MESSAGE =
-    "Here are the list of commands available:"
+            "Here are the list of commands available:"
             + "\n add - add a new recipe"
             + "\n addStep - add steps to selected recipe"
             + "\n edit - edit selected recipe"

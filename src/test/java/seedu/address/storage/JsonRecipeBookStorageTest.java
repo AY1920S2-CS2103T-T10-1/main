@@ -3,9 +3,9 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalRecipes.CAESAR_SALAD;
-import static seedu.address.testutil.TypicalRecipes.FISH_TACO;
-import static seedu.address.testutil.TypicalRecipes.VEGETARIAN_PIZZA;
+import static seedu.address.testutil.TypicalRecipes.VEGAN_THAI_GREEN_CURRY_SOUP;
+import static seedu.address.testutil.TypicalRecipes.FIVE_INGREDIENT_SPELT_SPAGHETTI;
+import static seedu.address.testutil.TypicalRecipes.BACON_SPINACH_CARAMELIZED_ONION_PASTA;
 import static seedu.address.testutil.TypicalRecipes.getTypicalRecipeBook;
 
 import java.io.IOException;
@@ -72,14 +72,14 @@ public class JsonRecipeBookStorageTest {
         assertEquals(original, new RecipeBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addRecipe(FISH_TACO);
-        original.removeRecipe(CAESAR_SALAD);
+        original.addRecipe(FIVE_INGREDIENT_SPELT_SPAGHETTI);
+        original.removeRecipe(VEGAN_THAI_GREEN_CURRY_SOUP);
         jsonRecipeBookStorage.saveRecipeBook(original, filePath);
         readBack = jsonRecipeBookStorage.readRecipeBook(filePath).get();
         assertEquals(original, new RecipeBook(readBack));
 
         // Save and read without specifying file path
-        original.addRecipe(VEGETARIAN_PIZZA);
+        original.addRecipe(BACON_SPINACH_CARAMELIZED_ONION_PASTA);
         jsonRecipeBookStorage.saveRecipeBook(original); // file path not specified
         readBack = jsonRecipeBookStorage.readRecipeBook().get(); // file path not specified
         assertEquals(original, new RecipeBook(readBack));

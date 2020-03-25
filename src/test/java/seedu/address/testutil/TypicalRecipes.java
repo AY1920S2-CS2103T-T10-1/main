@@ -36,9 +36,9 @@ public class TypicalRecipes {
             .withGrains("rice vermicelli noodles, 200g")
             .withVegetables("100g,button mushrooms sliced","1 cup, broccoli florets", "10g, Thai red eye bird's chili" )
             .withOthers(" 1 tbsp,thai Green Curry Paste",
-                                "1/4 Cup, coconut milk", "2 tsp, oil",
+                                "0.25 Cup, coconut milk", "2 tsp, oil",
                                 "1 tsp, Salt" , "1 tsp, soy sauce",
-                                "1/2 tsp, brown sugar")
+                                "0.5 tsp, brown sugar")
             .withSteps("Heat oil in a saucepan. Add the vegetables (broccoli, mushroom) and saute till they turn soft. Transfer to a plate and set aside.",
                     "In the same saucepan, add the green curry paste. Saute the curry paste for a minute.",
                     "Add the coconut milk, brown sugar and soy sauce. Stir until the curry paste is nicely dissolved.",
@@ -51,9 +51,9 @@ public class TypicalRecipes {
             .withGoals("Herbivore").build();
     public static final Recipe THAI_BASIL_GROUND_BEEF_BOWL = new RecipeBuilder().withName("Thai Basil Ground Beef Bowl")
             .withTime("25")
-            .withVegetables("20g, garlic cloves (minced)","20g, garlic clove", "2 cups, asparagus (chopped)", "1/4 cup, Thai basil",
+            .withVegetables("20g, garlic cloves (minced)","20g, garlic clove", "2 cups, asparagus (chopped)", "0.25 cup, Thai basil",
                     "200g, cauliflower",
-                    "1/4 cup, onion")
+                    "0.25 cup, onion")
             .withProteins("500g, 95% lean ground beef", "1 tbsp, fresh ginger (minced)")
             .withOthers("2 tbsp, low sodium soy sauce",
                     "2 tsp, chilli paste", "1 tbsp, coconut oil (or olive oil)")
@@ -156,7 +156,7 @@ public class TypicalRecipes {
                     "1 tbsp, Fresh Basil",
                     "2 tbsp, Salt",
                     "1 tbsp, Pepper",
-                    "1/2 tbsp, Olive Oil")
+                    "0.5 tbsp, Olive Oil")
             .withSteps("Thinly slice Tomatoes and Leek and shred your Zucchini.",
                     "Heat up Oil in a large Pan on a medium-high Level and roast Leek until golden.",
                     "Now add Zucchini.",
@@ -178,7 +178,7 @@ public class TypicalRecipes {
                     "1 tbsp, salt",
                     "1 tbsp, pepper",
                     "1 tbsp, garlic powder",
-                    "1/2 cup, Parmesan cheese sprinkles")
+                    "0.5 cup, Parmesan cheese sprinkles")
             .withSteps("In a large skillet, add your bacon and cook for 1-2 mins until bacon is halfway done",
             "In that same pan, and some butter, sugar, spices, and onion; sautee until the onion becomes tender, and bacon starts to crisp up.",
             "Boil pasta in salted water until al dente",
@@ -224,9 +224,9 @@ public class TypicalRecipes {
                     "15g, Thai chiles (dice)",
                     "10g, pepitas (with or without sesame seeds)")
             .withProteins("20g, toasted peanuts" , "3 tbsp, cashew or peanut butter")
-            .withFruits("50g, ripe peach (thinly sliced)", "1/2 tbsp, lime juice")
-            .withOthers("15g, chopped cilantro (including stems)", "1 tbsp, Sea salt", "1/2 tbsp. white miso paste",
-                    "1/4 tbsp, sesame oil", "1 tbsp, water")
+            .withFruits("50g, ripe peach (thinly sliced)", "0.5 tbsp, lime juice")
+            .withOthers("15g, chopped cilantro (including stems)", "1 tbsp, Sea salt", "0.5 tbsp. white miso paste",
+                    "0.25 tbsp, sesame oil", "1 tbsp, water")
             .withSteps("Make the dressing: In a small bowl, whisk together the cashew butter, miso paste, lime juice, sesame oil, and ginger. Whisk in enough water to create a drizzable consistency. Set aside.",
                     "In a dry cast-iron skillet over medium heat, char the peppers whole, rotating until the edges have a little char, about 2 minutes per side. Remove. When cool to the touch, slice in half lengthwise, remove the stem, ribbing, and seeds and slice horizontally into thin strips.",
                     "In a large bowl, combine the cabbage, peppers, scallions, cilantro, basil, chiles, and ¾ of the dressing. Toss until combined. Add the remaining dressing, if desired, and season to taste with a few pinches of sea salt. Serve topped with the toasted nuts, seeds, and sliced peaches.")
@@ -234,17 +234,17 @@ public class TypicalRecipes {
 
     public static final Recipe AVOCADO_COUSCOUS_GRAPEFRUIT_SALAD_WITH_HONEY_LIME_DRESSING = new RecipeBuilder().withName("Avocado Couscous Grapefruit salad with honey lime dressing")
             .withTime("35")
-            .withGrains("3/4 cups, uncooked whole wheat couscous", "100g, white beans" )
-            .withProteins("3/4 cups, low sodium chicken stock" )
+            .withGrains("0.75 cups, uncooked whole wheat couscous", "100g, white beans" )
+            .withProteins("0.75 cups, low sodium chicken stock" )
             .withFruits("300g, large avocados",
                     "200g, large ruby red grapefruit",
                     "3 tbsp, freshly squeezed lime juice (for dressing)")
-            .withOthers("1/2 cup, crumbled feta cheese",
+            .withOthers("0.5 cup, crumbled feta cheese",
                     "3 tbsp, chopped fresh mint",
                     "3 tbsp, finely chopped fresh cilantro",
                     "2 tbsp, honey",
                     "2 tbsp, extra virgin olive oil",
-                    "1/4 tbsp, kosher salt")
+                    "0.25 tbsp, kosher salt")
             .withSteps("In a small saucepan, bring the stock to a boil. Remove from the heat, stir in the couscous, then cover at let sit 5 minutes. Fluff with fork and set aside.",
                     "In a small bowl or large measuring cup, whisk together the dressing ingredients: lime juice, honey, olive oil, and salt, or shake all of the ingredients together in a mason jar with a tight-fitting lid.",
                     "In a large bowl, combine beans and couscous. Pour dressing over top and stir to combine. Add the avocados, grapefruit, feta, mint, and cilantro. Toss gently. Serve chilled or at room temperature.")
@@ -253,12 +253,12 @@ public class TypicalRecipes {
     public static final Recipe TERIYAKI_CHICKEN_NOODLE_BOWL = new RecipeBuilder().withName("Teriyaki chicken noodle bowl")
             .withTime("35")
             .withVegetables("50g, cloves garlic(minced)",
-                    "1/4 tbsp, freshly grated ginger ")
+                    "0.25 tbsp, freshly grated ginger ")
             .withProteins("113g, boneless and skinless chicken thighs(cut into 1-inch chunks)")
             .withOthers("141g, refrigerated Yaki-Soba, seasoning sauce packets discarded*",
-                    "4 tbsp, cornstarch", "1/12 cup, reduced sodium soy sauce", "1/12 cup, reduced sodium soy sauce",
-                    "1/16 cup, brown sugar(packed)","1/2 tbsp, honey", "1/4 tbsp, olive oil",
-                    "1/4 tbsp, sesame seeds",
+                    "4 tbsp, cornstarch", "0.08 cup, reduced sodium soy sauce", "0.08 cup, reduced sodium soy sauce",
+                    "0.06 cup, brown sugar(packed)","0.5 tbsp, honey", "0.25 tbsp, olive oil",
+                    "0.25 tbsp, sesame seeds",
                     "20g, green onion (thinly sliced)")
             .withSteps("In a large pot of boiling water, add Yaki-Soba until loosened, about 1-2 minutes; drain well.",
                     "In a small bowl, whisk together cornstarch and 1/4 cup water; set aside.",
@@ -314,7 +314,9 @@ public class TypicalRecipes {
     }
 
     public static List<Recipe> getTypicalRecipes() {
-        return new ArrayList<>(Arrays.asList(VEGAN_THAI_GREEN_CURRY_SOUP,THAI_BASIL_GROUND_BEEF_BOWL,BARLEY_PILAF,ASIAN_BBQ_CHICKEN, SWEET_AND_SOUR_CHICKEN, QUICK_CARROT_DAIKON_STIR_FRY,CHINESE_TOMATO_EGG_STIR_FRY,FIVE_INGREDIENT_SPELT_SPAGHETTI,BACON_SPINACH_CARAMELIZED_ONION_PASTA,HEALTHY_CHICKEN_SALAD_SANDWICH,ALL_VEGGIE_SANDWICH,SUMMER_ASIAN_SLAW,AVOCADO_COUSCOUS_GRAPEFRUIT_SALAD_WITH_HONEY_LIME_DRESSING,TERIYAKI_CHICKEN_NOODLE_BOWL,OVERNIGHT_OATMEAL
+        return new ArrayList<>(Arrays.asList(VEGAN_THAI_GREEN_CURRY_SOUP,THAI_BASIL_GROUND_BEEF_BOWL,
+                BARLEY_PILAF,ASIAN_BBQ_CHICKEN, SWEET_AND_SOUR_CHICKEN,
+                QUICK_CARROT_DAIKON_STIR_FRY,CHINESE_TOMATO_EGG_STIR_FRY,FIVE_INGREDIENT_SPELT_SPAGHETTI,BACON_SPINACH_CARAMELIZED_ONION_PASTA,HEALTHY_CHICKEN_SALAD_SANDWICH,ALL_VEGGIE_SANDWICH,SUMMER_ASIAN_SLAW,AVOCADO_COUSCOUS_GRAPEFRUIT_SALAD_WITH_HONEY_LIME_DRESSING,TERIYAKI_CHICKEN_NOODLE_BOWL,OVERNIGHT_OATMEAL
         ));
     }
 }

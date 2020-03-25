@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GOAL_PROTEIN;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalRecipes.CAESAR_SALAD;
+import static seedu.address.testutil.TypicalRecipes.VEGAN_THAI_GREEN_CURRY_SOUP;
 import static seedu.address.testutil.TypicalRecipes.getTypicalRecipeBook;
 
 import java.util.Arrays;
@@ -45,9 +45,9 @@ public class RecipeBookTest {
     @Test
     public void resetData_withDuplicateRecipes_throwsDuplicateRecipeException() {
         // Two recipes with the same identity fields
-        Recipe editedAlice = new RecipeBuilder(CAESAR_SALAD).withGoals(VALID_GOAL_PROTEIN)
+        Recipe editedAlice = new RecipeBuilder(VEGAN_THAI_GREEN_CURRY_SOUP).withGoals(VALID_GOAL_PROTEIN)
                 .build();
-        List<Recipe> newRecipes = Arrays.asList(CAESAR_SALAD, editedAlice);
+        List<Recipe> newRecipes = Arrays.asList(VEGAN_THAI_GREEN_CURRY_SOUP, editedAlice);
         RecipeBookStub newData = new RecipeBookStub(newRecipes);
 
         assertThrows(DuplicateRecipeException.class, () -> recipeBook.resetData(newData));
@@ -60,19 +60,19 @@ public class RecipeBookTest {
 
     @Test
     public void hasRecipe_recipeNotInRecipeBook_returnsFalse() {
-        assertFalse(recipeBook.hasRecipe(CAESAR_SALAD));
+        assertFalse(recipeBook.hasRecipe(VEGAN_THAI_GREEN_CURRY_SOUP));
     }
 
     @Test
     public void hasRecipe_recipeInRecipeBook_returnsTrue() {
-        recipeBook.addRecipe(CAESAR_SALAD);
-        assertTrue(recipeBook.hasRecipe(CAESAR_SALAD));
+        recipeBook.addRecipe(VEGAN_THAI_GREEN_CURRY_SOUP);
+        assertTrue(recipeBook.hasRecipe(VEGAN_THAI_GREEN_CURRY_SOUP));
     }
 
     @Test
     public void hasRecipe_recipeWithSameIdentityFieldsInRecipeBook_returnsTrue() {
-        recipeBook.addRecipe(CAESAR_SALAD);
-        Recipe editedAlice = new RecipeBuilder(CAESAR_SALAD).withGoals(VALID_GOAL_PROTEIN)
+        recipeBook.addRecipe(VEGAN_THAI_GREEN_CURRY_SOUP);
+        Recipe editedAlice = new RecipeBuilder(VEGAN_THAI_GREEN_CURRY_SOUP).withGoals(VALID_GOAL_PROTEIN)
                 .build();
         assertTrue(recipeBook.hasRecipe(editedAlice));
     }

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECIPES;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalRecipes.CAESAR_SALAD;
-import static seedu.address.testutil.TypicalRecipes.GRILLED_SANDWICH;
+import static seedu.address.testutil.TypicalRecipes.VEGAN_THAI_GREEN_CURRY_SOUP;
+import static seedu.address.testutil.TypicalRecipes.THAI_BASIL_GROUND_BEEF_BOWL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,13 +79,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasRecipe_recipeNotInRecipeBook_returnsFalse() {
-        assertFalse(modelManager.hasRecipe(CAESAR_SALAD));
+        assertFalse(modelManager.hasRecipe(VEGAN_THAI_GREEN_CURRY_SOUP));
     }
 
     @Test
     public void hasRecipe_recipeInRecipeBook_returnsTrue() {
-        modelManager.addRecipe(CAESAR_SALAD);
-        assertTrue(modelManager.hasRecipe(CAESAR_SALAD));
+        modelManager.addRecipe(VEGAN_THAI_GREEN_CURRY_SOUP);
+        assertTrue(modelManager.hasRecipe(VEGAN_THAI_GREEN_CURRY_SOUP));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        RecipeBook recipeBook = new RecipeBookBuilder().withRecipe(CAESAR_SALAD).withRecipe(GRILLED_SANDWICH).build();
+        RecipeBook recipeBook = new RecipeBookBuilder().withRecipe(VEGAN_THAI_GREEN_CURRY_SOUP).withRecipe(THAI_BASIL_GROUND_BEEF_BOWL).build();
         RecipeBook differentRecipeBook = new RecipeBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,7 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentRecipeBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = CAESAR_SALAD.getName().fullName.split("\\s+");
+        String[] keywords = VEGAN_THAI_GREEN_CURRY_SOUP.getName().fullName.split("\\s+");
         modelManager.updateFilteredRecipeList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(recipeBook, userPrefs)));
 
