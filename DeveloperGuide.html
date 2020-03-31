@@ -24,11 +24,12 @@ By: <code>Team HYBB</code>      Since: <code>Mar 2020</code>      Licenc
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#basic-commands">3.1. Basic commands</a></li>
-<li><a href="#advanced-filter-feature">3.2. Advanced Filter feature</a></li>
-<li><a href="#proposed-goals-feature">3.3. [Proposed] Goals feature</a></li>
+<li><a href="#recipe-customisation-commands">3.2. Recipe customisation commands</a></li>
+<li><a href="#filter-command">3.3. Filter command</a></li>
 <li><a href="#planning-feature">3.4. Planning feature</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
+<li><a href="#goals-feature">3.5. Goals feature</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -335,99 +336,235 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Recipe Book</
 <div class="sect2">
 <h3 id="basic-commands"><a class="link" href="#basic-commands">3.1. Basic commands</a></h3>
 <div class="sect3">
-<h4 id="switch-command"><a class="link" href="#switch-command">3.1.1. Switch command</a></h4>
+<h4 id="help-command"><a class="link" href="#help-command">3.1.1. Help command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="switch-command"><a class="link" href="#switch-command">3.1.2. Switch command</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/SwitchActivityDiagram.png" alt="SwitchActivityDiagram">
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="list-command"><a class="link" href="#list-command">3.1.3. List command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="find-command"><a class="link" href="#find-command">3.1.4. Find command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="add-command"><a class="link" href="#add-command">3.1.5. Add command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="edit-command"><a class="link" href="#edit-command">3.1.6. Edit command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="delete-command"><a class="link" href="#delete-command">3.1.7. Delete command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="favourite-and-unfavourite-commands"><a class="link" href="#favourite-and-unfavourite-commands">3.1.8. Favourite and Unfavourite commands</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="undo-and-redo-commands"><a class="link" href="#undo-and-redo-commands">3.1.9. Undo and Redo commands</a></h4>
+<div class="paragraph">
+<p>Description: TODO</p>
+</div>
+<div class="sect4">
+<h5 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h5>
+<div class="paragraph">
+<p>This section explains how the undo and redo commands are implemented.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>TODO</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows what happens when the user calls an undo operation:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram">
+</div>
+<div class="title">Figure 9. Undo command sequence diagram</div>
+</div>
+<div class="paragraph">
+<p>Result: TODO</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-how-undo-and-redo-executes"><a class="link" href="#aspect-how-undo-and-redo-executes">Aspect: How undo and redo executes</a></h6>
+<div class="paragraph">
+<p>Challenges faced: TODO</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire recipe book.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: May use up a lot of memory space within a single session 1) if there is a large volume of recipe book commits
+and/or 2) if the magnitude of a single commit is large (ie. the database is huge, containing many recipes).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will use less memory.</p>
+</li>
+<li>
+<p>Cons: Tedious to ensure the correctness of the implementation of each individual command.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clear-command"><a class="link" href="#clear-command">3.1.10. Clear command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="exit-command"><a class="link" href="#exit-command">3.1.11. Exit command</a></h4>
+
+</div>
 </div>
 <div class="sect2">
-<h3 id="advanced-filter-feature"><a class="link" href="#advanced-filter-feature">3.2. Advanced Filter feature</a></h3>
+<h3 id="recipe-customisation-commands"><a class="link" href="#recipe-customisation-commands">3.2. Recipe customisation commands</a></h3>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">3.2.1. Implementation</a></h4>
+<h4 id="add-ingredient-command"><a class="link" href="#add-ingredient-command">3.2.1. Add ingredient command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="edit-ingredient-command"><a class="link" href="#edit-ingredient-command">3.2.2. Edit ingredient command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="delete-ingredient-command"><a class="link" href="#delete-ingredient-command">3.2.3. Delete ingredient command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="add-step-command"><a class="link" href="#add-step-command">3.2.4. Add step command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="edit-step-command"><a class="link" href="#edit-step-command">3.2.5. Edit step command</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="delete-step-command"><a class="link" href="#delete-step-command">3.2.6. Delete step command</a></h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="filter-command"><a class="link" href="#filter-command">3.3. Filter command</a></h3>
+<div class="paragraph">
+<p>The advanced filter feature uses the <code>filter</code> command to search for recipes according to the set of keywords provided
+by the user. Think of it as a greatly enhanced and more robust version of the <code>find</code> command, which only allows the
+user to find recipes by their name.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.3.1. Implementation</a></h4>
+<div class="paragraph">
+<p>This section explains how the filter command is implemented.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User specified keywords are directed to the <code>FilterCommandParser</code> where <code>ArgumentTokenizer</code> and <code>ArgumentMultimap</code>
+are used to parse the user input. An error will be thrown if no keywords are specified at all.</p>
+</li>
+<li>
+<p>The parsed user input is then fed into <code>RecipeMatchesKeywordPredicate</code> where a <code>Predicate</code>, p, is created. This
+predicate will subsequently be used as the filter to get all recipes that meet the user specified criteria.</p>
+</li>
+<li>
+<p>A new <code>FilterCommand</code> object will be created with the predicate and returned to the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The <code>FilterCommand#execute(model)</code> method is executed and <code>Model#updateFilteredRecipeList(p)</code> is called. This tests
+every recipe in the database against the predicate, p, and updates the filtered recipe list with recipes that meet the
+user specified criteria.</p>
+</li>
+<li>
+<p>Once complete, this filtered recipe list is displayed to the user.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Here is a sample sequence diagram that shows what happens when the user inputs <code>filter favourites t/20 ig/Pasta</code>:</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/AdvancedFilterSequenceDiagram.png" alt="AdvancedFilterSequenceDiagram">
 </div>
+<div class="title">Figure 10. Advanced filter sequence diagram</div>
 </div>
+<div class="paragraph">
+<p>This operation displays all recipes that 1) are marked as favourites, 2) take 20 minutes or less to prepare,
+and 3) contains pasta as an ingredient.</p>
 </div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-recipes-are-filtered"><a class="link" href="#aspect-how-recipes-are-filtered">Aspect: How recipes are filtered</a></h5>
-
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="proposed-goals-feature"><a class="link" href="#proposed-goals-feature">3.3. [Proposed] Goals feature</a></h3>
-<div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.3.1. Proposed Implementation</a></h4>
-
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-goals-are-being-tagged"><a class="link" href="#aspect-how-goals-are-being-tagged">Aspect: How goals are being tagged</a></h5>
+<h5 id="aspect-consistency-of-user-input-format"><a class="link" href="#aspect-consistency-of-user-input-format">Aspect: Consistency of user input format</a></h5>
+<div class="paragraph">
+<p>One concern we had while implementing this feature was the sheer number of commands and prefixes that our app had.
+Eventually, the current implementation was chosen because we didn&#8217;t want to define a new format for <code>filter</code>
+keywords which might potentially confuse our users.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> System generates tags for each recipe based on food algorithm.</p>
+<p><strong>Alternative 1 (current choice):</strong> Uses the existing prefixes and format in the user input.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Higher accuracy and makes use of inputs of ingredients class.</p>
+<p>Pros: The existing <code>ArgumentTokenizer</code> and <code>ArgumentMultimap</code> classes already have capabilities to parse user input
+that is in a certain format. Thus, using the same format saves us time and effort in implementing our own parser. It
+also spares the user from having to remember multiple formats / keywords.</p>
 </li>
 <li>
-<p>Cons: Would require several criteria checks that may not be intuitive and would require the use of artificial intelligence for the highest accuracy.</p>
+<p>Cons: The user has to be familiar with the prefixes and other special keywords in order to use this feature to its
+fullest potential.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2 :</strong> User chooses from 4 given goals and user adds the tags to the recipes.</p>
+<p><strong>Alternative 2:</strong> Define new keywords that the user can use. These keywords could be "more english-like" as opposed
+to using shortened tags as prefixes.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: Easy to remember these keywords since they are more english-like.</p>
 </li>
 <li>
-<p>Cons: Is dependant on user&#8217;s understanding and not universal understanding of what may be deemed healthy.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-how-to-determine-the-criteria-for-each-goal"><a class="link" href="#aspect-how-to-determine-the-criteria-for-each-goal">Aspect: How to determine the criteria for each goal</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Check by quantity</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: More accurate and can be modelled against ideal ratio of a healthy meal.</p>
-</li>
-<li>
-<p>Cons: Harder to implement as we need to standardise the ingredient measurements, not as intuitive.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2 :</strong> Check by variety</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: Not as accurate as one grain of rice would still be counted as variety.</p>
+<p>Cons: We must implement our own parser which is tedious. The user will also have to remember a new set of keywords
+on top of the existing prefixes. This is double work for the user.</p>
 </li>
 </ul>
 </div>
@@ -440,7 +577,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Recipe Book</
 <div class="sect2">
 <h3 id="planning-feature"><a class="link" href="#planning-feature">3.4. Planning feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-2"><a class="link" href="#proposed-implementation-2">3.4.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.4.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The planning feature uses the <code>PlannedRecipeMap</code> to store a <code>Recipe</code> at a <code>Date</code>.</p>
 </div>
@@ -525,14 +662,90 @@ corresponds to the date we are interested in.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="goals-feature"><a class="link" href="#goals-feature">3.5. Goals feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation-2"><a class="link" href="#proposed-implementation-2">3.5.1. Proposed Implementation</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-goals-are-being-tagged"><a class="link" href="#aspect-how-goals-are-being-tagged">Aspect: How goals are being tagged</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> System generates tags for each recipe based on food algorithm.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Higher accuracy and makes use of inputs of ingredients class.</p>
+</li>
+<li>
+<p>Cons: Would require several criteria checks that may not be intuitive and would require the use of artificial intelligence for the highest accuracy.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong> User chooses from 4 given goals and user adds the tags to the recipes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Is dependant on user&#8217;s understanding and not universal understanding of what may be deemed healthy.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-determine-the-criteria-for-each-goal"><a class="link" href="#aspect-how-to-determine-the-criteria-for-each-goal">Aspect: How to determine the criteria for each goal</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Check by quantity</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More accurate and can be modelled against ideal ratio of a healthy meal.</p>
+</li>
+<li>
+<p>Cons: Harder to implement as we need to standardise the ingredient measurements, not as intuitive.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong> Check by variety</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Not as accurate as one grain of rice would still be counted as variety.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -563,7 +776,7 @@ corresponds to the date we are interested in.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1409,4 +1622,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-30 10:50:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-31 11:00:32 UTC</div></div></div></body></html>
