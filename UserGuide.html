@@ -164,7 +164,7 @@ through streaks and images of healthy food that they uploaded.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Ensure you have Java <code>11</code> or above installed in your Computer.</p>
+<p>Ensure you have <code>Java 11</code> or above installed in your Computer.</p>
 </li>
 <li>
 <p>Download the latest <code>healthybaby.jar</code> <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/releases">here</a>.</p>
@@ -194,7 +194,10 @@ through streaks and images of healthy food that they uploaded.</p>
 <p><strong><code>list</code></strong> : lists all recipes</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd recipe shown in the current list</p>
+<p><strong><code>delete 3</code></strong> : deletes the 3rd recipe shown in the current list</p>
+</li>
+<li>
+<p><strong><code>undo</code></strong> : undoes the previous action</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -239,15 +242,15 @@ through streaks and images of healthy food that they uploaded.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wholesome Wholemeals</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recipes that contain wholemeals or wholegrains</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bulk like the Hulk</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recipes that contain lots of proteins</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Herbivore</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recipes that only contain non-animal foodstuff</p></td>
 </tr>
 </tbody>
 </table>
@@ -380,7 +383,7 @@ through streaks and images of healthy food that they uploaded.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt; &gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional field. e.g. <code>n/NAME [g/GOAL]</code> can be used as <code>n/Spicy Chicken g/Bulk like the Hulk</code> or as <code>n/Spicy Chicken</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional field. e.g. <code>n/NAME &lt;g/GOAL&gt;</code> can be used as <code>n/Spicy Chicken g/Bulk like the Hulk</code> or as <code>n/Spicy Chicken</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">[ &lt; &gt; ]</p></td>
@@ -388,7 +391,7 @@ through streaks and images of healthy food that they uploaded.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">…</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One or more of this same field can be added. e.g. <code>[g/GOAL]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>g/Bulk like the Hulk</code>, <code>g/Wholesome wholemeals' g/Herbivore</code> etc.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more of this same field can be added. e.g. <code>&lt;g/GOAL&gt;&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>g/Bulk like the Hulk</code>, <code>g/Wholesome Wholemeals</code>, <code>g/Herbivore</code> etc.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">image::Tip.png</p></td>
@@ -403,8 +406,7 @@ through streaks and images of healthy food that they uploaded.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Parameters can be in any order e.g. if the command specifies <code>n/NAME i/INGREDIENT</code>,
-<code>i/INGREDIENT n/NAME</code> is also acceptable.<br>
+Parameters can be in any order e.g. if the command specifies <code>n/NAME t/TIME</code>, <code>t/TIME n/NAME</code> is also acceptable.<br>
 Commands are case-insensitive, but tags are case-sensitive.
 </td>
 </tr>
@@ -728,6 +730,18 @@ You can delete multiple steps at a time (at least one step must be deleted).
 <div class="sect1">
 <h2 id="filter-command"><a class="link" href="#filter-command">8. Filter Command</a></h2>
 <div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can combine the input of the next few subsections to filter the recipes by multiple criteria!
+</td>
+</tr>
+</table>
+</div>
 <div class="sect2">
 <h3 id="filter-by-ingredients"><a class="link" href="#filter-by-ingredients">8.1. Filter by ingredients</a></h3>
 <div class="paragraph">
@@ -761,7 +775,7 @@ Searches for recipes that have 15 minutes or less of preparation time.</p>
 </div>
 <div class="paragraph">
 <p>Example 2: <code>filter t/20-30</code><br>
-Searches  for recipes that have 20 to 30 minutes of preparation time.</p>
+Searches for recipes that have 20 to 30 minutes (inclusive) of preparation time.</p>
 </div>
 </div>
 </div>
@@ -1002,4 +1016,4 @@ Format: <code>addImage [i/image]</code></p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-03 01:45:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-03 03:06:37 UTC</div></div></div></body></html>
