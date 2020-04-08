@@ -521,10 +521,35 @@ image::AddExample.png</p>
 </td>
 <td class="content">
 Multiple steps and multiple ingredients for a recipe can be added in this one command.<br>
-&#160;<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
 The compulsory fields needed in a recipe are the <strong>name, time and at least one of the ingredient fields.</strong>
 You can add these fields first, then edit the recipe as needed using the various edit commands available
-(Refer to section 6.6 and 7).
+(Refer to section 6.6 and 7).<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For name and time fields that only require one input, if more than one name or more than one time is given,
+HYBB will take the later input.<br>
+For example, <code>add n/Chicken Rice n/Chicken with Rice t/30, ip/300g, Chicken Thigh</code>
+would create a new recipe with the name Chicken with Rice.
 </td>
 </tr>
 </table>
@@ -552,8 +577,33 @@ Using this command to edit a field that might have multiple entities like ‘veg
 overwrite the entire field.
 For example, if the 4th recipe currently has a list of 5 vegetable ingredients, running <code>edit 4 iv/50g, Lettuce</code> will
 replace the <strong>entire</strong> list of vegetable ingredients with only 50g of Lettuce.<br>
-&#160;<br>
-To make changes to a single entity in a field without having to rewrite everything, please refer to Section 7.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To make changes to a single entity in a field without having to rewrite everything, please refer to Section 7.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For fields that can only contain one entry like name and time, if more than one name or more than one time is given,
+HYBB will take the later input.<br>
+For example, <code>edit 4 t/10 t/20</code>
+would change the time taken to 20 minutes for the recipe at index 4.
 </td>
 </tr>
 </table>
@@ -1118,4 +1168,4 @@ data of your previous HYBB folder.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-07 14:22:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-08 13:16:59 UTC</div></div></div></body></html>
