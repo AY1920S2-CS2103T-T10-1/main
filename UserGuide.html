@@ -70,9 +70,9 @@
 <li><a href="#plan-a-recipe-code-plan-code">9.1. Plan a recipe: <code>plan</code></a></li>
 <li><a href="#delete-a-planned-recipe-code-deleteplan-code">9.2. Delete a planned recipe: <code>deletePlan</code></a></li>
 <li><a href="#clear-all-planned-recipes-code-clearplan-code">9.3. Clear all planned recipes: <code>clearPlan</code></a></li>
-<li><a href="#mark-a-planned-recipe-as-done-code-done-code-coming-in-v1-4">9.4. Mark a planned recipe as done: <code>done</code> [Coming in v1.4]</a></li>
-<li><a href="#obtain-ingredients-for-planned-recipes-code-getingredients-code-coming-in-v1-4">9.5. Obtain ingredients for planned recipes: <code>getIngredients</code> [Coming in v1.4]</a></li>
-<li><a href="#view-this-week-s-planned-recipes-code-viewweek-code-coming-in-v1-4">9.6. View this week&#8217;s planned recipes: <code>viewWeek</code> [Coming in v1.4]</a></li>
+<li><a href="#obtain-ingredients-for-planned-recipes-code-grocerylist-code">9.4. Obtain ingredients for planned recipes: <code>groceryList</code></a></li>
+<li><a href="#view-this-week-s-planned-recipes-code-viewweek-code-coming-in-v2-0">9.5. View this week&#8217;s planned recipes: <code>viewWeek</code> [Coming in v2.0]</a></li>
+<li><a href="#view-this-month-s-planned-recipes-code-viewmonth-code-coming-in-v2-0">9.6. View this month&#8217;s planned recipes: <code>viewMonth</code> [Coming in v2.0]</a></li>
 </ul>
 </li>
 <li><a href="#goal-feature">10. Goal Feature</a>
@@ -932,16 +932,53 @@ Format: <code>plan [recipe index] [d/yyyy-mm-dd]</code></p>
 <p>Example: <code>plan 1 d/2020-03-27</code><br>
 Plans the recipe at index 1 in the recipe book to 27 March 2020.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Multiple indexes can be given in one go. <code>plan 1 2 3 d/2020-03-27</code> will plan all three recipes at indexes 1 2 and 3
+on 27 March 2020.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="delete-a-planned-recipe-code-deleteplan-code"><a class="link" href="#delete-a-planned-recipe-code-deleteplan-code">9.2. Delete a planned recipe: <code>deletePlan</code></a></h3>
 <div class="paragraph">
 <p>Deletes a planned recipe at a certain day.<br>
-Format: <code>deletePlan [planned recipe index] [d/yyyy-mm-dd]</code></p>
+Format: <code>deletePlan [planned recipe index]</code></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>deletePlan 3 d/2020-03-27</code><br>
-Deletes the 3rd recipe planned on 27 March 2020.</p>
+<p>Format: <code>deletePlan 3</code><br>
+Deletes the 3rd recipe planned.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Multiple indexes can be given in one go. <code>deletePlan 1 2 3</code> will delete all three plans at indexes 1 2 and 3.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Using the <code>cooked</code> command in Section 10.4 will automatically delete today&#8217;s plan for that recipe.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -952,28 +989,24 @@ Format: <code>clearPlan</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-a-planned-recipe-as-done-code-done-code-coming-in-v1-4"><a class="link" href="#mark-a-planned-recipe-as-done-code-done-code-coming-in-v1-4">9.4. Mark a planned recipe as done: <code>done</code> [Coming in v1.4]</a></h3>
+<h3 id="obtain-ingredients-for-planned-recipes-code-grocerylist-code"><a class="link" href="#obtain-ingredients-for-planned-recipes-code-grocerylist-code">9.4. Obtain ingredients for planned recipes: <code>groceryList</code></a></h3>
 <div class="paragraph">
-<p>Marks the planned recipes at the specified date as cooked.<br>
-Format: <code>done d/YYYY-MM-DD INDEX</code></p>
+<p>Lists all ingredients needed for the recipes that have been planned.<br>
+Format: <code>groceryList</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="obtain-ingredients-for-planned-recipes-code-getingredients-code-coming-in-v1-4"><a class="link" href="#obtain-ingredients-for-planned-recipes-code-getingredients-code-coming-in-v1-4">9.5. Obtain ingredients for planned recipes: <code>getIngredients</code> [Coming in v1.4]</a></h3>
-<div class="paragraph">
-<p>Lists the ingredients needed for the recipes scheduled in the specified period of time.<br>
-Format: <code>getIngredients [d/yyyy-mm-dd] [d/yyyy-mm-dd]</code></p>
-</div>
-<div class="paragraph">
-<p>Example: <code>getIngredients d/2020-03-27 d/2020-04-01</code><br>
-Lists all ingredients needed for the recipes scheduled between 27 March and 4 April 2020.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="view-this-week-s-planned-recipes-code-viewweek-code-coming-in-v1-4"><a class="link" href="#view-this-week-s-planned-recipes-code-viewweek-code-coming-in-v1-4">9.6. View this week&#8217;s planned recipes: <code>viewWeek</code> [Coming in v1.4]</a></h3>
+<h3 id="view-this-week-s-planned-recipes-code-viewweek-code-coming-in-v2-0"><a class="link" href="#view-this-week-s-planned-recipes-code-viewweek-code-coming-in-v2-0">9.5. View this week&#8217;s planned recipes: <code>viewWeek</code> [Coming in v2.0]</a></h3>
 <div class="paragraph">
 <p>View all the plans for the week.<br>
 Format: <code>viewWeek</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-this-month-s-planned-recipes-code-viewmonth-code-coming-in-v2-0"><a class="link" href="#view-this-month-s-planned-recipes-code-viewmonth-code-coming-in-v2-0">9.6. View this month&#8217;s planned recipes: <code>viewMonth</code> [Coming in v2.0]</a></h3>
+<div class="paragraph">
+<p>View all the plans for the month.<br>
+Format: <code>viewMonth</code></p>
 </div>
 </div>
 </div>
@@ -1168,4 +1201,4 @@ data of your previous HYBB folder.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-10 23:10:29 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 08:30:16 UTC</div></div></div></body></html>
