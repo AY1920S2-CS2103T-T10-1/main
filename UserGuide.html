@@ -504,7 +504,8 @@ recipe to be found (e.g. <code>find Avo</code> will be able to find recipes that
 <h3 id="add-a-recipe-code-add-code"><a class="link" href="#add-a-recipe-code-add-code">6.5. Add a recipe: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a recipe to the recipe book<br>
-Format: <code>add [n/name] [t/time] &lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;&#8230;&#8203; &lt;io/other&gt;&#8230;&#8203; &lt;s/step&gt;…</code></p>
+Format: <code>add [n/name] [t/time] [&lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;&#8230;&#8203; &lt;io/other&gt;&#8230;&#8203;]
+&lt;s/step&gt;&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Example: <code>add n/Chicken Rice t/30 ip/300g, Chicken Thigh ig/300g, Rice s/Boil chicken s/While chicken is cooking,
@@ -559,8 +560,8 @@ would create a new recipe with the name Chicken with Rice.
 <h3 id="edit-a-recipe-code-edit-code"><a class="link" href="#edit-a-recipe-code-edit-code">6.6. Edit a recipe : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing recipe. This is the command used for editing entire fields at a time.<br>
-Format: <code>edit [recipe index] &lt;n/name&gt;&#8230;&#8203; &lt;t/time&gt;&#8230;&#8203; &lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;&#8230;&#8203;
-&lt;io/other&gt;… &lt;s/step&gt;…</code></p>
+Format: <code>edit [recipe index] [&lt;n/name&gt; &lt;t/time&gt; &lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;&#8230;&#8203;
+&lt;io/other&gt;&#8230;&#8203; &lt;s/step&gt;&#8230;&#8203;]</code></p>
 </div>
 <div class="paragraph">
 <p>Example: <code>edit 4 n/Chicken Rice t/20</code><br>
@@ -698,7 +699,7 @@ There is no need to save manually.</p>
 <h3 id="add-ingredients-to-a-recipe-code-addingredient-code"><a class="link" href="#add-ingredients-to-a-recipe-code-addingredient-code">7.1. Add Ingredients to a Recipe: <code>addIngredient</code></a></h3>
 <div class="paragraph">
 <p>Adds more ingredients to an existing recipe.<br>
-Format: <code>addIngredient [recipe index] [ &lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;&#8230;&#8203; &lt;io/other&gt;&#8230;&#8203; ]</code></p>
+Format: <code>addIngredient [recipe index] [&lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;&#8230;&#8203; &lt;io/other&gt;&#8230;&#8203;]</code></p>
 </div>
 <div class="paragraph">
 <p>Example: <code>addIngredient 2 ig/50g, Bread io/5g, Butter</code><br>
@@ -721,7 +722,7 @@ You can add multiple ingredients at a time (at least one ingredient must be adde
 <h3 id="edit-ingredient-quantity-in-a-recipe-code-editingredient-code"><a class="link" href="#edit-ingredient-quantity-in-a-recipe-code-editingredient-code">7.2. Edit Ingredient Quantity in a Recipe: <code>editIngredient</code></a></h3>
 <div class="paragraph">
 <p>Edits the quantity of an ingredient in an existing recipe.<br>
-Format: <code>editIngredient [recipe index] [ &lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;… &lt;io/other&gt;&#8230;&#8203; ]</code></p>
+Format: <code>editIngredient [recipe index] [&lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;… &lt;io/other&gt;&#8230;&#8203;]</code></p>
 </div>
 <div class="paragraph">
 <p>Example: <code>editIngredient 3 ig/50g, Bread</code><br>
@@ -744,9 +745,9 @@ You can edit multiple ingredients at a time (at least one ingredient must be edi
 <div class="sect2">
 <h3 id="delete-ingredients-in-a-recipe-code-deleteingredient-code"><a class="link" href="#delete-ingredients-in-a-recipe-code-deleteingredient-code">7.3. Delete Ingredients in a Recipe: <code>deleteIngredient</code></a></h3>
 <div class="paragraph">
-<p>Deletes an ingredient in an existing recipe.<br>
-Format: <code>deleteIngredient [recipe index] [ &lt;ig/grain name&gt;&#8230;&#8203; &lt;iv/vegetable name&gt;&#8230;&#8203; &lt;ip/protein name&gt;&#8230;&#8203;
-&lt;if/fruit name&gt;&#8230;&#8203; &lt;io/other name&gt;&#8230;&#8203; ]</code></p>
+<p>Deletes the specified ingredient(s) from an existing recipe.<br>
+Format: <code>deleteIngredient [recipe index] [&lt;ig/grain name&gt;&#8230;&#8203; &lt;iv/vegetable name&gt;&#8230;&#8203; &lt;ip/protein name&gt;&#8230;&#8203;
+&lt;if/fruit name&gt;&#8230;&#8203; &lt;io/other name&gt;&#8230;&#8203;]</code></p>
 </div>
 <div class="paragraph">
 <p>Example: <code>deleteIngredient 3 ig/Rice iv/Kailan</code><br>
@@ -1201,4 +1202,4 @@ data of your previous HYBB folder.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 22:52:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 23:11:28 UTC</div></div></div></body></html>
