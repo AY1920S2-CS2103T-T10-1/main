@@ -24,8 +24,8 @@ By: <code>Team HYBB</code>      Since: <code>Mar 2020</code>      Licenc
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#basic-commands">3.1. Basic commands</a></li>
-<li><a href="#recipe-customisation-commands">3.2. Recipe customisation commands</a></li>
-<li><a href="#filter-command">3.3. Filter command</a></li>
+<li><a href="#recipe-customisation-commands-brian">3.2. Recipe customisation commands (Brian)</a></li>
+<li><a href="#filter-command-brian">3.3. Filter command (Brian)</a></li>
 <li><a href="#planning-feature">3.4. Planning feature</a></li>
 <li><a href="#goals-feature">3.5. Goals feature</a></li>
 <li><a href="#logging">3.6. Logging</a></li>
@@ -376,23 +376,100 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Recipe Book</
 
 </div>
 <div class="sect3">
-<h4 id="favourite-and-unfavourite-commands"><a class="link" href="#favourite-and-unfavourite-commands">3.1.8. Favourite and Unfavourite commands</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="undo-and-redo-commands"><a class="link" href="#undo-and-redo-commands">3.1.9. Undo and Redo commands</a></h4>
+<h4 id="favourite-and-unfavourite-commands-brian"><a class="link" href="#favourite-and-unfavourite-commands-brian">3.1.8. Favourite and Unfavourite commands (Brian)</a></h4>
 <div class="paragraph">
 <p>Description: TODO</p>
 </div>
 <div class="sect4">
 <h5 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h5>
 <div class="paragraph">
-<p>This section explains how the undo and redo commands are implemented.</p>
+<p>For brevity, we will only be talking about the <code>favourite</code> command here. Note that the <code>unfavourite</code> command is
+implemented in the same way.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>TODO</p>
+<p>The user input received by <code>FavouriteCommandParser#parse</code> will pass on the user input to
+<code>ParserUtil#parseMultipleIndex</code> to verify if the indexes keyed in are non-zero, unsigned integers. An error is thrown
+if any of the indexes do not meet this requirement.</p>
+<div class="paragraph">
+<p>On top of verifying the validity of the indexes, <code>ParserUtil#parseMultipleIndex</code> will remove any duplicate indexes
+and sort them. It returns a sorted array of one-based indexes.</p>
+</div>
+</li>
+<li>
+<p>A new <code>FavouriteCommand</code> object will be created with the array of indexes and returned to the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The <code>FavouriteCommand#execute</code> method is executed. First, the array of indexes will be checked against the
+<em>currently displayed recipe list</em> to ensure that there exists a corresponding recipe index. An error will be thrown if
+a user specified recipe index is out of bounds.</p>
+</li>
+<li>
+<p>Next, we check if the specified recipe(s) is already a favourite. If it is not a favourite yet, we use an
+<code>EditRecipeDescriptor</code> to set the recipe&#8217;s <code>isFavourite</code> to true.</p>
+</li>
+<li>
+<p>Finally, we display the names of the recipes that have been newly made favourites, and the names of the recipes that
+were already favourites.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Here is a sample sequence diagram that shows what happens when the user inputs <code>favourite 2 3</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FavouriteCommandSequenceDiagram.png" alt="FavouriteCommandSequenceDiagram">
+</div>
+<div class="title">Figure 9. Favourite command sequence diagram</div>
+</div>
+<div class="paragraph">
+<p>This operation favourites recipe 2 and 3.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">3.1.9. Undo and Redo commands (Brian)</a></h4>
+<div class="paragraph">
+<p>The implementation of <code>undo</code> and <code>redo</code> was adapted from AB3. However, HYBB requires more book-keeping because on top
+of the <code>RecipeBook</code>, we have a <code>PlannedBook</code> and a <code>CookedRecordBook</code> to keep track of as well.</p>
+</div>
+<div class="paragraph">
+<p>For brevity, we will only be talking about the <code>undo</code> command here. Note that the <code>redo</code> command is implemented in the
+same way.</p>
+</div>
+<div class="sect4">
+<h5 id="implementation-before-code-undo-code-is-called"><a class="link" href="#implementation-before-code-undo-code-is-called">Implementation (before <code>undo</code> is called)</a></h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Whenever a command that changes the state of any of the books is called, <code>Model#commitBook</code> is
+called as well.</p>
+<div class="paragraph">
+<p><code>Model#commitBook</code> will save the <code>CommandType</code> and <code>Tab</code> of the command in 2 separate stacks in
+<code>MultipleBookStateManager</code>. It will also save the current state of the affected book(s) in an ArrayList of that book
+type. All redundant states, regardless of which book it belongs to, will be purged before any saving occurs.</p>
+</div>
+<div class="paragraph">
+<p>Note: <code>CommandType</code> tells you which book(s) the command affects, while <code>Tab</code> tells you which tab should be
+displayed upon execution of the command.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="implementation-when-code-undo-code-is-called"><a class="link" href="#implementation-when-code-undo-code-is-called">Implementation (when <code>undo</code> is called)</a></h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>Model#canUndo</code> is called to check if there are sufficient actions to be undone. An error is thrown if there are
+insufficient actions to be undone.</p>
+</li>
+<li>
+<p>If able to undo, <code>Model#undoBook</code> is called. The <code>CommandType</code> stack is popped to know which book(s) need undoing.
+The corresponding books in <code>Model</code> are then set to the previous version.</p>
 </li>
 </ol>
 </div>
@@ -403,7 +480,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Recipe Book</
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram">
 </div>
-<div class="title">Figure 9. Undo command sequence diagram</div>
+<div class="title">Figure 10. Undo command sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>Result: TODO</p>
@@ -426,7 +503,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Recipe Book</
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: May use up a lot of memory space within a single session 1) if there is a large volume of recipe book commits
+<p>Cons: May use up a lot of memory space within a single session 1) if there is a large number of recipe book commits
 and/or 2) if the magnitude of a single commit is large (ie. the database is huge, containing many recipes).</p>
 </li>
 </ul>
@@ -440,7 +517,8 @@ and/or 2) if the magnitude of a single commit is large (ie. the database is huge
 <p>Pros: Will use less memory.</p>
 </li>
 <li>
-<p>Cons: Tedious to ensure the correctness of the implementation of each individual command.</p>
+<p>Cons: Tedious to ensure the correctness of the implementation of each individual command. Furthermore, some commands
+affect multiple books, making book-keeping even more complicated (and hence, susceptible to error).</p>
 </li>
 </ul>
 </div>
@@ -460,49 +538,45 @@ and/or 2) if the magnitude of a single commit is large (ie. the database is huge
 </div>
 </div>
 <div class="sect2">
-<h3 id="recipe-customisation-commands"><a class="link" href="#recipe-customisation-commands">3.2. Recipe customisation commands</a></h3>
-<div class="sect3">
-<h4 id="add-ingredient-command"><a class="link" href="#add-ingredient-command">3.2.1. Add ingredient command</a></h4>
-
+<h3 id="recipe-customisation-commands-brian"><a class="link" href="#recipe-customisation-commands-brian">3.2. Recipe customisation commands (Brian)</a></h3>
+<div class="paragraph">
+<p>The following commands: <code>addingredient</code>, <code>editingredient</code>, <code>deleteingredient</code>, <code>addstep</code>, <code>editstep</code>, and <code>deletestep</code>
+were implemented to overcome the limitations of the <code>edit</code> command. These recipe customisation commands allow the user to make targeted changes to the ingredient or step fields instead of having to rewrite the
+entire field using <code>edit</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="edit-ingredient-command"><a class="link" href="#edit-ingredient-command">3.2.2. Edit ingredient command</a></h4>
-
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.2.1. Implementation</a></h4>
+<div class="paragraph">
+<p>TODO</p>
 </div>
-<div class="sect3">
-<h4 id="delete-ingredient-command"><a class="link" href="#delete-ingredient-command">3.2.3. Delete ingredient command</a></h4>
-
+<div class="sect4">
+<h5 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-todo"><a class="link" href="#aspect-todo">Aspect: TODO</a></h6>
+<div class="paragraph">
+<p>TODO</p>
 </div>
-<div class="sect3">
-<h4 id="add-step-command"><a class="link" href="#add-step-command">3.2.4. Add step command</a></h4>
-
 </div>
-<div class="sect3">
-<h4 id="edit-step-command"><a class="link" href="#edit-step-command">3.2.5. Edit step command</a></h4>
-
 </div>
-<div class="sect3">
-<h4 id="delete-step-command"><a class="link" href="#delete-step-command">3.2.6. Delete step command</a></h4>
-
 </div>
 </div>
 <div class="sect2">
-<h3 id="filter-command"><a class="link" href="#filter-command">3.3. Filter command</a></h3>
+<h3 id="filter-command-brian"><a class="link" href="#filter-command-brian">3.3. Filter command (Brian)</a></h3>
 <div class="paragraph">
 <p>The advanced filter feature uses the <code>filter</code> command to search for recipes according to the set of keywords provided
 by the user. Think of it as a greatly enhanced and more robust version of the <code>find</code> command, which only allows the
 user to find recipes by their name.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.3.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>This section explains how the filter command is implemented.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User specified keywords are directed to the <code>FilterCommandParser</code> where <code>ArgumentTokenizer</code> and <code>ArgumentMultimap</code>
-are used to parse the user input. An error will be thrown if no keywords are specified at all.</p>
+<p>User specified keywords are directed to <code>FilterCommandParser#parse</code> where <code>ArgumentTokenizer</code> and
+<code>ArgumentMultimap</code> are used to parse the user input. An error will be thrown if no keywords are specified at all.</p>
 </li>
 <li>
 <p>The parsed user input is then fed into <code>RecipeMatchesKeywordPredicate</code> where a <code>Predicate</code>, p, is created. This
@@ -512,7 +586,7 @@ predicate will subsequently be used as the filter to get all recipes that meet t
 <p>A new <code>FilterCommand</code> object will be created with the predicate and returned to the <code>LogicManager</code>.</p>
 </li>
 <li>
-<p>The <code>FilterCommand#execute(model)</code> method is executed and <code>Model#updateFilteredRecipeList(p)</code> is called. This tests
+<p>The <code>FilterCommand#execute</code> method is executed and <code>Model#updateFilteredRecipeList</code> is called. This tests
 every recipe in the database against the predicate, p, and updates the filtered recipe list with recipes that meet the
 user specified criteria.</p>
 </li>
@@ -528,7 +602,7 @@ user specified criteria.</p>
 <div class="content">
 <img src="images/AdvancedFilterSequenceDiagram.png" alt="AdvancedFilterSequenceDiagram">
 </div>
-<div class="title">Figure 10. Advanced filter sequence diagram</div>
+<div class="title">Figure 11. Advanced filter sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>This operation displays all recipes that 1) are marked as favourites, 2) take 20 minutes or less to prepare,
@@ -536,7 +610,7 @@ and 3) contains pasta as an ingredient.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-consistency-of-user-input-format"><a class="link" href="#aspect-consistency-of-user-input-format">Aspect: Consistency of user input format</a></h5>
 <div class="paragraph">
@@ -547,7 +621,7 @@ keywords which might potentially confuse our users.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Uses the existing prefixes and format in the user input.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use the existing prefixes and format in the user input.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -599,7 +673,7 @@ on top of the existing prefixes. This is double work for the user.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-recipes-are-scheduled"><a class="link" href="#aspect-how-recipes-are-scheduled">Aspect: How recipes are scheduled</a></h5>
 <div class="ulist">
@@ -676,7 +750,7 @@ corresponds to the date we are interested in.</p>
 
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-goals-are-being-tagged"><a class="link" href="#aspect-how-goals-are-being-tagged">Aspect: How goals are being tagged</a></h5>
 <div class="ulist">
@@ -1630,4 +1704,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 17:34:29 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 19:16:01 UTC</div></div></div></body></html>
