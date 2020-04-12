@@ -77,7 +77,7 @@
 </li>
 <li><a href="#goal-feature">10. Goal Feature</a>
 <ul class="sectlevel2">
-<li><a href="#remove-goal-code-removegoal-code">10.1. Remove goal: <code>removeGoal</code></a></li>
+<li><a href="#remove-goal-code-deletegoal-code">10.1. Remove goal: <code>deleteGoal</code></a></li>
 <li><a href="#list-goals-being-tracked-code-listgoals-code">10.2. List goals being tracked: <code>listGoals</code></a></li>
 <li><a href="#track-cooked-meals-code-cooked-code">10.3. Track cooked meals: <code>cooked</code></a></li>
 <li><a href="#show-progress-of-goals-code-chart-code-coming-in-v2-0">10.4. Show progress of goals: <code>chart</code> [Coming in v2.0]</a></li>
@@ -243,20 +243,20 @@ through streaks daily motivational quotes.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wholesome Wholemeals</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whole Grains</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bulk like the Hulk</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Healthy Proteins</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Herbivore</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Vegetables</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fruity Fiesta</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fruits</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bulk like the Hulk</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Healthy Proteins</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wholesome Wholemeals</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whole Grains</p></td>
 </tr>
 </tbody>
 </table>
@@ -1026,10 +1026,10 @@ Format: <code>viewMonth</code></p>
 <h2 id="goal-feature"><a class="link" href="#goal-feature">10. Goal Feature</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="remove-goal-code-removegoal-code"><a class="link" href="#remove-goal-code-removegoal-code">10.1. Remove goal: <code>removeGoal</code></a></h3>
+<h3 id="remove-goal-code-deletegoal-code"><a class="link" href="#remove-goal-code-deletegoal-code">10.1. Remove goal: <code>deleteGoal</code></a></h3>
 <div class="paragraph">
-<p>Removes a goal that has been auto-generated through the addition or editting of a recipe.<br>
-Format: <code>removeGoal [recipe index] [goal]</code></p>
+<p>Deletes a goal that has been auto-generated through the addition or editing of a recipe from a specific recipe.<br>
+Format: <code>deleteGoal [recipe index] [goal]</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1038,7 +1038,7 @@ Format: <code>removeGoal [recipe index] [goal]</code></p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Ensure that the capitalisation of the goal is the same!
+Ensure that the capitalisation of the goal is the same! Check out <code>listGoals</code> if unsure.
 </td>
 </tr>
 </table>
@@ -1163,15 +1163,15 @@ data of your previous HYBB folder.</p>
 </div>
 <div class="paragraph">
 <p><strong>Q</strong>: How does the auto-generation of goals work?<br>
-<strong>A</strong>: HYBB analyses the ingredients added or editted in a recipe and auto-generates goals for you. The recipe being tagged by a goal suggests that the minimum requirement per meal for the respective food group, as recommended by the National Institute of Health, has been met.</p>
+<strong>A</strong>: HYBB analyses the ingredients added or edited in a recipe and auto-generates goals for you. The recipe being tagged by a goal suggests that the minimum requirement per meal for the respective food group, as recommended by the National Institute of Health, has been met.</p>
 </div>
 <div class="paragraph">
-<p><strong>Q</strong>: Why is there a removeGoal command and no addGoal command?<br>
+<p><strong>Q</strong>: Why is there a deleteGoal command and no addGoal command?<br>
 <strong>A</strong>: As this is the beta version of HYBB, the auto-generation of goals is designed to either accurately calculate quantity or err on the side of overestimation. This would allow you to remove any goal you deem inaccurate based on your own judgement. You can look forward to future releases which will integrate artificial intelligence into HYBB to auto-generate goals more accurately!</p>
 </div>
 <div class="paragraph">
 <p><strong>Q</strong>: Why are there no safeguards for adding ingredients?<br>
-<strong>A</strong>: Currently, HYBB is designed to help you manage your customized recipe list. Hence, the addition of ingredients and under which tag(ip/ iv/ ig/ if/) they fall would be solely based on your judgement! For future releases, we will ensure more safeguards to prevent invalid inputs based on common knowledge.</p>
+<strong>A</strong>: Currently, HYBB is designed to help you manage your customized recipe list. Hence, the addition of ingredients and under which tag(ip/ iv/ ig/ if/ io/) they fall would be solely based on your judgement! For future releases, we will ensure more safeguards to prevent invalid inputs based on common knowledge.</p>
 </div>
 </div>
 </div>
@@ -1302,8 +1302,8 @@ data of your previous HYBB folder.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clears all planned recipes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">removeGoal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Removes specified goal from a recipe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteGoal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes specified goal from a recipe</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">listGoals</p></td>
@@ -1316,4 +1316,4 @@ data of your previous HYBB folder.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 06:34:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 08:36:50 UTC</div></div></div></body></html>
