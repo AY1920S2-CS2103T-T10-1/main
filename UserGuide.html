@@ -58,7 +58,7 @@
 <li><a href="#delete-steps-in-a-recipe-code-deletestep-code">8.6. Delete Steps in a Recipe: <code>deleteStep</code></a></li>
 </ul>
 </li>
-<li><a href="#filter-command">9. Filter Command</a>
+<li><a href="#filter-command-brian">9. Filter Command (Brian)</a>
 <ul class="sectlevel2">
 <li><a href="#filter-by-ingredients">9.1. Filter by ingredients</a></li>
 <li><a href="#filter-by-goals">9.2. Filter by goals</a></li>
@@ -76,16 +76,16 @@
 <li><a href="#view-this-month-s-planned-recipes-code-viewmonth-code-coming-in-v2-0">10.6. View this month&#8217;s planned recipes: <code>viewMonth</code> [Coming in v2.0]</a></li>
 </ul>
 </li>
-<li><a href="#goal-feature">11. Goal Feature</a>
+<li><a href="#goals-command-harshita">11. Goals Command (Harshita)</a>
 <ul class="sectlevel2">
 <li><a href="#remove-goal-code-deletegoal-code">11.1. Remove goal: <code>deleteGoal</code></a></li>
 <li><a href="#list-goals-being-tracked-code-listgoals-code">11.2. List goals being tracked: <code>listGoals</code></a></li>
 <li><a href="#track-cooked-meals-code-cooked-code">11.3. Track cooked meals: <code>cooked</code></a></li>
 <li><a href="#show-progress-of-goals-code-chart-code-coming-in-v2-0">11.4. Show progress of goals: <code>chart</code> [Coming in v2.0]</a></li>
-<li><a href="#analyse-images-added-to-generate-goals-coming-in-v2-0">11.5. Analyse images added to generate goals [Coming in v2.0]</a></li>
+<li><a href="#analyse-images-added-code-analyse-code-coming-in-v2-0">11.5. Analyse images added: <code>analyse</code> [Coming in v2.0]</a></li>
 </ul>
 </li>
-<li><a href="#achievement">12. Achievement</a>
+<li><a href="#achievement-yue-tong">12. Achievement (Yue Tong)</a>
 <ul class="sectlevel2">
 <li><a href="#display-streak-code-streak-code-coming-in-v1-4">12.1. Display streak: <code>streak</code> [Coming in v1.4]</a></li>
 <li><a href="#display-motivational-quote-code-quote-code-coming-in-v1-4">12.2. Display motivational quote : <code>quote</code> [Coming in v1.4]</a></li>
@@ -896,7 +896,7 @@ You can delete multiple steps at a time (at least one step must be deleted).
 </div>
 </div>
 <div class="sect1">
-<h2 id="filter-command"><a class="link" href="#filter-command">9. Filter Command</a></h2>
+<h2 id="filter-command-brian"><a class="link" href="#filter-command-brian">9. Filter Command (Brian)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This command is not to be confused with the <code>Find</code> command, which only searches for recipes by their names. The
@@ -1139,7 +1139,7 @@ Format: <code>viewMonth</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="goal-feature"><a class="link" href="#goal-feature">11. Goal Feature</a></h2>
+<h2 id="goals-command-harshita"><a class="link" href="#goals-command-harshita">11. Goals Command (Harshita)</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="remove-goal-code-deletegoal-code"><a class="link" href="#remove-goal-code-deletegoal-code">11.1. Remove goal: <code>deleteGoal</code></a></h3>
@@ -1185,11 +1185,11 @@ You can mark multiple recipes as cooked at the same time (at least one recipe mu
 </tr>
 </table>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 If you specify a recipe number that has already been cooked within the day or does not exist in the list of recipes
@@ -1237,15 +1237,15 @@ Format: <code>chart [g/goal]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="analyse-images-added-to-generate-goals-coming-in-v2-0"><a class="link" href="#analyse-images-added-to-generate-goals-coming-in-v2-0">11.5. Analyse images added to generate goals [Coming in v2.0]</a></h3>
+<h3 id="analyse-images-added-code-analyse-code-coming-in-v2-0"><a class="link" href="#analyse-images-added-code-analyse-code-coming-in-v2-0">11.5. Analyse images added: <code>analyse</code> [Coming in v2.0]</a></h3>
 <div class="paragraph">
-<p>Auto-generates goals through the use of Artificial Intelligence.<br></p>
+<p>Auto-generates goals and statistics through the use of Artificial Intelligence.<br></p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="achievement"><a class="link" href="#achievement">12. Achievement</a></h2>
+<h2 id="achievement-yue-tong"><a class="link" href="#achievement-yue-tong">12. Achievement (Yue Tong)</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="display-streak-code-streak-code-coming-in-v1-4"><a class="link" href="#display-streak-code-streak-code-coming-in-v1-4">12.1. Display streak: <code>streak</code> [Coming in v1.4]</a></h3>
@@ -1335,106 +1335,106 @@ data of your previous HYBB folder.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">help</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">View help</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">switch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>switch</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Switch to the desired tab</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">List all recipes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Find recipes by name</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add a recipe</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">edit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Edit a recipe</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delete recipes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">favourite</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>favourite</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Favourite recipes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">unfavourite</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>unfavourite</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unfavourite recipes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">clear</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clear the recipe book</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">exit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Exit the programme</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">addIngredient</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addIngredient</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add ingredients to a recipe</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">editIngredient</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>editIngredient</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Edit ingredients’ quantities in a recipe</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">deleteIngredient</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteIngredient</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delete ingredients in a recipe</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">addStep</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addStep</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add steps to a recipe</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">editStep</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>editStep</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Edit a step in a recipe</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">deleteStep</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteStep</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delete steps in a recipe</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">filter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>filter</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Search for recipes by (multiple) criteria</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">plan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plan</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Plan recipes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">deletePlan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deletePlan</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delete plans</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">clearPlan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clearPlan</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clear all plans</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">groceryList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>groceryList</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">List all ingredients used in the planned recipes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">deleteGoal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteGoal</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deletes specified goal from a recipe</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">listGoals</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listGoals</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Lists all available goals</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cooked</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cooked</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Records a recipe as cooked</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 15:52:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-12 15:53:25 UTC</div></div></div></body></html>
