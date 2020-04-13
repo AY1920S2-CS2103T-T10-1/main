@@ -709,14 +709,11 @@ libraries gives the risk of running into bugs in the future if the the dependenc
 </div>
 <div class="sect3">
 <h4 id="favourite-and-unfavourite-commands-brian"><a class="link" href="#favourite-and-unfavourite-commands-brian">3.1.5. Favourite and Unfavourite commands (Brian)</a></h4>
-<div class="paragraph">
-<p>Description: TODO</p>
-</div>
 <div class="sect4">
 <h5 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h5>
 <div class="paragraph">
-<p>For brevity, we will only be talking about the <code>favourite</code> command here. Note that the <code>unfavourite</code> command is
-implemented in the same way.</p>
+<p>For brevity, we will only talk about the <code>favourite</code> command. Note that the <code>unfavourite</code> command is implemented in the
+same way.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -748,7 +745,7 @@ were already favourites.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>Here is a sample sequence diagram that shows what happens when the user inputs <code>favourite 2 3</code>:</p>
+<p>Here is a sample sequence diagram that shows what happens when the user inputs <code>favourite 3</code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -764,35 +761,51 @@ were already favourites.</p>
 <div class="sect3">
 <h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">3.1.6. Undo and Redo commands (Brian)</a></h4>
 <div class="paragraph">
-<p>The implementation of <code>undo</code> and <code>redo</code> was adapted from AB3. However, HYBB requires more book-keeping because on top
+<p>The implementation of undo and redo was adapted from AB3. However, HYBB requires more book-keeping because on top
 of the <code>RecipeBook</code>, we have a <code>PlannedBook</code> and a <code>CookedRecordBook</code> to keep track of as well.</p>
 </div>
 <div class="paragraph">
-<p>For brevity, we will only be talking about the <code>undo</code> command here. Note that the <code>redo</code> command is implemented in the
-same way.</p>
+<p>For brevity, we will only talk about the <code>undo</code> command. Note that the <code>redo</code> command is implemented in the same way.</p>
 </div>
 <div class="sect4">
-<h5 id="implementation-before-code-undo-code-is-called"><a class="link" href="#implementation-before-code-undo-code-is-called">Implementation (before <code>undo</code> is called)</a></h5>
+<h5 id="implementation-before-undo-is-called"><a class="link" href="#implementation-before-undo-is-called">Implementation (before undo is called)</a></h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Whenever a command that changes the state of any of the books is called, <code>Model#commitBook</code> is
-called as well.</p>
-<div class="paragraph">
-<p><code>Model#commitBook</code> will save the <code>CommandType</code> and <code>Tab</code> of the command in 2 separate stacks in
-<code>MultipleBookStateManager</code>. It will also save the current state of the affected book(s) in an ArrayList of that book
-type. All redundant states, regardless of which book it belongs to, will be purged before any saving occurs.</p>
-</div>
-<div class="paragraph">
-<p>Note: <code>CommandType</code> tells you which book(s) the command affects, while <code>Tab</code> tells you which tab should be
-displayed upon execution of the command.</p>
-</div>
+<p>Whenever a command that changes the state of any of the books (RecipeBook, PlannedBook, or CookedRecordBook) is
+called, <code>Model#commitBook</code> is called as well.</p>
+</li>
+<li>
+<p><code>Model#commitBook</code> will first purge all redundant states in <code>MultipleBookStateManager</code> (ie. if the user called undo
+before and is now committing a new book, he will not be able to redo the actions of those undos anymore). This is the
+behavior that most modern desktop applications like Microsoft Word adopt.</p>
+</li>
+<li>
+<p><code>Model#commitBook</code> also saves the <code>CommandType</code> and <code>Tab</code> of the command in 2 separate stacks in
+<code>MultipleBookStateManager</code>. Finally, it saves the new state of the affected book(s) in an ArrayList of that book type.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>Note #1: <code>CommandType</code> tells you which book(s) the command affects, while <code>Tab</code> tells you which tab should be
+displayed upon execution of the command.</p>
+</div>
+<div class="paragraph">
+<p>Note #2: All 3 ArrayLists of the 3 book types have a "current pointer" each, which points to the respective states of
+the books that the <code>Model</code> is currently using (ie. what the user is seeing).</p>
+</div>
+<div class="paragraph">
+<p>The following diagram summarizes what happens when the user executes a command that changes the state of any book:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
+</div>
+<div class="title">Figure 17. Activity diagram when a command is executed</div>
+</div>
 </div>
 <div class="sect4">
-<h5 id="implementation-when-code-undo-code-is-called"><a class="link" href="#implementation-when-code-undo-code-is-called">Implementation (when <code>undo</code> is called)</a></h5>
+<h5 id="implementation-when-undo-is-called"><a class="link" href="#implementation-when-undo-is-called">Implementation (when undo is called)</a></h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -801,21 +814,58 @@ insufficient actions to be undone.</p>
 </li>
 <li>
 <p>If able to undo, <code>Model#undoBook</code> is called. The <code>CommandType</code> stack is popped to know which book(s) need undoing.
-The corresponding books in <code>Model</code> are then set to the previous version.</p>
+At the same time, the "current pointer" of the corresponding book ArrayList(s) is/are shifted backwards. All 3 books
+in <code>Model</code> are then set to the version of the book that each "current pointer" is pointing to.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows what happens when the user calls an undo operation:</p>
+<p>This class diagram shows the components of <code>MultipleBookStateManager</code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram">
+<img src="images/MultipleBookStateManagerClassDiagram.png" alt="MultipleBookStateManagerClassDiagram">
 </div>
-<div class="title">Figure 17. Undo command sequence diagram</div>
+<div class="title">Figure 18. Class diagram for MultipleBookStateManager</div>
 </div>
 <div class="paragraph">
-<p>Result: TODO</p>
+<p>The following diagrams show what happens after the execution of various commands:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState0.png" alt="UndoRedoState0">
+</div>
+<div class="title">Figure 19. When the app is first opened</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState1.png" alt="UndoRedoState1">
+</div>
+<div class="title">Figure 20. When "delete 5" is called, the state of RecipeBook is changed. This new state is added to ArrayList&lt;RecipeBook&gt;.</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState2.png" alt="UndoRedoState2">
+</div>
+<div class="title">Figure 21. When "favourite 3" is called, the state of RecipeBook is changed. This new state is added to ArrayList&lt;RecipeBook&gt;.</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState3.png" alt="UndoRedoState3">
+</div>
+<div class="title">Figure 22. When "undo" is called, the current state pointer of ArrayList&lt;RecipeBook&gt; is shifted back and the Model&#8217;s RecipeBook is set to this version.</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState4.png" alt="UndoRedoState4">
+</div>
+<div class="title">Figure 23. When a command like "list" (that does not change the state of any book) is called, the current state pointer remains where it is (ie. there is no change of states).</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoRedoState5.png" alt="UndoRedoState5">
+</div>
+<div class="title">Figure 24. If a command like "clear" (that changes the state of a book) is called while the current pointer is not pointing to the latest version, all versions after the current pointer will be purged and the newest version will be added to the ArrayList.</div>
 </div>
 </div>
 <div class="sect4">
@@ -823,7 +873,18 @@ The corresponding books in <code>Model</code> are then set to the previous versi
 <div class="sect5">
 <h6 id="aspect-how-undo-and-redo-executes"><a class="link" href="#aspect-how-undo-and-redo-executes">Aspect: How undo and redo executes</a></h6>
 <div class="paragraph">
-<p>Challenges faced: TODO</p>
+<p>One concern we had while choosing the design of the undo and redo features was the amount of memory that has to be used
+to keep track of the different states of the 3 books.</p>
+</div>
+<div class="paragraph">
+<p>On top of the ArrayLists of different book types, we also needed to have 2 additional stacks to keep track of the
+corresponding <code>CommandType</code> and <code>Tab</code>.</p>
+</div>
+<div class="paragraph">
+<p>We eventually decided on the current implementation because we do not expect the user to make that many changes to the
+books in a single session. We also do not expect the size of any book to grow so huge that a single commit would take
+up all the memory capacity. In other words, we foresee that the "cons" of our current choice will not happen (it would
+take really abnormal user behavior for it to reach that stage).</p>
 </div>
 <div class="ulist">
 <ul>
@@ -835,8 +896,8 @@ The corresponding books in <code>Model</code> are then set to the previous versi
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: May use up a lot of memory space within a single session 1) if there is a large number of recipe book commits
-and/or 2) if the magnitude of a single commit is large (ie. the database is huge, containing many recipes).</p>
+<p>Cons: May use up a lot of memory space within a single session 1) if there is a large number of book commits
+and/or 2) if the magnitude of a single commit is large (ie. the book being committed is huge just by itself).</p>
 </li>
 </ul>
 </div>
@@ -859,6 +920,13 @@ affect multiple books, making book-keeping even more complicated (and hence, sus
 </div>
 </div>
 </div>
+<div class="sect4">
+<h5 id="future-plans"><a class="link" href="#future-plans">Future plans</a></h5>
+<div class="paragraph">
+<p>Currently, the undo and redo command is not compatible with the <code>quote</code> command and the QuoteBook. This will be a
+feature that we plan to work on beyond v1.4 so that users will be able to undo and redo the action of adding a quote!</p>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="clear-command"><a class="link" href="#clear-command">3.1.7. Clear command</a></h4>
@@ -873,22 +941,51 @@ affect multiple books, making book-keeping even more complicated (and hence, sus
 <h3 id="recipe-customisation-commands-brian"><a class="link" href="#recipe-customisation-commands-brian">3.2. Recipe customisation commands (Brian)</a></h3>
 <div class="paragraph">
 <p>The following commands: <code>addingredient</code>, <code>editingredient</code>, <code>deleteingredient</code>, <code>addstep</code>, <code>editstep</code>, and <code>deletestep</code>
-were implemented to overcome the limitations of the <code>edit</code> command. These recipe customisation commands allow the user to make targeted changes to the ingredient or step fields instead of having to rewrite the
-entire field using <code>edit</code>.</p>
+were implemented to overcome the limitations of the <code>edit</code> command. These recipe customisation commands allow the user
+to make targeted changes to the ingredient or step fields instead of having to rewrite the entire field using <code>edit</code>.</p>
 </div>
 <div class="sect3">
 <h4 id="implementation-4"><a class="link" href="#implementation-4">3.2.1. Implementation</a></h4>
-<div class="paragraph">
-<p>TODO</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The commands listed above make use of <code>EditRecipeDescriptor</code> (ERD) to add, edit, or delete ingredients or steps.
+This is done by comparing the contents of the ERD to the contents of the field to be edited and making the necessary
+changes described below (note that at this point of time, the ERD is already populated with the user&#8217;s input):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If the command is <code>addingredient</code> or <code>addstep</code>, the existing ingredients or steps from the recipe will be added to
+the ERD.</p>
+</li>
+<li>
+<p>If the command is <code>editingredient</code> or <code>editstep</code>, the ERD will be checked against the recipe to see if the
+ingredients or step exists in the recipe. If it exists, the remaining ingredients or steps that were not changed
+will be added to the ERD. Otherwise, an exception is thrown.</p>
+</li>
+<li>
+<p>If the command is <code>deleteingredient</code> or <code>deletestep</code>, the ERD will be checked against the recipe to see if the
+ingredients or step exists in the recipe. If it exists, the ERD will be re-populated with the existing ingredients or
+steps from the recipe, less the ones that were specified by the user. Otherwise, an exception is thrown.</p>
+</li>
+</ul>
 </div>
-<div class="sect4">
-<h5 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h5>
-<div class="sect5">
-<h6 id="aspect-todo"><a class="link" href="#aspect-todo">Aspect: TODO</a></h6>
-<div class="paragraph">
-<p>TODO</p>
+</li>
+<li>
+<p>With the ERD fields set, the specified recipe is edited by <code>EditCommand#createEditedRecipe</code> using the ERD.</p>
+</li>
+<li>
+<p>Finally, <code>Model#setRecipe</code> will replace the old version of the recipe in RecipeBook with the newly edited one.
+<code>Model#commitBook</code> will commit the new state of the RecipeBook to the <code>MultipleBookStateManager</code> so that the user will
+be able to undo this command if he wishes to.</p>
+</li>
+</ol>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RecipeCustomisationCommandsActivityDiagram.png" alt="RecipeCustomisationCommandsActivityDiagram">
 </div>
+<div class="title">Figure 25. General activity diagram for recipe customisation commands</div>
 </div>
 </div>
 </div>
@@ -908,14 +1005,14 @@ user to find recipes by their name.</p>
 <ol class="arabic">
 <li>
 <p>User specified keywords are directed to <code>FilterCommandParser#parse</code> where <code>ArgumentTokenizer</code> and
-<code>ArgumentMultimap</code> are used to parse the user input. An error will be thrown if no keywords are specified at all.</p>
+<code>ArgumentMultimap</code> are used to parse the user input. An exception will be thrown if no keywords are specified at all.</p>
 </li>
 <li>
 <p>The parsed user input is then fed into <code>RecipeMatchesKeywordPredicate</code> where a <code>Predicate</code>, p, is created. This
 predicate will subsequently be used as the filter to get all recipes that meet the user specified criteria.</p>
 </li>
 <li>
-<p>A new <code>FilterCommand</code> object will be created with the predicate and returned to the <code>LogicManager</code>.</p>
+<p>A new <code>FilterCommand</code> object will be created with the predicate, p, and be returned to the <code>LogicManager</code>.</p>
 </li>
 <li>
 <p>The <code>FilterCommand#execute</code> method is executed and <code>Model#updateFilteredRecipeList</code> is called. This tests
@@ -934,7 +1031,7 @@ user specified criteria.</p>
 <div class="content">
 <img src="images/AdvancedFilterSequenceDiagram.png" alt="AdvancedFilterSequenceDiagram">
 </div>
-<div class="title">Figure 18. Advanced filter sequence diagram</div>
+<div class="title">Figure 26. Advanced filter sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>This operation displays all recipes that 1) are marked as favourites, 2) take 20 minutes or less to prepare,
@@ -942,7 +1039,7 @@ and 3) contains pasta as an ingredient.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-consistency-of-user-input-format"><a class="link" href="#aspect-consistency-of-user-input-format">Aspect: Consistency of user input format</a></h5>
 <div class="paragraph">
@@ -1011,7 +1108,7 @@ updated when a <code>Recipe</code> is changed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-recipes-are-scheduled"><a class="link" href="#aspect-how-recipes-are-scheduled">Aspect: How recipes are scheduled</a></h5>
 <div class="ulist">
@@ -1094,13 +1191,13 @@ corresponds to the date we are interested in.</p>
 <div class="content">
 <img src="images/AddSequenceDiagram.png" alt="AddSequenceDiagram">
 </div>
-<div class="title">Figure 19. Add command sequence diagram</div>
+<div class="title">Figure 27. Add command sequence diagram</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/AddRefSequenceDiagram.png" alt="AddRefSequenceDiagram">
 </div>
-<div class="title">Figure 20. Reference Frame for Add command sequence diagram</div>
+<div class="title">Figure 28. Reference Frame for Add command sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>A recipe is initially created with an empty goals set from parser and <code>calculateGoals()</code> is then called in the <code>AddCommand</code>.</p>
@@ -1137,7 +1234,7 @@ be updated in the particular instance of <code>Recipe r</code> and <code>Model#a
 
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-goals-are-being-tagged"><a class="link" href="#aspect-how-goals-are-being-tagged">Aspect: How goals are being tagged</a></h5>
 <div class="ulist">
@@ -1220,7 +1317,7 @@ more if the current list of quotes is not to their liking.</p>
 <div class="content">
 <img src="images/QuoteSequenceDiagram.png" alt="QuoteSequenceDiagram">
 </div>
-<div class="title">Figure 21. Quote command sequence diagram</div>
+<div class="title">Figure 29. Quote command sequence diagram</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1269,10 +1366,10 @@ been successfully added.</p>
 <div class="content">
 <img src="images/QuoteActivityDiagram.png" alt="QuoteActivityDiagram">
 </div>
-<div class="title">Figure 22. Quote command activity diagram</div>
+<div class="title">Figure 30. Quote command activity diagram</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
 <div class="sect5">
 <h6 id="aspect-how-quote-command-executes"><a class="link" href="#aspect-how-quote-command-executes">Aspect: How quote command executes</a></h6>
 <div class="ulist">
@@ -1323,7 +1420,7 @@ High streak.</p>
 <div class="content">
 <img src="images/StreakActivityDiagram.png" alt="StreakActivityDiagram">
 </div>
-<div class="title">Figure 23. Quote command sequence diagram</div>
+<div class="title">Figure 31. Quote command sequence diagram</div>
 </div>
 <div class="sect3">
 <h4 id="implementation-7"><a class="link" href="#implementation-7">3.7.1. Implementation</a></h4>
@@ -1340,7 +1437,7 @@ real time in the achievement tab.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
 <div class="sect5">
 <h6 id="aspect-how-streak-is-stored"><a class="link" href="#aspect-how-streak-is-stored">Aspect: How streak is stored</a></h6>
 <div class="ulist">
@@ -1608,7 +1705,7 @@ maintain their streaks</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">defeatist user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who loses motivation easily</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">look at daily quotes to remind myself</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">remember why I wanted to continue to be healthy</p></td>
 </tr>
@@ -2300,4 +2397,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:22:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:22:59 UTC</div></div></div></body></html>

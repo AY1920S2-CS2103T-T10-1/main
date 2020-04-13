@@ -675,9 +675,18 @@ You can <strong>delete, favourite, or unfavourite</strong> multiple recipes at t
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>If you specify a recipe number that does not exist in the list of recipes <em>that you are currently viewing</em>, none of your
-selected recipes will be deleted, favourited, or unfavourited.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you specify a recipe number that does not exist in the list of recipes <em>that you are currently viewing</em>, none of your
+selected recipes will be deleted, favourited, or unfavourited.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -728,6 +737,19 @@ Undoes all previous actions.</p>
 </td>
 <td class="content">
 For both undo and redo, the number of actions that you specify (if any) has to be a non-zero unsigned integer!
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The undo and redo command is currently not compatible with the <code>quote</code> command. This means that adding a quote is an
+irreversible action!
 </td>
 </tr>
 </table>
@@ -832,6 +854,18 @@ You can add multiple ingredients at a time (at least one ingredient must be adde
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you add an ingredient that already exists in the recipe, that existing ingredient will be replaced with the new one.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="edit-ingredient-quantity-in-a-recipe-code-editingredient-code-brian"><a class="link" href="#edit-ingredient-quantity-in-a-recipe-code-editingredient-code-brian">8.2. Edit Ingredient Quantity in a Recipe: <code>editIngredient</code> (Brian)</a></h3>
@@ -889,6 +923,19 @@ You can delete multiple ingredients at a time (at least one ingredient must be d
 </td>
 <td class="content">
 There is no need to specify quantity here. Just the ingredient name will do!
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you type an ingredient prefix (e.g. "ig/") but don&#8217;t specify any ingredients, all ingredients of that type will be
+deleted.
 </td>
 </tr>
 </table>
@@ -1537,4 +1584,4 @@ data of your previous HYBB folder.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:22:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:22:59 UTC</div></div></div></body></html>
