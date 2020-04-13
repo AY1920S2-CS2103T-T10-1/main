@@ -813,7 +813,7 @@ were already favourites.</p>
 <h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">3.1.6. Undo and Redo commands (Brian)</a></h4>
 <div class="paragraph">
 <p>The implementation of undo and redo was adapted from AB3. However, HYBB requires more book-keeping because on top
-of the <code>RecipeBook</code>, we have a <code>PlannedBook</code> and a <code>CookedRecordBook</code> to keep track of as well.</p>
+of the <code>RecipeBook</code>, we have a <code>PlannedBook</code>, a <code>CookedRecordBook</code>, and a <code>QuoteBook</code> to keep track of as well.</p>
 </div>
 <div class="paragraph">
 <p>For brevity, we will only talk about the <code>undo</code> command. Note that the <code>redo</code> command is implemented in the same way.</p>
@@ -823,8 +823,8 @@ of the <code>RecipeBook</code>, we have a <code>PlannedBook</code> and a <code>C
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Whenever a command that changes the state of any of the books (RecipeBook, PlannedBook, or CookedRecordBook) is
-called, <code>Model#commitBook</code> is called as well.</p>
+<p>Whenever a command that changes the state of any of the books (RecipeBook, PlannedBook, CookedRecordBook, or
+QuoteBook) is called, <code>Model#commitBook</code> is called as well.</p>
 </li>
 <li>
 <p><code>Model#commitBook</code> will first purge all redundant states in <code>MultipleBookStateManager</code> (ie. if the user called undo
@@ -842,7 +842,7 @@ behavior that most modern desktop applications like Microsoft Word adopt.</p>
 displayed upon execution of the command.</p>
 </div>
 <div class="paragraph">
-<p>Note #2: All 3 ArrayLists of the 3 book types have a "current pointer" each, which points to the respective states of
+<p>Note #2: All 4 ArrayLists of the 4 book types have a "current pointer" each, which points to the respective states of
 the books that the <code>Model</code> is currently using (ie. what the user is seeing).</p>
 </div>
 <div class="paragraph">
@@ -865,7 +865,7 @@ insufficient actions to be undone.</p>
 </li>
 <li>
 <p>If able to undo, <code>Model#undoBook</code> is called. The <code>CommandType</code> stack is popped to know which book(s) need undoing.
-At the same time, the "current pointer" of the corresponding book ArrayList(s) is/are shifted backwards. All 3 books
+At the same time, the "current pointer" of the corresponding book ArrayList(s) is/are shifted backwards. All 4 books
 in <code>Model</code> are then set to the version of the book that each "current pointer" is pointing to.</p>
 </li>
 </ol>
@@ -969,13 +969,6 @@ affect multiple books, making book-keeping even more complicated (and hence, sus
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="future-plans"><a class="link" href="#future-plans">Future plans</a></h5>
-<div class="paragraph">
-<p>Currently, the undo and redo command is not compatible with the <code>quote</code> command and the QuoteBook. This will be a
-feature that we plan to work on beyond v1.4 so that users will be able to undo and redo the action of adding a quote!</p>
 </div>
 </div>
 </div>
@@ -1523,9 +1516,18 @@ the lifeline reaches the end of diagram.
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p><code>Undo</code> button currently does not work for adding of quotes as there is no remove function currently implemented for quote
-==== Implementation</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>Undo</code> button currently does not work for adding of quotes as there is no remove function currently implemented for quote
+==== Implementation
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>This section explains how the <code>quote</code> command is implemented.</p>
@@ -1561,8 +1563,8 @@ been successfully added.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
-<div class="sect5">
-<h6 id="aspect-how-quote-command-executes"><a class="link" href="#aspect-how-quote-command-executes">Aspect: How quote command executes</a></h6>
+<div class="sect4">
+<h5 id="aspect-how-quote-command-executes"><a class="link" href="#aspect-how-quote-command-executes">Aspect: How quote command executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1629,8 +1631,8 @@ real time in the achievement tab.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
-<div class="sect5">
-<h6 id="aspect-how-streak-is-stored"><a class="link" href="#aspect-how-streak-is-stored">Aspect: How streak is stored</a></h6>
+<div class="sect4">
+<h5 id="aspect-how-streak-is-stored"><a class="link" href="#aspect-how-streak-is-stored">Aspect: How streak is stored</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1664,8 +1666,8 @@ it is harder for Streak to be updated realtime when cookedRecord is updated.</p>
 </ul>
 </div>
 </div>
-<div class="sect5">
-<h6 id="aspect-how-streak-is-calculated"><a class="link" href="#aspect-how-streak-is-calculated">Aspect: How streak is calculated</a></h6>
+<div class="sect4">
+<h5 id="aspect-how-streak-is-calculated"><a class="link" href="#aspect-how-streak-is-calculated">Aspect: How streak is calculated</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2699,4 +2701,4 @@ Expected: Adding corrupted data into the files would result in these correspondi
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 13:46:53 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 14:38:24 UTC</div></div></div></body></html>

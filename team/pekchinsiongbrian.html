@@ -460,7 +460,7 @@ Finds recipes that have 20 to 30 minutes (inclusive) of preparation time.</p>
 <h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">Undo and Redo commands (Brian)</a></h4>
 <div class="paragraph">
 <p>The implementation of undo and redo was adapted from AB3. However, HYBB requires more book-keeping because on top
-of the <code>RecipeBook</code>, we have a <code>PlannedBook</code> and a <code>CookedRecordBook</code> to keep track of as well.</p>
+of the <code>RecipeBook</code>, we have a <code>PlannedBook</code>, a <code>CookedRecordBook</code>, and a <code>QuoteBook</code> to keep track of as well.</p>
 </div>
 <div class="paragraph">
 <p>For brevity, we will only talk about the <code>undo</code> command. Note that the <code>redo</code> command is implemented in the same way.</p>
@@ -470,8 +470,8 @@ of the <code>RecipeBook</code>, we have a <code>PlannedBook</code> and a <code>C
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Whenever a command that changes the state of any of the books (RecipeBook, PlannedBook, or CookedRecordBook) is
-called, <code>Model#commitBook</code> is called as well.</p>
+<p>Whenever a command that changes the state of any of the books (RecipeBook, PlannedBook, CookedRecordBook, or
+QuoteBook) is called, <code>Model#commitBook</code> is called as well.</p>
 </li>
 <li>
 <p><code>Model#commitBook</code> will first purge all redundant states in <code>MultipleBookStateManager</code> (ie. if the user called undo
@@ -489,7 +489,7 @@ behavior that most modern desktop applications like Microsoft Word adopt.</p>
 displayed upon execution of the command.</p>
 </div>
 <div class="paragraph">
-<p>Note #2: All 3 ArrayLists of the 3 book types have a "current pointer" each, which points to the respective states of
+<p>Note #2: All 4 ArrayLists of the 4 book types have a "current pointer" each, which points to the respective states of
 the books that the <code>Model</code> is currently using (ie. what the user is seeing).</p>
 </div>
 <div class="paragraph">
@@ -512,7 +512,7 @@ insufficient actions to be undone.</p>
 </li>
 <li>
 <p>If able to undo, <code>Model#undoBook</code> is called. The <code>CommandType</code> stack is popped to know which book(s) need undoing.
-At the same time, the "current pointer" of the corresponding book ArrayList(s) is/are shifted backwards. All 3 books
+At the same time, the "current pointer" of the corresponding book ArrayList(s) is/are shifted backwards. All 4 books
 in <code>Model</code> are then set to the version of the book that each "current pointer" is pointing to.</p>
 </li>
 </ol>
@@ -618,13 +618,6 @@ affect multiple books, making book-keeping even more complicated (and hence, sus
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="future-plans"><a class="link" href="#future-plans">Future plans</a></h5>
-<div class="paragraph">
-<p>Currently, the undo and redo command is not compatible with the <code>quote</code> command and the QuoteBook. This will be a
-feature that we plan to work on beyond v1.4 so that users will be able to undo and redo the action of adding a quote!</p>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="recipe-customisation-commands-brian-2"><a class="link" href="#recipe-customisation-commands-brian-2">Recipe customisation commands (Brian)</a></h3>
@@ -679,4 +672,4 @@ be able to undo this command if he wishes to.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 13:46:53 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 14:38:24 UTC</div></div></div></body></html>
