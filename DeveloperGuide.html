@@ -27,7 +27,7 @@ By: <code>Team HYBB</code>      Since: <code>Mar 2020</code>      Licenc
 <li><a href="#recipe-customisation-commands-brian">3.2. Recipe customisation commands (Brian)</a></li>
 <li><a href="#filter-command-brian">3.3. Filter command (Brian)</a></li>
 <li><a href="#add-plan-command-beatrice">3.4. Add plan command (Beatrice)</a></li>
-<li><a href="#goals-feature">3.5. Goals feature</a></li>
+<li><a href="#goals-feature-harshita">3.5. Goals feature (Harshita)</a></li>
 <li><a href="#quote-command-yue-tong">3.6. Quote Command (Yue Tong)</a></li>
 <li><a href="#streak-feature-yue-tong">3.7. Streak feature(Yue Tong)</a></li>
 <li><a href="#logging">3.8. Logging</a></li>
@@ -291,7 +291,7 @@ illustrated in the next few sections of this document.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>It also exposes four unmodifiable lists that can be 'observed' by the <code>UI</code>:<br></p>
+<p>It also exposes five unmodifiable lists that can be 'observed' by the <code>UI</code>:<br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -303,6 +303,9 @@ illustrated in the next few sections of this document.</p>
 </li>
 <li>
 <p><code>ObservableList&lt;Record&gt;</code></p>
+</li>
+<li>
+<p><code>ObservableList&lt;GoalCount&gt;</code></p>
 </li>
 <li>
 <p><code>ObservableList&lt;Quote&gt;</code><br>
@@ -405,6 +408,9 @@ The <code>UI</code> can be bound to these lists so that the <code>UI</code> auto
 <li>
 <p>One <code>Name</code> from a <code>Recipe</code></p>
 </li>
+<li>
+<p>One set of <code>Goal</code> list</p>
+</li>
 </ul>
 </div>
 </div>
@@ -488,7 +494,48 @@ The <code>UI</code> can be bound to these lists so that the <code>UI</code> auto
 <div class="sect2">
 <h3 id="basic-commands"><a class="link" href="#basic-commands">3.1. Basic commands</a></h3>
 <div class="sect3">
-<h4 id="switch-command"><a class="link" href="#switch-command">3.1.1. Switch command</a></h4>
+<h4 id="switch-command-harshita"><a class="link" href="#switch-command-harshita">3.1.1. Switch command (Harshita)</a></h4>
+<div class="paragraph">
+<p>The <code>switch</code> command is facilitated by the <code>MainWindow</code>, <code>MainTabPanel</code>, <code>SwitchCommandParser</code> and <code>SwitchCommandParser</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following lists in sequential order the process of how <code>switch</code> behaves with user input.</p>
+</div>
+<div class="paragraph">
+<p>*The user launches HYBB and the default start tab is set to the recipes tab.</p>
+</div>
+<div class="paragraph">
+<p>*The user now executes <code>switch planning</code> to view the planning tab.</p>
+</div>
+<div class="paragraph">
+<p>*<code>LogicManager</code> uses <code>RecipeBookParser#parseCommand()</code> to parse the input from the user upon execution of the <code>switch</code> command.</p>
+</div>
+<div class="paragraph">
+<p>*<code>RecipeBookParser</code> determines which command is being used and creates <code>SwitchCommandParser</code> to parse the input
+from the user to obtain the arguments.</p>
+</div>
+<div class="paragraph">
+<p>*<code>SwitchCommandParser</code> parses the argument and checks its validity. If it is invalid,
+<code>SwitchCommandParser</code> throws an exception and terminates. Else, it returns a <code>SwitchCommand</code> that contains a <code>Tab</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>LogicManager</code> uses <code>SwitchCommand#execute()</code> to switch to the planning tab.</p>
+</li>
+<li>
+<p><code>SwitchCommand</code> returns a <code>CommandResult</code> to the <code>LogicManager</code> with the <code>Tab</code>. <code>LogicManager</code> then
+returns the <code>CommandResult</code> to <code>MainWindow</code>.</p>
+</li>
+<li>
+<p><code>MainWindow</code> checks if there is a change in state for <code>Tab</code> and if switching is needed. If there is, <code>MainWindow</code> uses
+<code>MainWindow#handleSwitchTab()</code> to switch tab. Else, <code>MainWindow</code> does nothing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following activity diagram shows the flow of activites from when the <code>switch</code> command is executed.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SwitchActivityDiagram.png" alt="SwitchActivityDiagram">
@@ -1179,11 +1226,13 @@ corresponds to the date we are interested in.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="goals-feature"><a class="link" href="#goals-feature">3.5. Goals feature</a></h3>
+<h3 id="goals-feature-harshita"><a class="link" href="#goals-feature-harshita">3.5. Goals feature (Harshita)</a></h3>
 <div class="paragraph">
 <p>The main functionalities and commands associated with the entire goals feature are <code>add</code>, <code>addIngredient</code>, <code>edit</code>, <code>editIngredient</code>,
  <code>cooked</code>, <code>listGoals</code> and 'removeGoals'. Goals are auto-generated and added to a recipe every time <code>add</code>, <code>addIngredient</code>, <code>edit</code> or <code>editIngredient</code> is executed.</p>
 </div>
+<div class="sect3">
+<h4 id="details-of-implementation-auto-generation-of-goals"><a class="link" href="#details-of-implementation-auto-generation-of-goals">3.5.1. Details of Implementation (Auto-generation of goals)</a></h4>
 <div class="paragraph">
 <p>The following sequence diagram shows how goals are generated through the example of <code>addIngredient</code> command execution</p>
 </div>
@@ -1229,12 +1278,49 @@ be updated in the particular instance of <code>Recipe r</code> and <code>Model#a
 <div class="paragraph">
 <p>The immutability of each object is supported to ensure the correctness of undo and redo functionality.</p>
 </div>
-<div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.5.1. Proposed Implementation</a></h4>
-
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<h4 id="details-of-implementation-statistics-of-cooked-recipes"><a class="link" href="#details-of-implementation-statistics-of-cooked-recipes">3.5.2. Details of Implementation (Statistics of cooked recipes)</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/CookedActivityDiagram.png" alt="CookedActivityDiagram">
+</div>
+<div class="title">Figure 29. Activity diagram when a cooked command is entered</div>
+</div>
+<div class="paragraph">
+<p>After <code>CookedCommand#execute(model)</code> is called, the series of checks shown in the above diagram is done to determine
+if the recipe can be marked as cooked. With multiple recipes inputted (eg "`cooked` 1 2 3", the series of checks will
+loop through for for each recipe.</p>
+</div>
+<div class="paragraph">
+<p>The checks ensure that all the recipes inputted are valid, else the  <code>CookedCommand</code>
+throws an exception and terminates. If successful, a new  <code>Record</code> containing the <code>Name</code>, current <code>Date</code> and set of <code>Goals</code>
+associated with the recipe is created and <code>Model#addRecord(record)</code> would then update <code>CookedRecordBook</code> in storage.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, if the recipe marked as cooked was included in the Planned Recipes for the day,
+it will be removed from the planned list.</p>
+</div>
+<div class="paragraph">
+<p>With reference to the structure of the CookedRecords Model,
+.Class diagram of Record
+image::ModelRecordClassDiagram.png[]</p>
+</div>
+<div class="paragraph">
+<p>We can see above that once a record is added to the UniqueRecordList two Observable lists will be updated for each
+addition of <code>Record</code>. Firstly, it is the <code>internalRecordsList</code> that stores unique <code>Record</code>. Secondly, based on this list,
+an <code>internalGoalsTally</code> that stores <code>GoalCount</code> will be updated each time. This <code>GoalCount</code> consists of one of the four main goal
+and its respective tally and this observable list is what the pie chart will be listening to for updates and will change
+each time the <code>internalGoalsTally</code> has been updated as well.</p>
+</div>
+<div class="paragraph">
+<p>Hence the <code>cooked</code> command is essential in not only archiving data, but also giving the user personalised statistics
+on their overall goal distribution that resembles the Healthy Eating Plate. The immutability of each object is
+supported to ensure the correctness of undo and redo functionality as well.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.3. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-goals-are-being-tagged"><a class="link" href="#aspect-how-goals-are-being-tagged">Aspect: How goals are being tagged</a></h5>
 <div class="ulist">
@@ -1257,7 +1343,7 @@ be updated in the particular instance of <code>Recipe r</code> and <code>Model#a
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: Easy to implement. User can filter their preferred goals easily.</p>
 </li>
 <li>
 <p>Cons: Is dependant on user&#8217;s understanding and not universal understanding of what may be deemed healthy.</p>
@@ -1266,6 +1352,12 @@ be updated in the particular instance of <code>Recipe r</code> and <code>Model#a
 </div>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Alternative 1 was chosen as standardising the goals give the recipes more meaning, especially when we are able
+to calculate statistics and present in in an meaningful and appealing way for users when it models the Healthy eating Plate.
+Furthermore, custom goals would not have checks would not have been implemented. for users to filter preferred recipes,
+the command <code>favourite</code> as been implemented.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1293,12 +1385,107 @@ be updated in the particular instance of <code>Recipe r</code> and <code>Model#a
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: Not as accurate as one grain of rice would still be counted as variety.</p>
+<p>Cons: Not as accurate as one grain of rice or 1 grape would still be counted as variety despite the small portion.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Alternative 1 was chosen because of its higher accuracy, although conversion between different measurement may be
+overestimated. The command <code>deleteGoal</code> was then created in order to enable users to delete goals they deem inaccurate.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-the-check-for-goal-is-done"><a class="link" href="#aspect-how-the-check-for-goal-is-done">Aspect: How the check for goal is done</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Check every time a recipe is added or edited and store this data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More consistent for the user in keeping track of their goals.</p>
+</li>
+<li>
+<p>Cons: Harder to implement as repetitive checks are needed every time ingredients are added or modified.
+Will be more expensive to calculate with a larger database.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong> Calculate the goals for each recipe every time it is retrieved from storage and set in RecipeList.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as only one check is needed for when the recipes are set.</p>
+</li>
+<li>
+<p>Cons: Goals will reset each time the application is open. If goal has been deleted by user with <code>deleteGoal</code>, it will
+not be updated the next time the user opens the application as the checks will be the same.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Alternative 1 was chosen as it optimizes the function of deleteGoal`, taking user preference into consideration.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-store-data-for-records"><a class="link" href="#aspect-how-to-store-data-for-records">Aspect: How to store data for records</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Store in a json file called records and calculate goal tally the first time
+it is set and update accordingly</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: A custom date can be set and it will be easier to iterate through the list to obtain goal tally.</p>
+</li>
+<li>
+<p>Cons: Duplicate data will be stored and is harder to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong> Use recipebook and add boolean attribute isCooked</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Restricted usage, unable to implement date and do statistical analysis for the user.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3 :</strong> Store goal tally in a new json file.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No need to iterate through recipe list each time and would be less expensive with a larger database.</p>
+</li>
+<li>
+<p>Cons: Only contains four values.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Alternative 1 was chosen as it optimizes the functions and uses of a Record and the scale for a personal data
+base is smaller, storage would not be an issue. Records need to be iterated through when set initially anyway, hence
+the association between GoalCount and Record makes the tally process more efficient.
+end::goals[]</p>
 </div>
 </div>
 </div>
@@ -1317,7 +1504,7 @@ more if the current list of quotes is not to their liking.</p>
 <div class="content">
 <img src="images/QuoteSequenceDiagram.png" alt="QuoteSequenceDiagram">
 </div>
-<div class="title">Figure 29. Quote command sequence diagram</div>
+<div class="title">Figure 30. Quote command sequence diagram</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1366,7 +1553,7 @@ been successfully added.</p>
 <div class="content">
 <img src="images/QuoteActivityDiagram.png" alt="QuoteActivityDiagram">
 </div>
-<div class="title">Figure 30. Quote command activity diagram</div>
+<div class="title">Figure 31. Quote command activity diagram</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
@@ -1420,7 +1607,7 @@ High streak.</p>
 <div class="content">
 <img src="images/StreakActivityDiagram.png" alt="StreakActivityDiagram">
 </div>
-<div class="title">Figure 31. Quote command sequence diagram</div>
+<div class="title">Figure 32. Quote command sequence diagram</div>
 </div>
 <div class="sect3">
 <h4 id="implementation-7"><a class="link" href="#implementation-7">3.7.1. Implementation</a></h4>
@@ -2397,4 +2584,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:22:59 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 12:41:57 UTC</div></div></div></body></html>
