@@ -26,7 +26,7 @@ By: <code>Team HYBB</code>      Since: <code>Mar 2020</code>      Licenc
 <li><a href="#basic-commands">3.1. Basic commands</a></li>
 <li><a href="#recipe-customisation-commands-brian">3.2. Recipe customisation commands (Brian)</a></li>
 <li><a href="#filter-command-brian">3.3. Filter command (Brian)</a></li>
-<li><a href="#add-plan-command-beatrice">3.4. Add plan command (Beatrice)</a></li>
+<li><a href="#plan-command-beatrice">3.4. Plan command (Beatrice)</a></li>
 <li><a href="#goals-feature-harshita">3.5. Goals feature (Harshita)</a></li>
 <li><a href="#quote-command-yue-tong">3.6. Quote Command (Yue Tong)</a></li>
 <li><a href="#streak-feature-yue-tong">3.7. Streak feature(Yue Tong)</a></li>
@@ -46,13 +46,18 @@ By: <code>Team HYBB</code>      Since: <code>Mar 2020</code>      Licenc
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-recipe">F.2. Deleting a recipe</a></li>
-<li><a href="#clearing-the-recipe-list">F.3. Clearing the recipe list</a></li>
-<li><a href="#adding-plans">F.4. Adding plans</a></li>
-<li><a href="#deleting-plans">F.5. Deleting plans</a></li>
-<li><a href="#clearing-plans">F.6. Clearing plans</a></li>
-<li><a href="#obtaining-grocery-list">F.7. Obtaining grocery list</a></li>
-<li><a href="#adding-quotes">F.8. Adding quotes</a></li>
-<li><a href="#saving-data">F.9. Saving data</a></li>
+<li><a href="#favourite-a-recipe">F.3. Favourite a recipe</a></li>
+<li><a href="#unfavourite-a-recipe">F.4. Unfavourite a recipe</a></li>
+<li><a href="#filtering-recipes">F.5. Filtering recipes</a></li>
+<li><a href="#undo-and-redo">F.6. Undo and Redo</a></li>
+<li><a href="#clearing-the-recipe-list">F.7. Clearing the recipe list</a></li>
+<li><a href="#adding-plans">F.8. Adding plans</a></li>
+<li><a href="#deleting-plans">F.9. Deleting plans</a></li>
+<li><a href="#clearing-plans">F.10. Clearing plans</a></li>
+<li><a href="#obtaining-grocery-list">F.11. Obtaining grocery list</a></li>
+<li><a href="#cooking-recipes">F.12. Cooking recipes</a></li>
+<li><a href="#adding-quotes">F.13. Adding quotes</a></li>
+<li><a href="#saving-data">F.14. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -548,11 +553,7 @@ returns the <code>CommandResult</code> to <code>MainWindow</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="add-command"><a class="link" href="#add-command">3.1.2. Add command</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="edit-command-beatrice"><a class="link" href="#edit-command-beatrice">3.1.3. Edit command (Beatrice)</a></h4>
+<h4 id="edit-command-beatrice"><a class="link" href="#edit-command-beatrice">3.1.2. Edit command (Beatrice)</a></h4>
 <div class="paragraph">
 <p>The edit feature allows users to edit the properties of a Recipe with ease using the <code>edit</code> command.<br></p>
 </div>
@@ -576,7 +577,7 @@ returns the <code>CommandResult</code> to <code>MainWindow</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User specified arguments are passed to the <code>EditCommandParser</code> and passed into <code>ArgumentTokenizer</code> and
+<p>User specified arguments are passed to the <code>EditCommandParser</code> and the arguments are broken up by the <code>ArgumentTokenizer</code> and
 <code>ArgumentMultimap</code>.</p>
 </li>
 <li>
@@ -595,6 +596,9 @@ being edited.</p>
 </li>
 <li>
 <p><code>Model#setRecipe()</code> will then replace the <code>Recipe</code> being edited with the new <code>Recipe</code> and update the list of recipes and plans.</p>
+</li>
+<li>
+<p>The success message will be returned to the user by the <code>CommandResult</code>.</p>
 </li>
 </ol>
 </div>
@@ -649,9 +653,16 @@ will replace the target with the edited <code>Recipe</code> in the recipe list.<
 </li>
 <li>
 <p>The same arguments are then passed into <code>PlannedBook#setRecipe()</code> which will get a list of all the plans that uses
-the target <code>Recipe</code> from <code>PlannedRecipeMap</code> and update each plan.</p>
+the target <code>Recipe</code> from <code>PlannedRecipeMap</code>.</p>
+</li>
+<li>
+<p>If there are no plans that uses <code>Recipe</code>, the process stops. However if plans exists, the <code>PlannedBook</code>
+will iterate through each old plan and update each plan.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>Step 4. is an example of how the <code>PlannedRecipeMap</code> can be used to ease the cost of updating each plan.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram summarizes how the <code>Recipe</code> and all its related <code>Plan</code> are updated
@@ -707,60 +718,15 @@ there are many properties to test, it is still a finite number and testing can b
 </div>
 </div>
 <div class="sect5">
-<h6 id="aspect-data-structure-to-support-the-recipes-and-plans"><a class="link" href="#aspect-data-structure-to-support-the-recipes-and-plans">Aspect: Data structure to support the recipes and plans</a></h6>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> The recipes and plans are maintained in an <code>ObservableList</code> by the
-<code>UniqueRecipeList</code> and <code>UniquePlannedList</code> class respectively. The lists are unmodifiable outside of these classes.
-<code>PlannedRecipeMap</code> maintains the mapping from <code>Recipe</code> to all plans that use this <code>Recipe</code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: The <code>ObservableList</code> allows the UI to 'listen' in and be updated when the lists change.<br>
-The unmodifiable property also safeguards the data in the lists from being corrupted.<br>
-The <code>PlannedRecipeMap</code> eases the cost of iterating through the entire list of plans in the <code>UniquePlannedList</code> and
-checking whether each plan uses the <code>Recipe</code> being edited.</p>
-</li>
-<li>
-<p>Cons: Performance might not be optimised by using a List instead of other data structures like a LinkedList or
-HashMap for the <code>UniqueRecipeList</code> and <code>UniquePlannedList</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Maintain the recipes and plans in an <code>ObservableMap</code> instead.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Performance will be better by using a Map than a List.</p>
-</li>
-<li>
-<p>Cons: There are no official javafx classes that supports an sorted <code>ObservableMap</code> or a filtered <code>ObservableMap</code>.
-We will have to write and maintain our own implementation or import from pre-existing libraries.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<h6 id="aspect-data-structure-to-support-plans"><a class="link" href="#aspect-data-structure-to-support-plans">Aspect: Data structure to support plans</a></h6>
 <div class="paragraph">
-<p>We decided to use alternative 1, as the cons of alternative 2 are too heavy. Many aspects of our program require
-filtering and sorting to be supported. For example, plans need to be sorted in chronological order, and the advanced
-recipe list needs to be filtered for our filter feature.<br>
-Additionally, we would not have enough time in the scope of this project to write our own implementation, and importing from pre-existing
-libraries gives the risk of running into bugs in the future if the the dependencies were not maintained.</p>
+<p>Please refer to <a href="#aspect-data-structure-to-support-plans">Section 3.1.2.2.2, &#8220;Aspect: Data structure to support plans&#8221;</a> for the design considerations for plans.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="delete-command"><a class="link" href="#delete-command">3.1.4. Delete command</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="favourite-and-unfavourite-commands-brian"><a class="link" href="#favourite-and-unfavourite-commands-brian">3.1.5. Favourite and Unfavourite commands (Brian)</a></h4>
+<h4 id="favourite-and-unfavourite-commands-brian"><a class="link" href="#favourite-and-unfavourite-commands-brian">3.1.3. Favourite and Unfavourite commands (Brian)</a></h4>
 <div class="sect4">
 <h5 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h5>
 <div class="paragraph">
@@ -811,7 +777,7 @@ were already favourites.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">3.1.6. Undo and Redo commands (Brian)</a></h4>
+<h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">3.1.4. Undo and Redo commands (Brian)</a></h4>
 <div class="paragraph">
 <p>The implementation of undo and redo was adapted from AB3. However, HYBB requires more book-keeping because on top
 of the <code>RecipeBook</code>, we have a <code>PlannedBook</code>, a <code>CookedRecordBook</code>, and a <code>QuoteBook</code> to keep track of as well.</p>
@@ -973,14 +939,6 @@ affect multiple books, making book-keeping even more complicated (and hence, sus
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="clear-command"><a class="link" href="#clear-command">3.1.7. Clear command</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="exit-command"><a class="link" href="#exit-command">3.1.8. Exit command</a></h4>
-
-</div>
 </div>
 <div class="sect2">
 <h3 id="recipe-customisation-commands-brian"><a class="link" href="#recipe-customisation-commands-brian">3.2. Recipe customisation commands (Brian)</a></h3>
@@ -1131,94 +1089,110 @@ on top of the existing prefixes. This is double work for the user.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-plan-command-beatrice"><a class="link" href="#add-plan-command-beatrice">3.4. Add plan command (Beatrice)</a></h3>
+<h3 id="plan-command-beatrice"><a class="link" href="#plan-command-beatrice">3.4. Plan command (Beatrice)</a></h3>
+<div class="paragraph">
+<p>The plan feature allows users to plan for recipes that they wish to cook at a certain date.<br>
+This feature is facilitated by the <code>PlanCommand</code> class.</p>
+</div>
 <div class="sect3">
 <h4 id="implementation-6"><a class="link" href="#implementation-6">3.4.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The planning feature uses the <code>UniquePlannedList</code> to store and display all plans and the <code>PlannedRecipeMap</code> to
-navigate between recipes and plans.</p>
+<p>This section explains how the <code>plan</code> command is implemented.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User specified arguments are passed to the <code>PlanCommandParser</code> which uses <code>ArgumentTokenizer</code> and
+<code>ArgumentMultimap</code> to break up the user input.</p>
+</li>
+<li>
+<p>The arguments are parsed by <code>ParserUtil</code> and if no invalid inputs were found, a <code>PlanCommand</code> object will be created.</p>
+</li>
+<li>
+<p><code>PlanCommand#execute()</code> gets the latest list of recipes from <code>Model</code>.</p>
+</li>
+<li>
+<p>For every <code>Index</code>, a new <code>Plan</code> object is created and added into the <code>Model</code>. This is done by passing the <code>Plan</code>
+and the <code>Recipe</code> that is being planned into the <code>UniquePlannedList</code> and <code>PlannedRecipeMap</code>.</p>
+</li>
+<li>
+<p>The <code>Plan</code> is added to the <code>UniquePlannedList</code> and the <code>Plan</code> is added to the list of plans at the <code>Recipe</code> key
+in the <code>PlannedRecipeMap</code>.</p>
+</li>
+<li>
+<p>The success message will be returned to the user by the <code>CommandResult</code>.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>The <code>UniquePlannedList</code> provides the UI with an unmodifiable observable list that can be 'observed' and displayed.
-Meanwhile, the <code>PlannedRecipeMap</code> maintains a mapping from <code>Recipe</code> to <code>Plan</code> so that a <code>Plan</code> can be easily
-updated when a <code>Recipe</code> is changed.</p>
-</div>
-<div class="paragraph">
-<p>Given below is a sequence diagram on how a <code>Plan</code> is updated when a <code>Recipe</code> is changed.</p>
+<p>The diagram below summarises the steps taken:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/abc.png" alt="abc">
+<img src="images/PlanningSequenceDiagram.png" alt="PlanningSequenceDiagram">
 </div>
+<div class="title">Figure 27. Plan sequence diagram</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for EditCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-recipes-are-scheduled"><a class="link" href="#aspect-how-recipes-are-scheduled">Aspect: How recipes are scheduled</a></h5>
+<h5 id="aspect-data-structure-to-support-plans-2"><a class="link" href="#aspect-data-structure-to-support-plans-2">Aspect: Data structure to support plans</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Scheduled recipes are saved in a separate data structure.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a <code>UniquePlannedList</code> with an <code>ObservableList</code> to display the list of plans,
+and an internal <code>PlannedRecipeMap</code> that maintains the mapping between a <code>Recipe</code> and all plans that were
+made for the recipe.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Scheduled recipes can be easily obtained and sorted.</p>
+<p>Pros: The <code>UniquePlannedList</code> provides the list of plans and updates the UI for every change in plan. In the
+background, the <code>PlannedRecipeMap</code> is maintained and used to ease the cost of iterating through an entire list of
+plans to search for all the plans that uses a specific <code>Recipe</code>.</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage if a large number of recipes are scheduled.</p>
+<p>Cons: Performance might not be optimised as <code>UniqueRecipeList</code> still uses a list.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Store the date that the scheduled recipe is scheduled on as another attribute to the Recipe class.</p>
+<p><strong>Alternative 2:</strong> Maintain the recipes and plans in one <code>ObservableMap</code> instead.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement, no additional data structure added.</p>
+<p>Pros: Performance will be better by using a Map than a List.</p>
 </li>
 <li>
-<p>Cons: All scheduled recipes can not be easily seen and sorted.</p>
+<p>Cons: There are no official javafx classes that supports an sorted <code>ObservableMap</code> or a filtered <code>ObservableMap</code>.
+We will have to write and maintain our own implementation or import from other libraries.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-scheduled-recipes"><a class="link" href="#aspect-data-structure-to-support-the-scheduled-recipes">Aspect: Data structure to support the scheduled recipes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a tree map to store the scheduled recipes in a &lt;Date, List&lt;Recipe&gt;&gt; key-value pair.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Allows us to easily and intuitively access the list of recipes scheduled on a certain day.</p>
-</li>
-<li>
-<p>Cons: Obtaining all the recipes scheduled across a period of time will not be very efficient.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use a List sorted by increasing time.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement, uncomplicated data structure.</p>
-</li>
-<li>
-<p>Cons: Hard to obtain the scheduled recipes on a certain date, as we do not know which index
-corresponds to the date we are interested in.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="paragraph">
+<p>We decided to use alternative 1, as the cons of alternative 2 are too heavy. The plans need to be sorted
+in a chronological order, and future implementations of the <code>viewWeek</code> and <code>viewMonth</code> command will require the plans
+to be filtered as well.<br>
+Additionally, we would not have enough time in the scope of this project to write a fully functional
+implementation, and importing from other libraries introduces the risk of running into bugs if the the dependencies
+were not maintained in the future.</p>
 </div>
 </div>
 </div>
@@ -1238,13 +1212,13 @@ corresponds to the date we are interested in.</p>
 <div class="content">
 <img src="images/AddSequenceDiagram.png" alt="AddSequenceDiagram">
 </div>
-<div class="title">Figure 27. Add command sequence diagram</div>
+<div class="title">Figure 28. Add command sequence diagram</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/AddRefSequenceDiagram.png" alt="AddRefSequenceDiagram">
 </div>
-<div class="title">Figure 28. Reference Frame for Add command sequence diagram</div>
+<div class="title">Figure 29. Reference Frame for Add command sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>A recipe is initially created with an empty goals set from parser and <code>calculateGoals()</code> is then called in the <code>AddCommand</code>.</p>
@@ -1283,11 +1257,11 @@ be updated in the particular instance of <code>Recipe r</code> and <code>Model#a
 <div class="content">
 <img src="images/CookedActivityDiagram.png" alt="CookedActivityDiagram">
 </div>
-<div class="title">Figure 29. Activity diagram when a cooked command is entered</div>
+<div class="title">Figure 30. Activity diagram when a cooked command is entered</div>
 </div>
 <div class="paragraph">
 <p>After <code>CookedCommand#execute(model)</code> is called, the series of checks shown in the above diagram is done to determine
-if the recipe can be marked as cooked. With multiple recipes inputted (eg "`cooked` 1 2 3", the series of checks will
+if the recipe can be marked as cooked. With multiple recipes inputted (eg <code>cooked</code> 1 2 3, the series of checks will
 loop through for for each recipe.</p>
 </div>
 <div class="paragraph">
@@ -1300,9 +1274,13 @@ associated with the recipe is created and <code>Model#addRecord(record)</code> w
 it will be removed from the planned list.</p>
 </div>
 <div class="paragraph">
-<p>With reference to the structure of the CookedRecords Model,
-.Class diagram of Record
-image::ModelRecordClassDiagram.png[]</p>
+<p>With reference to the structure of the CookedRecords Model,</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModelRecordClassDiagram.png" alt="ModelRecordClassDiagram">
+</div>
+<div class="title">Figure 31. Class diagram of Record</div>
 </div>
 <div class="paragraph">
 <p>We can see above that once a record is added to the UniqueRecordList two Observable lists will be updated for each
@@ -1502,7 +1480,7 @@ more if the current list of quotes is not to their liking.</p>
 <div class="content">
 <img src="images/QuoteSequenceDiagram.png" alt="QuoteSequenceDiagram">
 </div>
-<div class="title">Figure 30. Quote command sequence diagram</div>
+<div class="title">Figure 32. Quote command sequence diagram</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1560,7 +1538,7 @@ been successfully added.</p>
 <div class="content">
 <img src="images/QuoteActivityDiagram.png" alt="QuoteActivityDiagram">
 </div>
-<div class="title">Figure 31. Quote command activity diagram</div>
+<div class="title">Figure 33. Quote command activity diagram</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
@@ -1614,7 +1592,7 @@ High streak.</p>
 <div class="content">
 <img src="images/StreakActivityDiagram.png" alt="StreakActivityDiagram">
 </div>
-<div class="title">Figure 32. Quote command sequence diagram</div>
+<div class="title">Figure 34. Quote command sequence diagram</div>
 </div>
 <div class="sect3">
 <h4 id="implementation-7"><a class="link" href="#implementation-7">3.7.1. Implementation</a></h4>
@@ -2151,7 +2129,7 @@ minimise food wastage.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a1. HealthyBaby shows an error message.</p>
+<p>2a1. HealthyBaby tells the user that 0 recipes are listed.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2397,7 +2375,119 @@ The plan for recipe 1 is removed from the list of plans in the 'Planning' tab.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-the-recipe-list"><a class="link" href="#clearing-the-recipe-list">F.3. Clearing the recipe list</a></h3>
+<h3 id="favourite-a-recipe"><a class="link" href="#favourite-a-recipe">F.3. Favourite a recipe</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Favouriting a recipe while all recipes are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all recipes using the <code>list</code> command. There must be at least 2 recipes for all the following test
+cases to work as expected.</p>
+</li>
+<li>
+<p>Test case: <code>favourite 1</code><br>
+   Expected: A star appears beside the recipe name, indicating that it has been marked as a favourite and a success
+message appears in the message box.</p>
+</li>
+<li>
+<p>Test case: <code>favourite 0</code><br>
+Expected: No recipe is favourited. An error message appears in the message box.</p>
+</li>
+<li>
+<p>Test case: <code>favourite 1 2</code><br>
+   Expected: A star appears beside the names of recipe 1 and 2, indicating that they have been marked as favourites and
+a success message appears in the message box.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unfavourite-a-recipe"><a class="link" href="#unfavourite-a-recipe">F.4. Unfavourite a recipe</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Unfavouriting a recipe while all recipes are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all recipes using the <code>list</code> command. Recipe 1 must be favourited as well.</p>
+</li>
+<li>
+<p>Test case: <code>unfavourite 1</code><br>
+   Expected: The star beside recipe 1 disappears, indicating that it has been removed from favourites and a success
+message appears in the message box.</p>
+</li>
+<li>
+<p>Test case: <code>unfavourite 0</code><br>
+Expected: No recipe is unfavourited. An error message appears in the message box.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filtering-recipes"><a class="link" href="#filtering-recipes">F.5. Filtering recipes</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Filters recipes that match the given criteria</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all recipes using the <code>list</code> command. At least one recipe should be favourited and at least one
+recipe should contain a grain ingredient called "Bread"</p>
+</li>
+<li>
+<p>Test case: <code>filter favourites</code><br>
+Expected: Only recipes that are favourites (has a star beside its name) are displayed.</p>
+</li>
+<li>
+<p>Test case: <code>filter ig/Bread</code><br>
+Expected: Only recipes that have a grain ingredient called "Bread" are displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-and-redo"><a class="link" href="#undo-and-redo">F.6. Undo and Redo</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Undoes the previous action, followed by restoring the action that was undone</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all recipes using the <code>list</code> command. Recipe 1 should not be favourited and should not contain a
+grain ingredient called "Bread"</p>
+</li>
+<li>
+<p>Test case: <code>favourite 1</code>, followed by <code>undo</code>, followed by <code>redo</code>
+   Expected: A star appears beside recipe 1&#8217;s name upon favouriting it, disappears upon undoing, and reappears upon
+redoing.</p>
+</li>
+<li>
+<p>Test case: <code>addingredient 1 ig/2g, Bread</code>, followed by <code>undo</code>, followed by <code>redo</code>
+   Expected: A bread ingredient appears under the "Grains" section of recipe 1 upon addingredient, disappears upon
+undoing, and reappears upon redoing.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-the-recipe-list"><a class="link" href="#clearing-the-recipe-list">F.7. Clearing the recipe list</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2432,7 +2522,7 @@ Expected: All recipes are cleared from the list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-plans"><a class="link" href="#adding-plans">F.4. Adding plans</a></h3>
+<h3 id="adding-plans"><a class="link" href="#adding-plans">F.8. Adding plans</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2504,7 +2594,7 @@ Expected: No plans are added. Duplicate message is shown in the result box.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-plans"><a class="link" href="#deleting-plans">F.5. Deleting plans</a></h3>
+<h3 id="deleting-plans"><a class="link" href="#deleting-plans">F.9. Deleting plans</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2551,7 +2641,7 @@ Other incorrect plan commands to try: <code>deletePlan 1 0</code>, <code>deleteP
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-plans"><a class="link" href="#clearing-plans">F.6. Clearing plans</a></h3>
+<h3 id="clearing-plans"><a class="link" href="#clearing-plans">F.10. Clearing plans</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2572,7 +2662,7 @@ Expected: All plans in the plan list are cleared.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="obtaining-grocery-list"><a class="link" href="#obtaining-grocery-list">F.7. Obtaining grocery list</a></h3>
+<h3 id="obtaining-grocery-list"><a class="link" href="#obtaining-grocery-list">F.11. Obtaining grocery list</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2623,7 +2713,56 @@ Expected: Window with updated grocery list appears.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-quotes"><a class="link" href="#adding-quotes">F.8. Adding quotes</a></h3>
+<h3 id="cooking-recipes"><a class="link" href="#cooking-recipes">F.12. Cooking recipes</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Mark a recipe as cooked</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Recipes are present. If required, add recipes by using the <code>add</code> command.</p>
+</li>
+<li>
+<p>Test case: <code>cooked 1</code><br>
+Expected: The result box below informs the user that the recipe has been cooked.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Cooking a recipe that has already been cooked.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Records list contains records cooked within the day.</p>
+</li>
+<li>
+<p>Test case: <code>cooked 1</code><br>
+Expected: The result box below informs the user that the recipe is a duplicated and cannot be added in.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Cooking multiple recipes</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Recipes are present. If required, add recipes by using the <code>add</code> command.</p>
+</li>
+<li>
+<p>Test case: <code>cooked 1 2 3</code><br>
+Expected: The result box below informs the user that the recipes have been cooked.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-quotes"><a class="link" href="#adding-quotes">F.13. Adding quotes</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2661,7 +2800,7 @@ Expected: The result box below informs the user that the quote is a duplicated a
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.9. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.14. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2689,7 +2828,7 @@ Expected: Deleting the files would result in these corresponding results:</p>
 <p>Plannedbook: An empty plan list in 'Planning'</p>
 </li>
 <li>
-<p>Cookedrecords: An empty cooked meals list with no pie chard in 'Goals'</p>
+<p>Cookedrecords: An empty cooked meals list with no pie chart in 'Goals'</p>
 </li>
 </ol>
 </div>
@@ -2737,4 +2876,4 @@ Expected: Adding corrupted data into the files would result in these correspondi
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 14:47:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 15:56:31 UTC</div></div></div></body></html>

@@ -415,7 +415,7 @@ Format: <code>viewMonth</code></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User specified arguments are passed to the <code>EditCommandParser</code> and passed into <code>ArgumentTokenizer</code> and
+<p>User specified arguments are passed to the <code>EditCommandParser</code> and the arguments are broken up by the <code>ArgumentTokenizer</code> and
 <code>ArgumentMultimap</code>.</p>
 </li>
 <li>
@@ -434,6 +434,9 @@ being edited.</p>
 </li>
 <li>
 <p><code>Model#setRecipe()</code> will then replace the <code>Recipe</code> being edited with the new <code>Recipe</code> and update the list of recipes and plans.</p>
+</li>
+<li>
+<p>The success message will be returned to the user by the <code>CommandResult</code>.</p>
 </li>
 </ol>
 </div>
@@ -488,9 +491,16 @@ will replace the target with the edited <code>Recipe</code> in the recipe list.<
 </li>
 <li>
 <p>The same arguments are then passed into <code>PlannedBook#setRecipe()</code> which will get a list of all the plans that uses
-the target <code>Recipe</code> from <code>PlannedRecipeMap</code> and update each plan.</p>
+the target <code>Recipe</code> from <code>PlannedRecipeMap</code>.</p>
+</li>
+<li>
+<p>If there are no plans that uses <code>Recipe</code>, the process stops. However if plans exists, the <code>PlannedBook</code>
+will iterate through each old plan and update each plan.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>Step 4. is an example of how the <code>PlannedRecipeMap</code> can be used to ease the cost of updating each plan.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram summarizes how the <code>Recipe</code> and all its related <code>Plan</code> are updated
@@ -546,30 +556,97 @@ there are many properties to test, it is still a finite number and testing can b
 </div>
 </div>
 <div class="sect5">
-<h6 id="aspect-data-structure-to-support-the-recipes-and-plans"><a class="link" href="#aspect-data-structure-to-support-the-recipes-and-plans">Aspect: Data structure to support the recipes and plans</a></h6>
-<div class="ulist">
-<ul>
+<h6 id="aspect-data-structure-to-support-plans"><a class="link" href="#aspect-data-structure-to-support-plans">Aspect: Data structure to support plans</a></h6>
+<div class="paragraph">
+<p>Please refer to <a href="#aspect-data-structure-to-support-plans">Aspect: Data structure to support plans</a> for the design considerations for plans.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="plan-command-beatrice"><a class="link" href="#plan-command-beatrice">Plan command (Beatrice)</a></h3>
+<div class="paragraph">
+<p>The plan feature allows users to plan for recipes that they wish to cook at a certain date.<br>
+This feature is facilitated by the <code>PlanCommand</code> class.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<div class="paragraph">
+<p>This section explains how the <code>plan</code> command is implemented.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p><strong>Alternative 1 (current choice):</strong> The recipes and plans are maintained in an <code>ObservableList</code> by the
-<code>UniqueRecipeList</code> and <code>UniquePlannedList</code> class respectively. The lists are unmodifiable outside of these classes.
-<code>PlannedRecipeMap</code> maintains the mapping from <code>Recipe</code> to all plans that use this <code>Recipe</code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: The <code>ObservableList</code> allows the UI to 'listen' in and be updated when the lists change.<br>
-The unmodifiable property also safeguards the data in the lists from being corrupted.<br>
-The <code>PlannedRecipeMap</code> eases the cost of iterating through the entire list of plans in the <code>UniquePlannedList</code> and
-checking whether each plan uses the <code>Recipe</code> being edited.</p>
+<p>User specified arguments are passed to the <code>PlanCommandParser</code> which uses <code>ArgumentTokenizer</code> and
+<code>ArgumentMultimap</code> to break up the user input.</p>
 </li>
 <li>
-<p>Cons: Performance might not be optimised by using a List instead of other data structures like a LinkedList or
-HashMap for the <code>UniqueRecipeList</code> and <code>UniquePlannedList</code>.</p>
+<p>The arguments are parsed by <code>ParserUtil</code> and if no invalid inputs were found, a <code>PlanCommand</code> object will be created.</p>
+</li>
+<li>
+<p><code>PlanCommand#execute()</code> gets the latest list of recipes from <code>Model</code>.</p>
+</li>
+<li>
+<p>For every <code>Index</code>, a new <code>Plan</code> object is created and added into the <code>Model</code>. This is done by passing the <code>Plan</code>
+and the <code>Recipe</code> that is being planned into the <code>UniquePlannedList</code> and <code>PlannedRecipeMap</code>.</p>
+</li>
+<li>
+<p>The <code>Plan</code> is added to the <code>UniquePlannedList</code> and the <code>Plan</code> is added to the list of plans at the <code>Recipe</code> key
+in the <code>PlannedRecipeMap</code>.</p>
+</li>
+<li>
+<p>The success message will be returned to the user by the <code>CommandResult</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The diagram below summarises the steps taken:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PlanningSequenceDiagram.png" alt="PlanningSequenceDiagram">
+</div>
+<div class="title">Figure 7. Plan sequence diagram</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for EditCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-to-support-plans-2"><a class="link" href="#aspect-data-structure-to-support-plans-2">Aspect: Data structure to support plans</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a <code>UniquePlannedList</code> with an <code>ObservableList</code> to display the list of plans,
+and an internal <code>PlannedRecipeMap</code> that maintains the mapping between a <code>Recipe</code> and all plans that were
+made for the recipe.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The <code>UniquePlannedList</code> provides the list of plans and updates the UI for every change in plan. In the
+background, the <code>PlannedRecipeMap</code> is maintained and used to ease the cost of iterating through an entire list of
+plans to search for all the plans that uses a specific <code>Recipe</code>.</p>
+</li>
+<li>
+<p>Cons: Performance might not be optimised as <code>UniqueRecipeList</code> still uses a list.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Maintain the recipes and plans in an <code>ObservableMap</code> instead.</p>
+<p><strong>Alternative 2:</strong> Maintain the recipes and plans in one <code>ObservableMap</code> instead.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -577,7 +654,7 @@ HashMap for the <code>UniqueRecipeList</code> and <code>UniquePlannedList</code>
 </li>
 <li>
 <p>Cons: There are no official javafx classes that supports an sorted <code>ObservableMap</code> or a filtered <code>ObservableMap</code>.
-We will have to write and maintain our own implementation or import from pre-existing libraries.</p>
+We will have to write and maintain our own implementation or import from other libraries.</p>
 </li>
 </ul>
 </div>
@@ -585,108 +662,16 @@ We will have to write and maintain our own implementation or import from pre-exi
 </ul>
 </div>
 <div class="paragraph">
-<p>We decided to use alternative 1, as the cons of alternative 2 are too heavy. Many aspects of our program require
-filtering and sorting to be supported. For example, plans need to be sorted in chronological order, and the advanced
-recipe list needs to be filtered for our filter feature.<br>
-Additionally, we would not have enough time in the scope of this project to write our own implementation, and importing from pre-existing
-libraries gives the risk of running into bugs in the future if the the dependencies were not maintained.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="add-plan-command-beatrice"><a class="link" href="#add-plan-command-beatrice">Add plan command (Beatrice)</a></h3>
-<div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
-<div class="paragraph">
-<p>The planning feature uses the <code>UniquePlannedList</code> to store and display all plans and the <code>PlannedRecipeMap</code> to
-navigate between recipes and plans.</p>
-</div>
-<div class="paragraph">
-<p>The <code>UniquePlannedList</code> provides the UI with an unmodifiable observable list that can be 'observed' and displayed.
-Meanwhile, the <code>PlannedRecipeMap</code> maintains a mapping from <code>Recipe</code> to <code>Plan</code> so that a <code>Plan</code> can be easily
-updated when a <code>Recipe</code> is changed.</p>
-</div>
-<div class="paragraph">
-<p>Given below is a sequence diagram on how a <code>Plan</code> is updated when a <code>Recipe</code> is changed.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/abc.png" alt="abc">
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-recipes-are-scheduled"><a class="link" href="#aspect-how-recipes-are-scheduled">Aspect: How recipes are scheduled</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Scheduled recipes are saved in a separate data structure.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Scheduled recipes can be easily obtained and sorted.</p>
-</li>
-<li>
-<p>Cons: May have performance issues in terms of memory usage if a large number of recipes are scheduled.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Store the date that the scheduled recipe is scheduled on as another attribute to the Recipe class.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement, no additional data structure added.</p>
-</li>
-<li>
-<p>Cons: All scheduled recipes can not be easily seen and sorted.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-scheduled-recipes"><a class="link" href="#aspect-data-structure-to-support-the-scheduled-recipes">Aspect: Data structure to support the scheduled recipes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a tree map to store the scheduled recipes in a &lt;Date, List&lt;Recipe&gt;&gt; key-value pair.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Allows us to easily and intuitively access the list of recipes scheduled on a certain day.</p>
-</li>
-<li>
-<p>Cons: Obtaining all the recipes scheduled across a period of time will not be very efficient.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use a List sorted by increasing time.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement, uncomplicated data structure.</p>
-</li>
-<li>
-<p>Cons: Hard to obtain the scheduled recipes on a certain date, as we do not know which index
-corresponds to the date we are interested in.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<p>We decided to use alternative 1, as the cons of alternative 2 are too heavy. The plans need to be sorted
+in a chronological order, and future implementations of the <code>viewWeek</code> and <code>viewMonth</code> command will require the plans
+to be filtered as well.<br>
+Additionally, we would not have enough time in the scope of this project to write a fully functional
+implementation, and importing from other libraries introduces the risk of running into bugs if the the dependencies
+were not maintained in the future.</p>
 </div>
 <hr>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 14:47:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 15:56:31 UTC</div></div></div></body></html>

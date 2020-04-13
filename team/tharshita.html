@@ -10,7 +10,16 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p><strong>HealthyBaby</strong> (HYBB) is a desktop application targeted towards university students that provides users with a database of quick, easy, and healthy recipes.
+HYBB helps alleviate the challenges faced while maintaining healthy eating habits, easing the transition from eating
+out everyday to cooking healthy meals regularly. The user interacts with HYBB using a Command Line Interface, and it has a Graphical User Interface created with JavaFX.</p>
+</div>
+<div class="paragraph">
+<p>This portfolio serves to demonstrate my proficiency in the various aspects of software engineering such as
+coding, project management and technical writing skills in crafting documentation that fits the target user.
+My role was to design and implement the code for the goals feature and switch feature which will be further elaborated in the
+following sections. Also included are the details of the relevant documentation I have written in the user and
+developer guide to assist users and other developers to understand these features.</p>
 </div>
 </div>
 </div>
@@ -20,29 +29,41 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: added <strong>the goals feature</strong>
+I implemented the commands and functionality related to the goals feature.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: Auto generated goals for a recipe every time a recipe&#8217;s ingredients are added or edited. Based on these goals,
+when recipe is marked as cooked, an archive of past cooked meals can be seen as well as a pie chart representing the goals distribution
+can be seen under the goals tab.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature improves the product significantly because a user using a healthy recipe database would want to see
+their history of cooked meals as well as statistics of their food distribution (represented by the goals distribution).</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: This enhancement affects existing add and edit commands and commands to be added in future such as planning.
+It required an in-depth analysis of design alternatives so as to achieve the most accurate results.
+The implementation too was challenging as it required changes to existing commands as well as working on all parts of the code such as
+creating a new json file to store records, working with ui and fxml and listeners with pie charts. A great deal of designing and
+abstraction was needed where code had to be continually changed and rewritten to be optimised and make proper use of inheritance
+of ingredients for efficiency in calculating quantity.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Minor enhancement</strong>: added <strong>the ability to switch between tabs</strong>
+I implemented the switch command that allows for switching between tabs. A great deal of planning and understanding
+of the front-end code was needed in order to integrate the switch command. I designed and abstracted out the front end into
+4 main tabs.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p>* <a href="https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#=undefined&amp;search=tharshita">Functional code and test code</a></p>
+</li>
+<li>
+<p>* <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/107">example code</a></p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -53,7 +74,15 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Managed the <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/issues?q=is%3Aissue+author%3Atharshita+is%3Aclosed">issues</a>
+covered for each milestone. Added each feature as issue and assigned it to teammates.</p>
+</li>
+<li>
+<p>Initiated testing of the product before v1.4 and reported bugs and assigned them to person in charge. <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/issues?q=is%3Aissue+label%3Atype.Bug+is%3Aclosed">bugs</a></p>
+</li>
+<li>
+<p>Did the major refactoring of code from addressbook to recipebook, adding classes and fields such as goal class, time class and steps class and
+deleting unecessary fields <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/22">22</a></p>
 </li>
 </ul>
 </div>
@@ -63,10 +92,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+<p>Updated the GUI color scheme and changed logo of HYBB(Pull requests <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/69">#69</a>)</p>
 </li>
 <li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Created all 4 tabs and guided teammates on how to fill these tabs with their respective data. <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/118">#118</a></p>
+</li>
+<li>
+<p>Wrote additional tests for existing features to increase coverage (Pull requests <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/173">#173</a>, <a href="https://github.com">#38</a>)</p>
 </li>
 </ul>
 </div>
@@ -76,7 +108,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Wrote the overview, FAQs and updated command summary, help command, introduction, switch and goals commands</p>
+</li>
+<li>
+<p>wrote NFR, use cases and user stories <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/commit/865a04f919fc36b4ffa6ac9a7de1b8439f80e1a5">PR</a></p>
+</li>
+<li>
+<p>Updated the UI and storage models in Developer&#8217;s guide and wrote manual testing.</p>
 </li>
 </ul>
 </div>
@@ -86,29 +124,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/115">#115</a>, <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/172">#172</a>, <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pulls?q=is%3Apr+reviewed-by%3A%40me+is%3Aclosed">all</a>,</p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
+<p>Reviewed other team: <a href="https://github.com/AY1920S2-CS2103T-T10-2/main/pull/89">#89</a></p>
 </li>
 <li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Reported bugs and suggestions for other teams in the class during tutorials and peer testing</p>
 </li>
 </ul>
 </div>
@@ -117,9 +139,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -151,177 +170,273 @@
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="goals-feature-harshita"><a class="link" href="#goals-feature-harshita">Goals feature (Harshita)</a></h3>
+<div class="paragraph">
+<p>The main functionalities and commands associated with the entire goals feature are <code>add</code>, <code>addIngredient</code>, <code>edit</code>, <code>editIngredient</code>,
+ <code>cooked</code>, <code>listGoals</code> and 'removeGoals'. Goals are auto-generated and added to a recipe every time <code>add</code>, <code>addIngredient</code>, <code>edit</code> or <code>editIngredient</code> is executed.</p>
+</div>
 <div class="sect3">
-<h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">Undo and Redo commands (Brian)</a></h4>
+<h4 id="details-of-implementation-auto-generation-of-goals"><a class="link" href="#details-of-implementation-auto-generation-of-goals">Details of Implementation (Auto-generation of goals)</a></h4>
 <div class="paragraph">
-<p>The implementation of undo and redo was adapted from AB3. However, HYBB requires more book-keeping because on top
-of the <code>RecipeBook</code>, we have a <code>PlannedBook</code>, a <code>CookedRecordBook</code>, and a <code>QuoteBook</code> to keep track of as well.</p>
+<p>The following sequence diagram shows how goals are generated through the example of <code>addIngredient</code> command execution</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddSequenceDiagram.png" alt="AddSequenceDiagram">
+</div>
+<div class="title">Figure 1. Add command sequence diagram</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddRefSequenceDiagram.png" alt="AddRefSequenceDiagram">
+</div>
+<div class="title">Figure 2. Reference Frame for Add command sequence diagram</div>
 </div>
 <div class="paragraph">
-<p>For brevity, we will only talk about the <code>undo</code> command. Note that the <code>redo</code> command is implemented in the same way.</p>
+<p>A recipe is initially created with an empty goals set from parser and <code>calculateGoals()</code> is then called in the <code>AddCommand</code>.</p>
 </div>
+<div class="paragraph">
+<p>Each ingredient type that is associated with a goal (<code>Vegetable</code>, <code>Protein</code>, <code>Fruit</code>, <code>Grain</code>) is listed as an enum type
+in MainIngredientType. This ensures that invalid goals are not created and simplifies the mapping between <code>MainIngredientType</code>
+and <code>Goal</code>.</p>
+</div>
+<div class="paragraph">
+<p>The calculation of goals then occurs through looping through each ingredient type and executing the method call to
+<code>Recipe#calculateIngredientQuantity()</code>.
+This would obtain the total quantity for each ingredient, firstly by calling <code>Ingredient#getMainIngredientType()</code>
+to ensure the validity of ingredients beings calculated (e.g. any instance of 'Other' ingredient would throw an <code>InvalidStateException</code>).
+Secondly, by obtaining the quantity in grams through the method calls to <code>Ingredient#getQuantity()' and 'Quantity#convertToGram()</code>.</p>
+</div>
+<div class="paragraph">
+<p>After the calculation for each main ingredient type is completed, an instance of <code>MainIngredientTypeMagnitude</code> is created.
+It acts as a container to store the quantities and conduct the checks for whether these quantities meet the minimum quantity
+requirement for their respective food group. This calculation and checks are done through the method call to
+<code>MainIngredientTypeMagnitude#getMainTypes()</code> which would then return a set of <code>MainIngredientType</code> that successfully met the
+minimum requirement.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, after looping through this set and creating each goal with the mapping from <code>MainIngredientType</code> to <code>Goal</code> done
+(e.g. <code>MainIngredientType.FRUIT</code> leads to the creation of goal with goal name generated as "Fruity Fiesta"), the goals will
+be updated in the particular instance of <code>Recipe r</code> and <code>Model#addRecipe(r)</code> would then update <code>RecipeBook</code> in storage.</p>
+</div>
+<div class="paragraph">
+<p>The immutability of each object is supported to ensure the correctness of undo and redo functionality.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="details-of-implementation-statistics-of-cooked-recipes"><a class="link" href="#details-of-implementation-statistics-of-cooked-recipes">Details of Implementation (Statistics of cooked recipes)</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CookedActivityDiagram.png" alt="CookedActivityDiagram">
+</div>
+<div class="title">Figure 3. Activity diagram when a cooked command is entered</div>
+</div>
+<div class="paragraph">
+<p>After <code>CookedCommand#execute(model)</code> is called, the series of checks shown in the above diagram is done to determine
+if the recipe can be marked as cooked. With multiple recipes inputted (eg <code>cooked</code> 1 2 3, the series of checks will
+loop through for for each recipe.</p>
+</div>
+<div class="paragraph">
+<p>The checks ensure that all the recipes inputted are valid, else the  <code>CookedCommand</code>
+throws an exception and terminates. If successful, a new  <code>Record</code> containing the <code>Name</code>, current <code>Date</code> and set of <code>Goals</code>
+associated with the recipe is created and <code>Model#addRecord(record)</code> would then update <code>CookedRecordBook</code> in storage.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, if the recipe marked as cooked was included in the Planned Recipes for the day,
+it will be removed from the planned list.</p>
+</div>
+<div class="paragraph">
+<p>With reference to the structure of the CookedRecords Model,</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelRecordClassDiagram.png" alt="ModelRecordClassDiagram">
+</div>
+<div class="title">Figure 4. Class diagram of Record</div>
+</div>
+<div class="paragraph">
+<p>We can see above that once a record is added to the UniqueRecordList two Observable lists will be updated for each
+addition of <code>Record</code>. Firstly, it is the <code>internalRecordsList</code> that stores unique <code>Record</code>. Secondly, based on this list,
+an <code>internalGoalsTally</code> that stores <code>GoalCount</code> will be updated each time. This <code>GoalCount</code> consists of one of the four main goal
+and its respective tally and this observable list is what the pie chart will be listening to for updates and will change
+each time the <code>internalGoalsTally</code> has been updated as well.</p>
+</div>
+<div class="paragraph">
+<p>Hence the <code>cooked</code> command is essential in not only archiving data, but also giving the user personalised statistics
+on their overall goal distribution that resembles the Healthy Eating Plate. The immutability of each object is
+supported to ensure the correctness of undo and redo functionality as well.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="implementation-before-undo-is-called"><a class="link" href="#implementation-before-undo-is-called">Implementation (before undo is called)</a></h5>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Whenever a command that changes the state of any of the books (RecipeBook, PlannedBook, CookedRecordBook, or
-QuoteBook) is called, <code>Model#commitBook</code> is called as well.</p>
-</li>
-<li>
-<p><code>Model#commitBook</code> will first purge all redundant states in <code>MultipleBookStateManager</code> (ie. if the user called undo
-before and is now committing a new book, he will not be able to redo the actions of those undos anymore). This is the
-behavior that most modern desktop applications like Microsoft Word adopt.</p>
-</li>
-<li>
-<p><code>Model#commitBook</code> also saves the <code>CommandType</code> and <code>Tab</code> of the command in 2 separate stacks in
-<code>MultipleBookStateManager</code>. Finally, it saves the new state of the affected book(s) in an ArrayList of that book type.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Note #1: <code>CommandType</code> tells you which book(s) the command affects, while <code>Tab</code> tells you which tab should be
-displayed upon execution of the command.</p>
-</div>
-<div class="paragraph">
-<p>Note #2: All 4 ArrayLists of the 4 book types have a "current pointer" each, which points to the respective states of
-the books that the <code>Model</code> is currently using (ie. what the user is seeing).</p>
-</div>
-<div class="paragraph">
-<p>The following diagram summarizes what happens when the user executes a command that changes the state of any book:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
-</div>
-<div class="title">Figure 1. Activity diagram when a command is executed</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="implementation-when-undo-is-called"><a class="link" href="#implementation-when-undo-is-called">Implementation (when undo is called)</a></h5>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>Model#canUndo</code> is called to check if there are sufficient actions to be undone. An error is thrown if there are
-insufficient actions to be undone.</p>
-</li>
-<li>
-<p>If able to undo, <code>Model#undoBook</code> is called. The <code>CommandType</code> stack is popped to know which book(s) need undoing.
-At the same time, the "current pointer" of the corresponding book ArrayList(s) is/are shifted backwards. All 4 books
-in <code>Model</code> are then set to the version of the book that each "current pointer" is pointing to.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>This class diagram shows the components of <code>MultipleBookStateManager</code>:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/MultipleBookStateManagerClassDiagram.png" alt="MultipleBookStateManagerClassDiagram">
-</div>
-<div class="title">Figure 2. Class diagram for MultipleBookStateManager</div>
-</div>
-<div class="paragraph">
-<p>The following diagrams show what happens after the execution of various commands:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState0.png" alt="UndoRedoState0">
-</div>
-<div class="title">Figure 3. When the app is first opened</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState1.png" alt="UndoRedoState1">
-</div>
-<div class="title">Figure 4. When "delete 5" is called, the state of RecipeBook is changed. This new state is added to ArrayList&lt;RecipeBook&gt;.</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState2.png" alt="UndoRedoState2">
-</div>
-<div class="title">Figure 5. When "favourite 3" is called, the state of RecipeBook is changed. This new state is added to ArrayList&lt;RecipeBook&gt;.</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState3.png" alt="UndoRedoState3">
-</div>
-<div class="title">Figure 6. When "undo" is called, the current state pointer of ArrayList&lt;RecipeBook&gt; is shifted back and the Model&#8217;s RecipeBook is set to this version.</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState4.png" alt="UndoRedoState4">
-</div>
-<div class="title">Figure 7. When a command like "list" (that does not change the state of any book) is called, the current state pointer remains where it is (ie. there is no change of states).</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState5.png" alt="UndoRedoState5">
-</div>
-<div class="title">Figure 8. If a command like "clear" (that changes the state of a book) is called while the current pointer is not pointing to the latest version, all versions after the current pointer will be purged and the newest version will be added to the ArrayList.</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h5>
-<div class="sect5">
-<h6 id="aspect-how-undo-and-redo-executes"><a class="link" href="#aspect-how-undo-and-redo-executes">Aspect: How undo and redo executes</a></h6>
-<div class="paragraph">
-<p>One concern we had while choosing the design of the undo and redo features was the amount of memory that has to be used
-to keep track of the different states of the 3 books.</p>
-</div>
-<div class="paragraph">
-<p>On top of the ArrayLists of different book types, we also needed to have 2 additional stacks to keep track of the
-corresponding <code>CommandType</code> and <code>Tab</code>.</p>
-</div>
-<div class="paragraph">
-<p>We eventually decided on the current implementation because we do not expect the user to make that many changes to the
-books in a single session. We also do not expect the size of any book to grow so huge that a single commit would take
-up all the memory capacity. In other words, we foresee that the "cons" of our current choice will not happen (it would
-take really abnormal user behavior for it to reach that stage).</p>
-</div>
+<h5 id="aspect-how-goals-are-being-tagged"><a class="link" href="#aspect-how-goals-are-being-tagged">Aspect: How goals are being tagged</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire recipe book.</p>
+<p><strong>Alternative 1 (current choice):</strong> System generates tags for each recipe based on food algorithm.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Higher accuracy and makes use of inputs of ingredients class.</p>
+</li>
+<li>
+<p>Cons: Would require several criteria checks that may not be intuitive and would require the use of artificial intelligence for the highest accuracy.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong> User chooses from 4 given goals and user adds the tags to the recipes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement. User can filter their preferred goals easily.</p>
+</li>
+<li>
+<p>Cons: Is dependant on user&#8217;s understanding and not universal understanding of what may be deemed healthy.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Alternative 1 was chosen as standardising the goals give the recipes more meaning, especially when we are able
+to calculate statistics and present in in an meaningful and appealing way for users when it models the Healthy eating Plate.
+Furthermore, custom goals would not have checks would not have been implemented. for users to filter preferred recipes,
+the command <code>favourite</code> as been implemented.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-determine-the-criteria-for-each-goal"><a class="link" href="#aspect-how-to-determine-the-criteria-for-each-goal">Aspect: How to determine the criteria for each goal</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Check by quantity</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More accurate and can be modelled against ideal ratio of a healthy meal.</p>
+</li>
+<li>
+<p>Cons: Harder to implement as we need to standardise the ingredient measurements, not as intuitive.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong> Check by variety</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: May use up a lot of memory space within a single session 1) if there is a large number of book commits
-and/or 2) if the magnitude of a single commit is large (ie. the book being committed is huge just by itself).</p>
+<p>Cons: Not as accurate as one grain of rice or 1 grape would still be counted as variety despite the small portion.</p>
 </li>
 </ul>
 </div>
 </li>
-<li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+</ul>
+</div>
+<div class="paragraph">
+<p>Alternative 1 was chosen because of its higher accuracy, although conversion between different measurement may be
+overestimated. The command <code>deleteGoal</code> was then created in order to enable users to delete goals they deem inaccurate.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-the-check-for-goal-is-done"><a class="link" href="#aspect-how-the-check-for-goal-is-done">Aspect: How the check for goal is done</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory.</p>
+<p><strong>Alternative 1 (current choice):</strong> Check every time a recipe is added or edited and store this data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More consistent for the user in keeping track of their goals.</p>
 </li>
 <li>
-<p>Cons: Tedious to ensure the correctness of the implementation of each individual command. Furthermore, some commands
-affect multiple books, making book-keeping even more complicated (and hence, susceptible to error).</p>
+<p>Cons: Harder to implement as repetitive checks are needed every time ingredients are added or modified.
+Will be more expensive to calculate with a larger database.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong> Calculate the goals for each recipe every time it is retrieved from storage and set in RecipeList.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as only one check is needed for when the recipes are set.</p>
+</li>
+<li>
+<p>Cons: Goals will reset each time the application is open. If goal has been deleted by user with <code>deleteGoal</code>, it will
+not be updated the next time the user opens the application as the checks will be the same.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>Alternative 1 was chosen as it optimizes the function of deleteGoal`, taking user preference into consideration.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 14:47:14 UTC</div></div></div></body></html>
+<div class="sect4">
+<h5 id="aspect-how-to-store-data-for-records"><a class="link" href="#aspect-how-to-store-data-for-records">Aspect: How to store data for records</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Store in a json file called records and calculate goal tally the first time
+it is set and update accordingly</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: A custom date can be set and it will be easier to iterate through the list to obtain goal tally.</p>
+</li>
+<li>
+<p>Cons: Duplicate data will be stored and is harder to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong> Use recipebook and add boolean attribute isCooked</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Restricted usage, unable to implement date and do statistical analysis for the user.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3 :</strong> Store goal tally in a new json file.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No need to iterate through recipe list each time and would be less expensive with a larger database.</p>
+</li>
+<li>
+<p>Cons: Only contains four values.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Alternative 1 was chosen as it optimizes the functions and uses of a Record and the scale for a personal data
+base is smaller, storage would not be an issue. Records need to be iterated through when set initially anyway, hence
+the association between GoalCount and Record makes the tally process more efficient.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 15:56:31 UTC</div></div></div></body></html>
