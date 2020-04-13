@@ -70,10 +70,10 @@
 </li>
 <li><a href="#planning-command-beatrice">10. Planning Command (Beatrice)</a>
 <ul class="sectlevel2">
-<li><a href="#plan-a-recipe-code-plan-code">10.1. Plan a recipe: <code>plan</code></a></li>
-<li><a href="#delete-a-plan-code-deleteplan-code">10.2. Delete a plan: <code>deletePlan</code></a></li>
-<li><a href="#clear-all-planned-recipes-code-clearplan-code">10.3. Clear all planned recipes: <code>clearPlan</code></a></li>
-<li><a href="#obtain-ingredients-for-planned-recipes-code-grocerylist-code">10.4. Obtain ingredients for planned recipes: <code>groceryList</code></a></li>
+<li><a href="#plan-a-recipe-code-plan-code-beatrice">10.1. Plan a recipe: <code>plan</code> (Beatrice)</a></li>
+<li><a href="#delete-a-plan-code-deleteplan-code-beatrice">10.2. Delete a plan: <code>deletePlan</code> (Beatrice)</a></li>
+<li><a href="#clear-all-planned-recipes-code-clearplan-code-beatrice">10.3. Clear all planned recipes: <code>clearPlan</code> (Beatrice)</a></li>
+<li><a href="#obtain-ingredients-for-planned-recipes-code-grocerylist-code-beatrice">10.4. Obtain ingredients for planned recipes: <code>groceryList</code> (Beatrice)</a></li>
 <li><a href="#view-this-week-s-planned-recipes-code-viewweek-code-coming-in-v2-0">10.5. View this week&#8217;s planned recipes: <code>viewWeek</code> [Coming in v2.0]</a></li>
 <li><a href="#view-this-month-s-planned-recipes-code-viewmonth-code-coming-in-v2-0">10.6. View this month&#8217;s planned recipes: <code>viewMonth</code> [Coming in v2.0]</a></li>
 </ul>
@@ -632,7 +632,8 @@ replace the <strong>entire</strong> list of vegetable ingredients with only 50g 
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-To make changes to a single entity in a field without having to rewrite everything, please refer to Section 7.<br>
+To make changes to a single entity in a field without having to rewrite everything, please refer to
+<a href="#recipe-customisation-commands-brian">Section 8, &#8220;Recipe Customisation Commands (Brian)&#8221;</a>.<br>
 </td>
 </tr>
 </table>
@@ -1111,19 +1112,19 @@ Switch to the planning tab by typing <code>switch planning</code> or by clicking
 <div class="title">Figure 4. Details of each plan</div>
 </div>
 <div class="sect2">
-<h3 id="plan-a-recipe-code-plan-code"><a class="link" href="#plan-a-recipe-code-plan-code">10.1. Plan a recipe: <code>plan</code></a></h3>
+<h3 id="plan-a-recipe-code-plan-code-beatrice"><a class="link" href="#plan-a-recipe-code-plan-code-beatrice">10.1. Plan a recipe: <code>plan</code> (Beatrice)</a></h3>
 <div class="paragraph">
 <p>Plans a recipe that you would like to cook on a certain day in the future.<br>
 Format: <code>plan [recipe index] [d/yyyy-mm-dd]</code></p>
 </div>
 <div class="paragraph">
 <p>Example 1: <code>plan 1 d/2020-05-27</code><br>
-Plans the recipe at index 1 in the recipe book to 27 May 2020.<br>
-1. Type <code>plan 1 d/2020-05-27</code> into the <strong>Command Box</strong>.</p>
+Plans the recipe at <em>recipe index</em> 1 on 27 May 2020 and adds this plan into the plan list.<br></p>
 </div>
 <div class="paragraph">
 <p>Example 2: <code>plan 1 2 3 d/2020-05-27</code><br>
-Plans the recipe at index 1 in the recipe book to 27 May 2020.</p>
+Plans the recipes at <em>recipe indexes</em> 1, 2 and 3 on 27 May 2020 and adds these three plans into
+the plan list.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1132,30 +1133,45 @@ Plans the recipe at index 1 in the recipe book to 27 May 2020.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The latest date that you can input is today&#8217;s date.
+As long as at least one index is specified, you can plan as many recipes as you want in one go. For example, we can
+plan for five recipes in one command. <code>plan 1 2 3 4 5 d/2020-05-27</code> will plan for the recipes at <em>recipe indexes</em>
+1, 2, 3, 4 and 5 on 27 May 2020.
 </td>
 </tr>
 </table>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Multiple indexes can be given in one go. <code>plan 1 2 3 d/2020-05-27</code> will plan all three recipes at indexes 1 2 and 3
-on 27 May 2020.
+Valid indexes are integer numbers ranging from 1 to the current plan list size. If one of the indexes given was
+invalid, the command will not be successful.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Valid dates start from the today&#8217;s date and are in the format yyyy-mm-dd.
+This means that we cannot make a plan on yesterday&#8217;s date.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-a-plan-code-deleteplan-code"><a class="link" href="#delete-a-plan-code-deleteplan-code">10.2. Delete a plan: <code>deletePlan</code></a></h3>
+<h3 id="delete-a-plan-code-deleteplan-code-beatrice"><a class="link" href="#delete-a-plan-code-deleteplan-code-beatrice">10.2. Delete a plan: <code>deletePlan</code> (Beatrice)</a></h3>
 <div class="paragraph">
 <p>Deletes a plan.<br>
-Format: <code>deletePlan [planned recipe index]&#8230;&#8203;</code></p>
+Format: <code>deletePlan [plan index]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Example 1: <code>deletePlan 3</code><br>
@@ -1172,7 +1188,21 @@ Deletes the 3rd, 5th and 8th plan.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Multiple indexes can be given in one go. <code>deletePlan 1 2 3</code> will delete all three plans at indexes 1 2 and 3.
+As long as at least one index is specified, you can delete as many plans as you want in one go. For example, we can
+delete five plans in one command. <code>deletePlan 1 2 3 4 5</code> will delete all plans at plan indexes 1, 2, 3, 4 and 5.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Valid indexes are integer numbers ranging from 1 to the current plan list size. If one of the indexes given was
+invalid, the command will not be successful.
 </td>
 </tr>
 </table>
@@ -1184,14 +1214,15 @@ Multiple indexes can be given in one go. <code>deletePlan 1 2 3</code> will dele
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Using the <code>cooked</code> command in Section 10.4 will automatically delete today&#8217;s plan for that recipe.
+Using the <code>cooked</code> command in <a href="#track-cooked-meals-code-cooked-code-harshita">Section 11.3, &#8220;Track cooked meals: <code>cooked</code> (Harshita)&#8221;</a> will automatically delete today&#8217;s plan for
+the recipe that is cooked.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clear-all-planned-recipes-code-clearplan-code"><a class="link" href="#clear-all-planned-recipes-code-clearplan-code">10.3. Clear all planned recipes: <code>clearPlan</code></a></h3>
+<h3 id="clear-all-planned-recipes-code-clearplan-code-beatrice"><a class="link" href="#clear-all-planned-recipes-code-clearplan-code-beatrice">10.3. Clear all planned recipes: <code>clearPlan</code> (Beatrice)</a></h3>
 <div class="paragraph">
 <p>Clears all the plans you have made.<br>
 Format: <code>clearPlan</code></p>
@@ -1222,10 +1253,30 @@ You can <code>undo</code> this command if it was performed by accident.
 </div>
 </div>
 <div class="sect2">
-<h3 id="obtain-ingredients-for-planned-recipes-code-grocerylist-code"><a class="link" href="#obtain-ingredients-for-planned-recipes-code-grocerylist-code">10.4. Obtain ingredients for planned recipes: <code>groceryList</code></a></h3>
+<h3 id="obtain-ingredients-for-planned-recipes-code-grocerylist-code-beatrice"><a class="link" href="#obtain-ingredients-for-planned-recipes-code-grocerylist-code-beatrice">10.4. Obtain ingredients for planned recipes: <code>groceryList</code> (Beatrice)</a></h3>
 <div class="paragraph">
-<p>Lists all ingredients needed for the recipes that have been planned.<br>
+<p>Lists the ingredients needed for all recipes that have been planned.<br>
+Click on 'Copy' to copy all the ingredients into your clipboard.<br>
+Simplify your next grocery shopping experience by pasting this list into your preferred social networking
+application (like Telegram or Whatsapp) and sending it to yourself for an easy reference from your
+mobile phone.<br>
+Alternatively, you can paste the list into a word document and print it out.</p>
+</div>
+<div class="paragraph">
+<p>You can print this list out by pasting the text into a word document  to
 Format: <code>groceryList</code></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If no plans have been made, the grocery list will not be generated.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1304,7 +1355,7 @@ You can mark multiple recipes as cooked at the same time (at least one recipe mu
 </table>
 </div>
 <div class="paragraph">
-<p>Example 2: <code>deletePlan 3 4 8</code><br>
+<p>Example 2: <code>cooked 3 4 8</code><br>
 Marks the 3rd, 4th and 8th recipe as cooked.</p>
 </div>
 <div class="admonitionblock warning">
@@ -1316,6 +1367,18 @@ Marks the 3rd, 4th and 8th recipe as cooked.</p>
 <td class="content">
 If you specify a recipe number that has already been cooked within the day or does not exist in the list of recipes
 <em>under the recipes tab</em>, none of your selected recipes will be marked as cooked.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If a plan for the recipe being cooked exists today, using <code>cooked</code> will automatically delete these plans.
 </td>
 </tr>
 </table>
@@ -1432,6 +1495,11 @@ data of your previous HYBB folder.</p>
 <div class="paragraph">
 <p><strong>Q</strong>: Why are there no safeguards for adding ingredients?<br>
 <strong>A</strong>: Currently, HYBB is designed to help you manage your customized recipe list. Hence, the addition of ingredients and under which tag(ip/ iv/ ig/ if/ io/) they fall would be solely based on your judgement! For future releases, we will ensure more safeguards to prevent invalid inputs based on common knowledge.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q</strong>: What are recipe indexes and plan indexes?<br>
+<strong>A</strong>: Recipe indexes are the numbers beside each recipe in the 'Recipes' tab.
+On the other hand, plan indexes are the numbers beside each plan in the 'Planning' tab.</p>
 </div>
 </div>
 </div>
@@ -1584,4 +1652,4 @@ data of your previous HYBB folder.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 13:39:02 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 13:46:53 UTC</div></div></div></body></html>

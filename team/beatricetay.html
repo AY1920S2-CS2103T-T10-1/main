@@ -10,7 +10,15 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p><strong>HealthyBaby</strong> (HYBB) is a desktop application targeted towards university students that provides users with a database of quick, easy, and healthy recipes.
+HYBB helps alleviate the challenges faced while maintaining healthy eating habits, easing the transition from eating
+out everyday to cooking healthy meals regularly.</p>
+</div>
+<div class="paragraph">
+<p>The user interacts with HYBB using a Command Line Interface, and it has a Graphical User Interface created with JavaFX.</p>
+</div>
+<div class="paragraph">
+<p>It is written in Java, and has about 18 kLoC.</p>
 </div>
 </div>
 </div>
@@ -20,29 +28,34 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: Added the <strong>Planning feature</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: Allows the user to plan and remove the plans for a recipe on a certain date. The user is also able to
+obtain all ingredients required for the planned recipes on a simple grocery list.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: Assists users in making healthy cooking easier as the user
+can plan for recipes containing Goals for the nutritional food group that they want to focus on.
+Users can save money and reduce food wastage by planning for recipes with similar ingredients and purchasing only
+items that they need using the grocery list command.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: This enhancement is affected by recipes being modified, as the plans of the modified recipe needs to be
+updated as well. Ensuring that each plan is deleted or updated after each modification was challenging as HYBB supports
+many recipe customisation methods (9 in total).</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Minor enhancement</strong>: Added Ingredient and Quantity classes to allow HYBB to estimate the portion of each food
+group in the recipes.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>:
+<a href="https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=beatricetay&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2020-02-14&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false">RepoSense</a></p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -53,7 +66,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Managed releases <code>v1.2.1</code> - <code>v1.3.1</code> (3 releases) on GitHub</p>
 </li>
 </ul>
 </div>
@@ -63,10 +76,9 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Did cosmetic tweaks to the GUI: (Pull requests
+<a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/192">#192</a>,
+<a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/195">#195</a>)</p>
 </li>
 </ul>
 </div>
@@ -86,16 +98,14 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>PRs reviewed (with non-trivial review comments):
+<a href="https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/3">#3</a>,
+<a href="https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/26">#26</a>,
+<a href="https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/33">#33</a></p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
+<p>Reported bugs and suggestions for other teams in the class (example:
+<a href="https://github.com/beatricetay/ped/issues">1</a>)</p>
 </li>
 </ul>
 </div>
@@ -105,10 +115,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Integrated AppVeyor and CoverAll to the repo (<a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/23">#23</a>)</p>
 </li>
 </ul>
 </div>
@@ -117,9 +124,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -139,6 +143,241 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="healthybaby-s-user-interface-beatrice"><a class="link" href="#healthybaby-s-user-interface-beatrice">HealthyBaby&#8217;s User Interface (Beatrice)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Upon opening <strong>HYBB</strong>, you will see our Graphical User Interface.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AnnotatedUserInterface.png" alt="AnnotatedUserInterface">
+</div>
+<div class="title">Figure 1. HealthyBaby&#8217;s User Interface</div>
+</div>
+<div class="paragraph">
+<p>The <strong>Command Box</strong> is where you can enter commands to tell HYBB what to do.<br>
+The <strong>Result Box</strong> is where you can see whether the command you have given was successful or unsuccessful.<br>
+The <strong>Tab Panel</strong> can be clicked to switch between tabs.<br>
+Alternatively, if you wish to switch between tabs by typing instead of clicking, you can type <code>switch [tab name]</code>
+into the Command Box instead.<br>
+For more information, please refer to <a href="#Switch the current tab: <code>switch</code>">[Switch the current tab: <code>switch</code>]</a>.<br>
+The <strong>Display Panel</strong> displays the information for the current tab you are on.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="planning-command-beatrice"><a class="link" href="#planning-command-beatrice">Planning Command (Beatrice)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most of the planning commands take place in the planning tab.<br>
+Switch to the planning tab by typing <code>switch planning</code> or by clicking on Planning from the <strong>Tab Panel</strong>.<br></p>
+</div>
+<div class="paragraph">
+<p>You should get the following interface:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PlanTab.png" alt="PlanTab">
+</div>
+<div class="title">Figure 2. Planning Tab</div>
+</div>
+<div class="paragraph">
+<p>The <strong>Display Panel</strong> for the planing tab lists all the plans that you have made.<br></p>
+</div>
+<div class="paragraph">
+<p>You can the see the details of each plan from the list of plans.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PlanTab_Plan.png" alt="PlanTab Plan">
+</div>
+<div class="title">Figure 3. Details of each plan</div>
+</div>
+<div class="sect2">
+<h3 id="plan-a-recipe-code-plan-code-beatrice"><a class="link" href="#plan-a-recipe-code-plan-code-beatrice">Plan a recipe: <code>plan</code> (Beatrice)</a></h3>
+<div class="paragraph">
+<p>Plans a recipe that you would like to cook on a certain day in the future.<br>
+Format: <code>plan [recipe index] [d/yyyy-mm-dd]</code></p>
+</div>
+<div class="paragraph">
+<p>Example 1: <code>plan 1 d/2020-05-27</code><br>
+Plans the recipe at <em>recipe index</em> 1 on 27 May 2020 and adds this plan into the plan list.<br></p>
+</div>
+<div class="paragraph">
+<p>Example 2: <code>plan 1 2 3 d/2020-05-27</code><br>
+Plans the recipes at <em>recipe indexes</em> 1, 2 and 3 on 27 May 2020 and adds these three plans into
+the plan list.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+As long as at least one index is specified, you can plan as many recipes as you want in one go. For example, we can
+plan for five recipes in one command. <code>plan 1 2 3 4 5 d/2020-05-27</code> will plan for the recipes at <em>recipe indexes</em>
+1, 2, 3, 4 and 5 on 27 May 2020.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Valid indexes are integer numbers ranging from 1 to the current plan list size. If one of the indexes given was
+invalid, the command will not be successful.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Valid dates start from the today&#8217;s date and are in the format yyyy-mm-dd.
+This means that we cannot make a plan on yesterday&#8217;s date.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-a-plan-code-deleteplan-code-beatrice"><a class="link" href="#delete-a-plan-code-deleteplan-code-beatrice">Delete a plan: <code>deletePlan</code> (Beatrice)</a></h3>
+<div class="paragraph">
+<p>Deletes a plan.<br>
+Format: <code>deletePlan [plan index]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Example 1: <code>deletePlan 3</code><br>
+Deletes the 3rd plan.</p>
+</div>
+<div class="paragraph">
+<p>Example 2: <code>deletePlan 3 5 8</code><br>
+Deletes the 3rd, 5th and 8th plan.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+As long as at least one index is specified, you can delete as many plans as you want in one go. For example, we can
+delete five plans in one command. <code>deletePlan 1 2 3 4 5</code> will delete all plans at plan indexes 1, 2, 3, 4 and 5.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Valid indexes are integer numbers ranging from 1 to the current plan list size. If one of the indexes given was
+invalid, the command will not be successful.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Using the <code>cooked</code> command in <a href="#Track cooked meals: <code>cooked</code> (Harshita)">[Track cooked meals: <code>cooked</code> (Harshita)]</a> will automatically delete today&#8217;s plan for
+the recipe that is cooked.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clear-all-planned-recipes-code-clearplan-code-beatrice"><a class="link" href="#clear-all-planned-recipes-code-clearplan-code-beatrice">Clear all planned recipes: <code>clearPlan</code> (Beatrice)</a></h3>
+<div class="paragraph">
+<p>Clears all the plans you have made.<br>
+Format: <code>clearPlan</code></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+All plans will be removed.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can <code>undo</code> this command if it was performed by accident.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="obtain-ingredients-for-planned-recipes-code-grocerylist-code-beatrice"><a class="link" href="#obtain-ingredients-for-planned-recipes-code-grocerylist-code-beatrice">Obtain ingredients for planned recipes: <code>groceryList</code> (Beatrice)</a></h3>
+<div class="paragraph">
+<p>Lists the ingredients needed for all recipes that have been planned.<br>
+Click on 'Copy' to copy all the ingredients into your clipboard.<br>
+Simplify your next grocery shopping experience by pasting this list into your preferred social networking
+application (like Telegram or Whatsapp) and sending it to yourself for an easy reference from your
+mobile phone.<br>
+Alternatively, you can paste the list into a word document and print it out.</p>
+</div>
+<div class="paragraph">
+<p>You can print this list out by pasting the text into a word document  to
+Format: <code>groceryList</code></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If no plans have been made, the grocery list will not be generated.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-this-week-s-planned-recipes-code-viewweek-code-coming-in-v2-0"><a class="link" href="#view-this-week-s-planned-recipes-code-viewweek-code-coming-in-v2-0">View this week&#8217;s planned recipes: <code>viewWeek</code> [Coming in v2.0]</a></h3>
+<div class="paragraph">
+<p>View all the plans for the week.<br>
+Format: <code>viewWeek</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-this-month-s-planned-recipes-code-viewmonth-code-coming-in-v2-0"><a class="link" href="#view-this-month-s-planned-recipes-code-viewmonth-code-coming-in-v2-0">View this month&#8217;s planned recipes: <code>viewMonth</code> [Coming in v2.0]</a></h3>
+<div class="paragraph">
+<p>View all the plans for the month.<br>
+Format: <code>viewMonth</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
@@ -152,183 +391,302 @@
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">Undo and Redo commands (Brian)</a></h4>
+<h4 id="edit-command-beatrice"><a class="link" href="#edit-command-beatrice">Edit command (Beatrice)</a></h4>
 <div class="paragraph">
-<p>The implementation of undo and redo was adapted from AB3. However, HYBB requires more book-keeping because on top
-of the <code>RecipeBook</code>, we have a <code>PlannedBook</code> and a <code>CookedRecordBook</code> to keep track of as well.</p>
+<p>The edit feature allows users to edit the properties of a Recipe with ease using the <code>edit</code> command.<br></p>
 </div>
 <div class="paragraph">
-<p>For brevity, we will only talk about the <code>undo</code> command. Note that the <code>redo</code> command is implemented in the same way.</p>
+<p>This feature is facilitated by the <code>EditCommand</code> class.<br></p>
+</div>
+<div class="paragraph">
+<p>The following activity diagram illustrates how the <code>EditCommand</code> is used.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EditActivityDiagram.png" alt="EditActivityDiagram">
+</div>
+<div class="title">Figure 4. Activity Diagram for edit command</div>
 </div>
 <div class="sect4">
-<h5 id="implementation-before-undo-is-called"><a class="link" href="#implementation-before-undo-is-called">Implementation (before undo is called)</a></h5>
+<h5 id="implementation"><a class="link" href="#implementation">Implementation</a></h5>
+<div class="paragraph">
+<p>This section explains how the <code>edit</code> command is implemented.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Whenever a command that changes the state of any of the books (RecipeBook, PlannedBook, or CookedRecordBook) is
-called, <code>Model#commitBook</code> is called as well.</p>
+<p>User specified arguments are passed to the <code>EditCommandParser</code> and passed into <code>ArgumentTokenizer</code> and
+<code>ArgumentMultimap</code>.</p>
 </li>
 <li>
-<p><code>Model#commitBook</code> will first purge all redundant states in <code>MultipleBookStateManager</code> (ie. if the user called undo
-before and is now committing a new book, he will not be able to redo the actions of those undos anymore). This is the
-behavior that most modern desktop applications like Microsoft Word adopt.</p>
+<p>The arguments will then be parsed by <code>ParserUtil</code> and passed into <code>EditRecipeDescriptor</code>.
+An error will be thrown if the inputs were invalid or if no properties of the Recipe were edited.</p>
 </li>
 <li>
-<p><code>Model#commitBook</code> also saves the <code>CommandType</code> and <code>Tab</code> of the command in 2 separate stacks in
-<code>MultipleBookStateManager</code>. Finally, it saves the new state of the affected book(s) in an ArrayList of that book type.</p>
+<p>A new <code>EditCommand</code> object will be created containing the new properties of the <code>Recipe</code>.</p>
+</li>
+<li>
+<p><code>EditCommand#execute()</code> will then get the latest list of recipes from <code>Model</code> and obtain the <code>Recipe</code> that is
+being edited.</p>
+</li>
+<li>
+<p>This <code>Recipe</code> is passed into <code>EditCommand#createEditedRecipe()</code> which creates a new <code>Recipe</code> with the edited properties.</p>
+</li>
+<li>
+<p><code>Model#setRecipe()</code> will then replace the <code>Recipe</code> being edited with the new <code>Recipe</code> and update the list of recipes and plans.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Note #1: <code>CommandType</code> tells you which book(s) the command affects, while <code>Tab</code> tells you which tab should be
-displayed upon execution of the command.</p>
-</div>
-<div class="paragraph">
-<p>Note #2: All 3 ArrayLists of the 3 book types have a "current pointer" each, which points to the respective states of
-the books that the <code>Model</code> is currently using (ie. what the user is seeing).</p>
-</div>
-<div class="paragraph">
-<p>The following diagram summarizes what happens when the user executes a command that changes the state of any book:</p>
+<p>The following sequence diagram summarizes the steps taken so far:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
+<img src="../images/EditSequenceDiagram.png" alt="EditSequenceDiagram">
 </div>
-<div class="title">Figure 1. Activity diagram when a command is executed</div>
+<div class="title">Figure 5. Edit sequence diagram</div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for EditCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
 </div>
-<div class="sect4">
-<h5 id="implementation-when-undo-is-called"><a class="link" href="#implementation-when-undo-is-called">Implementation (when undo is called)</a></h5>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The details of some methods, like the the usage of <code>EditRecipeDecriptor</code>, was omitted to reduce clutter in the diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The edited recipe will be updated in both the list of recipes and plans.
+The following section explains in detail the implementation behind how each list is updated in the
+<code>RecipeBook</code> and <code>PlannedBook</code> class.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>Model#canUndo</code> is called to check if there are sufficient actions to be undone. An error is thrown if there are
-insufficient actions to be undone.</p>
+<p>Continuing off from Step 8, <code>ModelManager#setRecipe()</code> will be called to replace the target <code>Recipe</code> with the
+edited <code>Recipe</code>. (<code>ModelManager</code> implements <code>Model</code>)</p>
 </li>
 <li>
-<p>If able to undo, <code>Model#undoBook</code> is called. The <code>CommandType</code> stack is popped to know which book(s) need undoing.
-At the same time, the "current pointer" of the corresponding book ArrayList(s) is/are shifted backwards. All 3 books
-in <code>Model</code> are then set to the version of the book that each "current pointer" is pointing to.</p>
+<p>The target and edited <code>Recipe</code> is passed into <code>RecipeBook#setRecipe()</code> and <code>UniqueRecipeList#setRecipe()</code>, which
+will replace the target with the edited <code>Recipe</code> in the recipe list.</p>
+</li>
+<li>
+<p>The same arguments are then passed into <code>PlannedBook#setRecipe()</code> which will get a list of all the plans that uses
+the target <code>Recipe</code> from <code>PlannedRecipeMap</code> and update each plan.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>This class diagram shows the components of <code>MultipleBookStateManager</code>:</p>
+<p>The following sequence diagram summarizes how the <code>Recipe</code> and all its related <code>Plan</code> are updated
+when the <code>Recipe</code> is edited.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/MultipleBookStateManagerClassDiagram.png" alt="MultipleBookStateManagerClassDiagram">
+<img src="../images/EditModelSequenceDiagram.png" alt="EditModelSequenceDiagram">
 </div>
-<div class="title">Figure 2. Class diagram for MultipleBookStateManager</div>
-</div>
-<div class="paragraph">
-<p>The following diagrams show what happens after the execution of various commands:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState0.png" alt="UndoRedoState0">
-</div>
-<div class="title">Figure 3. When the app is first opened</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState1.png" alt="UndoRedoState1">
-</div>
-<div class="title">Figure 4. When "delete 5" is called, the state of RecipeBook is changed. This new state is added to ArrayList&lt;RecipeBook&gt;.</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState2.png" alt="UndoRedoState2">
-</div>
-<div class="title">Figure 5. When "favourite 3" is called, the state of RecipeBook is changed. This new state is added to ArrayList&lt;RecipeBook&gt;.</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState3.png" alt="UndoRedoState3">
-</div>
-<div class="title">Figure 6. When "undo" is called, the current state pointer of ArrayList&lt;RecipeBook&gt; is shifted back and the Model&#8217;s RecipeBook is set to this version.</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState4.png" alt="UndoRedoState4">
-</div>
-<div class="title">Figure 7. When a command like "list" (that does not change the state of any book) is called, the current state pointer remains where it is (ie. there is no change of states).</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoState5.png" alt="UndoRedoState5">
-</div>
-<div class="title">Figure 8. If a command like "clear" (that changes the state of a book) is called while the current pointer is not pointing to the latest version, all versions after the current pointer will be purged and the newest version will be added to the ArrayList.</div>
+<div class="title">Figure 6. Edit sequence diagram focusing on Model</div>
 </div>
 </div>
 <div class="sect4">
 <h5 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h5>
 <div class="sect5">
-<h6 id="aspect-how-undo-and-redo-executes"><a class="link" href="#aspect-how-undo-and-redo-executes">Aspect: How undo and redo executes</a></h6>
-<div class="paragraph">
-<p>One concern we had while choosing the design of the undo and redo features was the amount of memory that has to be used
-to keep track of the different states of the 3 books.</p>
-</div>
-<div class="paragraph">
-<p>On top of the ArrayLists of different book types, we also needed to have 2 additional stacks to keep track of the
-corresponding <code>CommandType</code> and <code>Tab</code>.</p>
-</div>
-<div class="paragraph">
-<p>We eventually decided on the current implementation because we do not expect the user to make that many changes to the
-books in a single session. We also do not expect the size of any book to grow so huge that a single commit would take
-up all the memory capacity. In other words, we foresee that the "cons" of our current choice will not happen (it would
-take really abnormal user behavior for it to reach that stage).</p>
-</div>
+<h6 id="aspect-how-recipes-are-edited"><a class="link" href="#aspect-how-recipes-are-edited">Aspect: How recipes are edited</a></h6>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire recipe book.</p>
+<p><strong>Alternative 1 (current choice):</strong> The <code>EditRecipeDescriptor</code> class is used to make sense of user input and mimics
+the <code>Recipe</code> class with the same properties.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: Multiple fields can be edited in one go.</p>
 </li>
 <li>
-<p>Cons: May use up a lot of memory space within a single session 1) if there is a large number of book commits
-and/or 2) if the magnitude of a single commit is large (ie. the book being committed is huge just by itself).</p>
+<p>Cons: Might make testing harder since there are many properties in a Recipe and an edit command can take on any
+combination of each property.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<p><strong>Alternative 2:</strong> Allow each property in the <code>Recipe</code> to have its own <code>edit</code> command.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory.</p>
+<p>Pros: Implementation of each command will be simpler.</p>
 </li>
 <li>
-<p>Cons: Tedious to ensure the correctness of the implementation of each individual command. Furthermore, some commands
-affect multiple books, making book-keeping even more complicated (and hence, susceptible to error).</p>
+<p>Cons: Editing a recipe will be harder and more troublesome for the user.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>We decided to stick with alternative 1, which is the implementation inherited by AB3, as we believe that being able
+to edit multiple fields in one go provides much more versatility and convenience to the user. Additionally, although
+there are many properties to test, it is still a finite number and testing can be done with adequate time.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="aspect-data-structure-to-support-the-recipes-and-plans"><a class="link" href="#aspect-data-structure-to-support-the-recipes-and-plans">Aspect: Data structure to support the recipes and plans</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> The recipes and plans are maintained in an <code>ObservableList</code> by the
+<code>UniqueRecipeList</code> and <code>UniquePlannedList</code> class respectively. The lists are unmodifiable outside of these classes.
+<code>PlannedRecipeMap</code> maintains the mapping from <code>Recipe</code> to all plans that use this <code>Recipe</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The <code>ObservableList</code> allows the UI to 'listen' in and be updated when the lists change.<br>
+The unmodifiable property also safeguards the data in the lists from being corrupted.<br>
+The <code>PlannedRecipeMap</code> eases the cost of iterating through the entire list of plans in the <code>UniquePlannedList</code> and
+checking whether each plan uses the <code>Recipe</code> being edited.</p>
+</li>
+<li>
+<p>Cons: Performance might not be optimised by using a List instead of other data structures like a LinkedList or
+HashMap for the <code>UniqueRecipeList</code> and <code>UniquePlannedList</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Maintain the recipes and plans in an <code>ObservableMap</code> instead.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Performance will be better by using a Map than a List.</p>
+</li>
+<li>
+<p>Cons: There are no official javafx classes that supports an sorted <code>ObservableMap</code> or a filtered <code>ObservableMap</code>.
+We will have to write and maintain our own implementation or import from pre-existing libraries.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We decided to use alternative 1, as the cons of alternative 2 are too heavy. Many aspects of our program require
+filtering and sorting to be supported. For example, plans need to be sorted in chronological order, and the advanced
+recipe list needs to be filtered for our filter feature.<br>
+Additionally, we would not have enough time in the scope of this project to write our own implementation, and importing from pre-existing
+libraries gives the risk of running into bugs in the future if the the dependencies were not maintained.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-plan-command-beatrice"><a class="link" href="#add-plan-command-beatrice">Add plan command (Beatrice)</a></h3>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<div class="paragraph">
+<p>The planning feature uses the <code>UniquePlannedList</code> to store and display all plans and the <code>PlannedRecipeMap</code> to
+navigate between recipes and plans.</p>
+</div>
+<div class="paragraph">
+<p>The <code>UniquePlannedList</code> provides the UI with an unmodifiable observable list that can be 'observed' and displayed.
+Meanwhile, the <code>PlannedRecipeMap</code> maintains a mapping from <code>Recipe</code> to <code>Plan</code> so that a <code>Plan</code> can be easily
+updated when a <code>Recipe</code> is changed.</p>
+</div>
+<div class="paragraph">
+<p>Given below is a sequence diagram on how a <code>Plan</code> is updated when a <code>Recipe</code> is changed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/abc.png" alt="abc">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-recipes-are-scheduled"><a class="link" href="#aspect-how-recipes-are-scheduled">Aspect: How recipes are scheduled</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Scheduled recipes are saved in a separate data structure.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Scheduled recipes can be easily obtained and sorted.</p>
+</li>
+<li>
+<p>Cons: May have performance issues in terms of memory usage if a large number of recipes are scheduled.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store the date that the scheduled recipe is scheduled on as another attribute to the Recipe class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, no additional data structure added.</p>
+</li>
+<li>
+<p>Cons: All scheduled recipes can not be easily seen and sorted.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect4">
-<h5 id="future-plans"><a class="link" href="#future-plans">Future plans</a></h5>
-<div class="paragraph">
-<p>Currently, the undo and redo command is not compatible with the <code>quote</code> command and the QuoteBook. This will be a
-feature that we plan to work on beyond v1.4 so that users will be able to undo and redo the action of adding a quote!</p>
+<h5 id="aspect-data-structure-to-support-the-scheduled-recipes"><a class="link" href="#aspect-data-structure-to-support-the-scheduled-recipes">Aspect: Data structure to support the scheduled recipes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a tree map to store the scheduled recipes in a &lt;Date, List&lt;Recipe&gt;&gt; key-value pair.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows us to easily and intuitively access the list of recipes scheduled on a certain day.</p>
+</li>
+<li>
+<p>Cons: Obtaining all the recipes scheduled across a period of time will not be very efficient.</p>
+</li>
+</ul>
 </div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a List sorted by increasing time.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, uncomplicated data structure.</p>
+</li>
+<li>
+<p>Cons: Hard to obtain the scheduled recipes on a certain date, as we do not know which index
+corresponds to the date we are interested in.</p>
+</li>
+</ul>
 </div>
+</li>
+</ul>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
 <hr>
-<div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 13:39:02 UTC</div></div></div></body></html>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 13:46:53 UTC</div></div></div></body></html>
