@@ -10,7 +10,7 @@ By: <code>Team HYBB</code>      Since: <code>Mar 2020</code>      Licenc
 <div id="toc" class="toc">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#setting-upu">1. Setting upu</a></li>
+<li><a href="#setting-up">1. Setting up</a></li>
 <li><a href="#design">2. Design</a>
 <ul class="sectlevel2">
 <li><a href="#Design-Architecture">2.1. Architecture</a></li>
@@ -26,7 +26,7 @@ By: <code>Team HYBB</code>      Since: <code>Mar 2020</code>      Licenc
 <li><a href="#basic-commands">3.1. Basic commands</a></li>
 <li><a href="#recipe-customisation-commands-brian">3.2. Recipe customisation commands (Brian)</a></li>
 <li><a href="#filter-command-brian">3.3. Filter command (Brian)</a></li>
-<li><a href="#planning-feature">3.4. Planning feature</a></li>
+<li><a href="#planning-feature-beatrice">3.4. Planning feature (Beatrice)</a></li>
 <li><a href="#goals-feature">3.5. Goals feature</a></li>
 <li><a href="#logging">3.6. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
@@ -52,7 +52,7 @@ By: <code>Team HYBB</code>      Since: <code>Mar 2020</code>      Licenc
 </div>
 </div>
 <div class="sect1">
-<h2 id="setting-upu"><a class="link" href="#setting-upu">1. Setting upu</a></h2>
+<h2 id="setting-up"><a class="link" href="#setting-up">1. Setting up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Refer to the guide <a href="SettingUp.html">here</a>.</p>
@@ -220,7 +220,7 @@ The following class plays an important role at the architecture level:</p>
 <p>The command execution can affect the <code>Model</code> (e.g. adding a recipe).</p>
 </li>
 <li>
-<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
+<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed git back to the <code>Ui</code>.</p>
 </li>
 <li>
 <p>In addition, the <code>CommandResult</code> object can also instruct the <code>Ui</code> to perform certain actions, such as displaying help to the user.</p>
@@ -269,29 +269,77 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Recipe Book data.</p>
+<p>stores a <code>RecipeBook</code> object that stores all recipes.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Recipe&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>stores a <code>PlannedBook</code> object that stores all plans.</p>
+</li>
+<li>
+<p>stores a <code>CookedRecordBook</code> object that stores the records of all the cooked recipes.</p>
+</li>
+<li>
+<p>stores a <code>QuoteBook</code> object that stores all quotes.</p>
+</li>
+<li>
+<p>exposes four unmodifiable lists that can be 'observed'<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>ObservableList&lt;Recipe&gt;</code></p>
+</li>
+<li>
+<p><code>ObservableList&lt;Plan&gt;</code></p>
+</li>
+<li>
+<p><code>ObservableList&lt;Record&gt;</code></p>
+</li>
+<li>
+<p><code>ObservableList&lt;Quote&gt;</code><br>
+e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Recipe Book</code>, which <code>Recipe</code> can reference. This would allow <code>Recipe Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Recipe</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
-<br>
-<span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
-</td>
-</tr>
-</table>
+<div class="sect3">
+<h4 id="recipe-model"><a class="link" href="#recipe-model">2.4.1. Recipe Model</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModelRecipeClassDiagram.png" alt="ModelRecipeClassDiagram">
+</div>
+<div class="title">Figure 8. Structure of the Recipe Model</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="plan-model"><a class="link" href="#plan-model">2.4.2. Plan Model</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModelPlanClassDiagram.png" alt="ModelPlanClassDiagram">
+</div>
+<div class="title">Figure 9. Structure of the Plan Model</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="record-model"><a class="link" href="#record-model">2.4.3. Record Model</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModelRecordClassDiagram.png" alt="ModelRecordClassDiagram">
+</div>
+<div class="title">Figure 10. Structure of the Record Model</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="quote-model"><a class="link" href="#quote-model">2.4.4. Quote Model</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModelQuoteClassDiagram.png" alt="ModelQuoteClassDiagram">
+</div>
+<div class="title">Figure 11. Structure of the Quote Model</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -300,7 +348,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Recipe Book</
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
 </div>
-<div class="title">Figure 8. Structure of the Storage Component</div>
+<div class="title">Figure 12. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/src/main/java/seedu/recipe/storage/Storage.java"><code>Storage.java</code></a></p>
@@ -344,11 +392,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Recipe Book</
 <div class="sect2">
 <h3 id="basic-commands"><a class="link" href="#basic-commands">3.1. Basic commands</a></h3>
 <div class="sect3">
-<h4 id="help-command"><a class="link" href="#help-command">3.1.1. Help command</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="switch-command"><a class="link" href="#switch-command">3.1.2. Switch command</a></h4>
+<h4 id="switch-command"><a class="link" href="#switch-command">3.1.1. Switch command</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/SwitchActivityDiagram.png" alt="SwitchActivityDiagram">
@@ -356,32 +400,115 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Recipe Book</
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-command"><a class="link" href="#list-command">3.1.3. List command</a></h4>
+<h4 id="list-command"><a class="link" href="#list-command">3.1.2. List command</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="find-command"><a class="link" href="#find-command">3.1.4. Find command</a></h4>
+<h4 id="find-command"><a class="link" href="#find-command">3.1.3. Find command</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="add-command"><a class="link" href="#add-command">3.1.5. Add command</a></h4>
+<h4 id="add-command"><a class="link" href="#add-command">3.1.4. Add command</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="edit-command"><a class="link" href="#edit-command">3.1.6. Edit command</a></h4>
+<h4 id="edit-command"><a class="link" href="#edit-command">3.1.5. Edit command</a></h4>
+<div class="paragraph">
+<p>The edit feature allows users to edit the properties of a Recipe with ease using the <code>edit</code> command.<br></p>
+</div>
+<div class="paragraph">
+<p>This feature is facilitated by the <code>EditCommand</code> class.<br></p>
+</div>
+<div class="paragraph">
+<p>The following activity diagram illustrates how the <code>EditCommand</code> is used.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditActivityDiagram.png" alt="EditActivityDiagram">
+</div>
+<div class="title">Figure 13. Activity Diagram for edit command</div>
+</div>
+<div class="sect4">
+<h5 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h5>
+<div class="paragraph">
+<p>This section explains how the <code>edit</code> command is implemented.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User specified arguments are passed to the <code>EditCommandParser</code> and passed into <code>ArgumentTokenizer</code> and
+<code>ArgumentMultimap</code>.</p>
+</li>
+<li>
+<p>The arguments will then be parsed by <code>ParserUtil</code> and passed into <code>EditRecipeDescriptor</code>.
+An error will be thrown if the inputs were invalid or if no properties of the Recipe were edited.</p>
+</li>
+<li>
+<p>A new <code>EditCommand</code> object will be created containing the new properties of the <code>Recipe</code>.</p>
+</li>
+<li>
+<p><code>EditCommand#execute()</code> will then get the latest list of recipes from <code>Model</code> and obtain the <code>Recipe</code> that is
+being edited.</p>
+</li>
+<li>
+<p>This <code>Recipe</code> is passed into <code>EditCommand#createEditedRecipe()</code> which creates a new <code>Recipe</code> with the edited properties.</p>
+</li>
+<li>
+<p><code>Model#setRecipe()</code> will then replace the <code>Recipe</code> being edited with the new <code>Recipe</code> and update the list of recipes and plans.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram summarizes the steps taken so far:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditSequenceDiagram.png" alt="EditSequenceDiagram">
+</div>
+<div class="title">Figure 14. Edit sequence diagram</div>
+</div>
+<div class="paragraph">
+<p>The edited recipe will be updated in both the list of recipes and plans.
+The following section explains in detail the implementation behind how each list is updated in the
+<code>RecipeBook</code> and <code>PlannedBook</code> class.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Continuing off from Step 8, <code>ModelManager#setRecipe()</code> will be called to replace the target <code>Recipe</code> with the
+edited <code>Recipe</code>. (<code>ModelManager</code> implements <code>Model</code>)</p>
+</li>
+<li>
+<p>These arguments will then be passed into <code>RecipeBook#setRecipe()</code> and <code>UniqueRecipeList#setRecipe()</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>2.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram illustrates how the <code>Recipe</code> is updated and how each <code>Plan</code>
+that uses this <code>Recipe</code> is updated.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EditModelSequenceDiagram.png" alt="EditModelSequenceDiagram">
+</div>
+<div class="title">Figure 15. Edit sequence diagram focusing on Model</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-command"><a class="link" href="#delete-command">3.1.6. Delete command</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="delete-command"><a class="link" href="#delete-command">3.1.7. Delete command</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="favourite-and-unfavourite-commands-brian"><a class="link" href="#favourite-and-unfavourite-commands-brian">3.1.8. Favourite and Unfavourite commands (Brian)</a></h4>
+<h4 id="favourite-and-unfavourite-commands-brian"><a class="link" href="#favourite-and-unfavourite-commands-brian">3.1.7. Favourite and Unfavourite commands (Brian)</a></h4>
 <div class="paragraph">
 <p>Description: TODO</p>
 </div>
 <div class="sect4">
-<h5 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h5>
+<h5 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h5>
 <div class="paragraph">
 <p>For brevity, we will only be talking about the <code>favourite</code> command here. Note that the <code>unfavourite</code> command is
 implemented in the same way.</p>
@@ -422,7 +549,7 @@ were already favourites.</p>
 <div class="content">
 <img src="images/FavouriteCommandSequenceDiagram.png" alt="FavouriteCommandSequenceDiagram">
 </div>
-<div class="title">Figure 9. Favourite command sequence diagram</div>
+<div class="title">Figure 16. Favourite command sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>This operation favourites recipe 2 and 3.</p>
@@ -430,7 +557,7 @@ were already favourites.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">3.1.9. Undo and Redo commands (Brian)</a></h4>
+<h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">3.1.8. Undo and Redo commands (Brian)</a></h4>
 <div class="paragraph">
 <p>The implementation of <code>undo</code> and <code>redo</code> was adapted from AB3. However, HYBB requires more book-keeping because on top
 of the <code>RecipeBook</code>, we have a <code>PlannedBook</code> and a <code>CookedRecordBook</code> to keep track of as well.</p>
@@ -480,7 +607,7 @@ The corresponding books in <code>Model</code> are then set to the previous versi
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram">
 </div>
-<div class="title">Figure 10. Undo command sequence diagram</div>
+<div class="title">Figure 17. Undo command sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>Result: TODO</p>
@@ -529,11 +656,11 @@ affect multiple books, making book-keeping even more complicated (and hence, sus
 </div>
 </div>
 <div class="sect3">
-<h4 id="clear-command"><a class="link" href="#clear-command">3.1.10. Clear command</a></h4>
+<h4 id="clear-command"><a class="link" href="#clear-command">3.1.9. Clear command</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="exit-command"><a class="link" href="#exit-command">3.1.11. Exit command</a></h4>
+<h4 id="exit-command"><a class="link" href="#exit-command">3.1.10. Exit command</a></h4>
 
 </div>
 </div>
@@ -545,7 +672,7 @@ were implemented to overcome the limitations of the <code>edit</code> command. T
 entire field using <code>edit</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.2.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.2.1. Implementation</a></h4>
 <div class="paragraph">
 <p>TODO</p>
 </div>
@@ -568,9 +695,9 @@ by the user. Think of it as a greatly enhanced and more robust version of the <c
 user to find recipes by their name.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.3.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.3.1. Implementation</a></h4>
 <div class="paragraph">
-<p>This section explains how the filter command is implemented.</p>
+<p>This section explains how the <code>filter</code> command is implemented.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -602,7 +729,7 @@ user specified criteria.</p>
 <div class="content">
 <img src="images/AdvancedFilterSequenceDiagram.png" alt="AdvancedFilterSequenceDiagram">
 </div>
-<div class="title">Figure 11. Advanced filter sequence diagram</div>
+<div class="title">Figure 18. Advanced filter sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>This operation displays all recipes that 1) are marked as favourites, 2) take 20 minutes or less to prepare,
@@ -657,18 +784,24 @@ on top of the existing prefixes. This is double work for the user.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="planning-feature"><a class="link" href="#planning-feature">3.4. Planning feature</a></h3>
+<h3 id="planning-feature-beatrice"><a class="link" href="#planning-feature-beatrice">3.4. Planning feature (Beatrice)</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.4.1. Proposed Implementation</a></h4>
+<h4 id="implementation-6"><a class="link" href="#implementation-6">3.4.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The planning feature uses the <code>PlannedRecipeMap</code> to store a <code>Recipe</code> at a <code>Date</code>.</p>
+<p>The planning feature uses the <code>UniquePlannedList</code> to store and display all plans and the <code>PlannedRecipeMap</code> to
+navigate between recipes and plans.</p>
 </div>
 <div class="paragraph">
-<p>Given below is a sequence diagram on how a recipe can be scheduled on a date.</p>
+<p>The <code>UniquePlannedList</code> provides the UI with an unmodifiable observable list that can be 'observed' and displayed.
+Meanwhile, the <code>PlannedRecipeMap</code> maintains a mapping from <code>Recipe</code> to <code>Plan</code> so that a <code>Plan</code> can be easily
+updated when a <code>Recipe</code> is changed.</p>
+</div>
+<div class="paragraph">
+<p>Given below is a sequence diagram on how a <code>Plan</code> is updated when a <code>Recipe</code> is changed.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/PlanningSequenceDiagram.png" alt="PlanningSequenceDiagram">
+<img src="images/abc.png" alt="abc">
 </div>
 </div>
 </div>
@@ -746,7 +879,7 @@ corresponds to the date we are interested in.</p>
 <div class="sect2">
 <h3 id="goals-feature"><a class="link" href="#goals-feature">3.5. Goals feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-2"><a class="link" href="#proposed-implementation-2">3.5.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.5.1. Proposed Implementation</a></h4>
 
 </div>
 <div class="sect3">
@@ -1704,4 +1837,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 03:23:04 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 04:03:24 UTC</div></div></div></body></html>
