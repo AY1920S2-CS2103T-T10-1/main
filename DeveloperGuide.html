@@ -434,12 +434,26 @@ The <code>UI</code> can be bound to these lists so that the <code>UI</code> auto
 <p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/src/main/java/seedu/recipe/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>In the figure above, we can see that we are maintaining 5 different storages. These storages aim to keep the memory of:
-* <code>UserPrefs</code>
-* <code>RecipeBook</code>
-* <code>PlannedBook</code>
-* <code>CookedRecords</code>
-* <code>QuoteBook</code></p>
+<p>In the figure above, we can see that we are maintaining 5 different storages. These storages aim to keep the memory of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>UserPrefs</code></p>
+</li>
+<li>
+<p><code>RecipeBook</code></p>
+</li>
+<li>
+<p><code>PlannedBook</code></p>
+</li>
+<li>
+<p><code>CookedRecords</code></p>
+</li>
+<li>
+<p><code>QuoteBook</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>The <code>Storage</code> component,</p>
@@ -1067,6 +1081,55 @@ corresponds to the date we are interested in.</p>
 </div>
 <div class="sect2">
 <h3 id="goals-feature"><a class="link" href="#goals-feature">3.5. Goals feature</a></h3>
+<div class="paragraph">
+<p>The main functionalities and commands associated with the entire goals feature are <code>add</code>, <code>addIngredient</code>, <code>edit</code>, <code>editIngredient</code>,
+ <code>cooked</code>, <code>listGoals</code> and 'removeGoals'. Goals are auto-generated and added to a recipe every time <code>add</code>, <code>addIngredient</code>, <code>edit</code> or <code>editIngredient</code> is executed.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how goals are generated through the example of <code>addIngredient</code> command execution</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddSequenceDiagram.png" alt="AddSequenceDiagram">
+</div>
+<div class="title">Figure 19. Add command sequence diagram</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddRefSequenceDiagram.png" alt="AddRefSequenceDiagram">
+</div>
+<div class="title">Figure 20. Reference Frame for Add command sequence diagram</div>
+</div>
+<div class="paragraph">
+<p>A recipe is initially created with an empty goals set from parser and <code>calculateGoals()</code> is then called in the <code>AddCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>Each ingredient type that is associated with a goal (<code>Vegetable</code>, <code>Protein</code>, <code>Fruit</code>, <code>Grain</code>) is listed as an enum type
+in MainIngredientType. This ensures that invalid goals are not created and simplifies the mapping between <code>MainIngredientType</code>
+and <code>Goal</code>.</p>
+</div>
+<div class="paragraph">
+<p>The calculation of goals then occurs through looping through each ingredient type and executing the method call to
+<code>Recipe#calculateIngredientQuantity()</code>.
+This would obtain the total quantity for each ingredient, firstly by calling <code>Ingredient#getMainIngredientType()</code>
+to ensure the validity of ingredients beings calculated (e.g. any instance of 'Other' ingredient would throw an <code>InvalidStateException</code>).
+Secondly, by obtaining the quantity in grams through the method calls to <code>Ingredient#getQuantity()' and 'Quantity#convertToGram()</code>.</p>
+</div>
+<div class="paragraph">
+<p>After the calculation for each main ingredient type is completed, an instance of <code>MainIngredientTypeMagnitude</code> is created.
+It acts as a container to store the quantities and conduct the checks for whether these quantities meet the minimum quantity
+requirement for their respective food group. This calculation and checks are done through the method call to
+<code>MainIngredientTypeMagnitude#getMainTypes()</code> which would then return a set of <code>MainIngredientType</code> that successfully met the
+minimum requirement.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, after looping through this set and creating each goal with the mapping from <code>MainIngredientType</code> to <code>Goal</code> done
+(e.g. <code>MainIngredientType.FRUIT</code> leads to the creation of goal with goal name generated as "Fruity Fiesta"), the goals will
+be updated in the particular instance of <code>Recipe r</code> and <code>Model#addRecipe(r)</code> would then update <code>RecipeBook</code> in storage.</p>
+</div>
+<div class="paragraph">
+<p>The immutability of each object is supported to ensure the correctness of undo and redo functionality.</p>
+</div>
 <div class="sect3">
 <h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.5.1. Proposed Implementation</a></h4>
 
@@ -2026,4 +2089,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 06:57:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 07:01:47 UTC</div></div></div></body></html>
