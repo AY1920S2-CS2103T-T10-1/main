@@ -10,7 +10,13 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p><strong>HealthyBaby</strong> (HYBB) is a desktop application targeted towards university students that provides users with a database
+of quick, easy, and healthy recipes. HYBB helps alleviate the challenges faced while maintaining healthy eating habits,
+easing the transition from eating out everyday to cooking healthy meals regularly.</p>
+</div>
+<div class="paragraph">
+<p>The user interacts with HYBB using a Command Line Interface, and it has a Graphical User Interface created with JavaFX.
+It is written in Java, and has about 18 kLoC.</p>
 </div>
 </div>
 </div>
@@ -20,95 +26,138 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement 1</strong>: Added the undo and redo feature</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p><strong>What it does</strong>: It allows the user to undo the actions of previous commands. The user may choose undo one command at
+a time, undo multiple commands at a time, or even undo all previous commands at once. Undo commands can be reversed by
+using the redo command (with equal robustness).</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p><strong>Justification</strong>: This feature vastly improves the user-friendliness of the app as the user can now conveniently
+rectify any mistakes made.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
+<p><strong>Highlights</strong>: HYBB maintains 4 different "books" (databases) and this feature involves keeping track of the changes
+made to these 4 books. Since, most commands will make changes to at least one of these books when executed, designing
+and implementing this feature was meaningful and challenging as it required a deep understanding of how each command
+affects the 4 books. Essentially, this feature affects most of the existing commands and commands that are added in
+future!</p>
+<div class="paragraph">
+<p>Changes to existing commands had to made, and more data structures and tracking mechanisms had to
+be added on to make undo/redo compatible with all the commands in HYBB. Though inspiration was intially taken from the
+proposed undo/redo feature in AB3, the final implementation of undo/redo in HYBB is significantly different to suit our
+needs.</p>
+</div>
 </li>
 <li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p><strong>Credits</strong>: As mentioned above, this was inspired by the proposed undo/redo feature in AB3.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Major enhancement 2</strong>: Added recipe customisation commands (<code>addingredient</code>, <code>editingredient</code>, <code>deleteingredient</code>,
+<code>addstep</code>, <code>editstep</code>, <code>editingredient</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>What they do</strong>: These commands allow the user to edit the ingredients or steps of a recipe without having to rewrite
+the entire field.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Justification</strong>: The edit command inherited from AB3 was limited as it could only edit entire fields at once.
+These commands vastly improve the user-friendliness of the app as the user can now make small changes without
+having to rewrite the entire field (imagine if the recipe has 10 steps but the user only wants to edit 1 of them!)</p>
+</li>
+<li>
+<p><strong>Highlights</strong>: Implementing these commands required a good understanding of how recipes are created and edited, and
+how recipes interact with the RecipeBook (the database for all recipes) and the Model.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major enhancement 3</strong>: Added the filter feature</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>What it does</strong>: It allows users to search for recipes using various criteria such as prep time, ingredients used, or
+by the goals tagged to the recipe.</p>
+</li>
+<li>
+<p><strong>Justification</strong>: The find command inherited from AB3 was limited as it could only find recipes by name. This means
+the user will have to roughly know a recipe&#8217;s name beforehand. Not only is this inconvenient, but it doesn&#8217;t tell the
+user much about the recipe. The filter feature allows the user to find recipes with much more ease and makes the search
+more targeted. E.g. people with allergies can find recipes without allergens, people with no time can find recipes with
+short prep time etc.</p>
+</li>
+<li>
+<p><strong>Highlights</strong>: Implementing this feature required a good understanding of how recipes are filtered (using predicates).
+It was challenging because the construction of the predicate had to be precise and accurate, otherwise the wrong
+recipes would be displayed to the user.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Added the ability to favourite and unfavourite recipes</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>What it does</strong>: It allows the user to mark a recipe as "favourite" or unmark a favourited recipe.</p>
+</li>
+<li>
+<p><strong>Justification</strong>: It is observed that humans are habitual creatures and will tend to eat the same things. Hence this
+minor feature is to complement the filter feature, allowing the user to find all his favourites with one simple line:
+<code>filter favourites</code></p>
+</li>
+<li>
+<p><strong>Highlights</strong>: Implementing this feature required a good understanding of how recipes are edited. This understanding
+provided a good foundation for the implementation of the recipe customisation commands (which were implemented after
+this feature). It also required a good understanding of how the UI components work with each other as I had to display
+a star beside the recipe name if it&#8217;s a favourite.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#=undefined&amp;search=pekchinsiongbrian">RepoSense Report for Brian Pek</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Project management:</p>
+<p><strong>Enhancements to existing features</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Enhanced the <code>find</code> command to have 2 methods of searching with 2 corresponding levels of strictness
+(Pull request <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/159">#159</a>)</p>
+</li>
+<li>
+<p>Enhanced <code>ParserUtil</code> to be able to parse multiple indexes (instead of just one) (Pull request <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/68">#68</a>).
+Initially, this was an enhancement for <code>delete</code> so that the user can delete multiple recipes at once, but subsequently,
+it was taken up by other commands!</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Enhancements to existing features:</p>
+<p><strong>Community</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/23">#23</a>,
+<a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/95#discussion_r399608456">#95</a>,
+<a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/105#discussion_r400787470">#105</a>,
+<a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/164#discussion_r405227169">#164</a></p>
 </li>
 <li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Documentation:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Community:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
-</li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>The multiple index input parsing enhancement was adopted by several other teammates (Pull request <a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/107">#107</a>,
+<a href="https://github.com/AY1920S2-CS2103T-T10-1/main/pull/176">#176</a>)</p>
 </li>
 </ul>
 </div>
@@ -117,9 +166,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -132,10 +178,269 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The following section is a portion of my contributions to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="recipe-customisation-commands-brian"><a class="link" href="#recipe-customisation-commands-brian">Recipe Customisation Commands (Brian)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As we see from the <code>edit</code> command in section 6.6, if you want to add, edit, or delete a single ingredient or step,
+you would have to rewrite the whole field that you wish to edit. This would be troublesome if the field contains
+multiple ingredients or steps that you may not necessarily want to edit. Therefore, the following commands are used in
+occasions like these!</p>
+</div>
+<div class="sect2">
+<h3 id="add-ingredients-to-a-recipe-code-addingredient-code-brian"><a class="link" href="#add-ingredients-to-a-recipe-code-addingredient-code-brian">Add Ingredients to a Recipe: <code>addIngredient</code> (Brian)</a></h3>
+<div class="paragraph">
+<p>Adds more ingredients to an existing recipe.<br>
+Format: <code>addIngredient [recipe index] [&lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;&#8230;&#8203; &lt;io/other&gt;&#8230;&#8203;]</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>addIngredient 2 ig/50g, Bread io/5g, Butter</code><br>
+Adds 50g of Bread and 5g of Butter to recipe 2.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can add multiple ingredients at a time (at least one ingredient must be added).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you add an ingredient that already exists in the recipe, that existing ingredient will be replaced with the new one.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-ingredient-quantity-in-a-recipe-code-editingredient-code-brian"><a class="link" href="#edit-ingredient-quantity-in-a-recipe-code-editingredient-code-brian">Edit Ingredient Quantity in a Recipe: <code>editIngredient</code> (Brian)</a></h3>
+<div class="paragraph">
+<p>Edits the quantity of an ingredient in an existing recipe.<br>
+Format: <code>editIngredient [recipe index] [&lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;… &lt;io/other&gt;&#8230;&#8203;]</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>editIngredient 3 ig/50g, Bread</code><br>
+Searches for Bread in recipe 3 and changes its quantity to 50g. An error message will appear if Bread does not exist in
+recipe 3&#8217;s ingredients set.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can edit multiple ingredients at a time (at least one ingredient must be edited).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-ingredients-in-a-recipe-code-deleteingredient-code-brian"><a class="link" href="#delete-ingredients-in-a-recipe-code-deleteingredient-code-brian">Delete Ingredients in a Recipe: <code>deleteIngredient</code> (Brian)</a></h3>
+<div class="paragraph">
+<p>Deletes the specified ingredient(s) from an existing recipe.<br>
+Format: <code>deleteIngredient [recipe index] [&lt;ig/grain name&gt;&#8230;&#8203; &lt;iv/vegetable name&gt;&#8230;&#8203; &lt;ip/protein name&gt;&#8230;&#8203;
+&lt;if/fruit name&gt;&#8230;&#8203; &lt;io/other name&gt;&#8230;&#8203;]</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>deleteIngredient 3 ig/Rice iv/Kailan</code><br>
+Searches for Rice and Kailan in recipe 3 and deletes them. An error message will appear if Rice and/or Kailan does not
+exist in recipe 3&#8217;s ingredients set.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can delete multiple ingredients at a time (at least one ingredient must be deleted).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+There is no need to specify quantity here. Just the ingredient name will do!
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you type an ingredient prefix (e.g. "ig/") but don&#8217;t specify any ingredients, all ingredients of that type will be
+deleted.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-steps-to-a-recipe-code-addstep-code-brian"><a class="link" href="#add-steps-to-a-recipe-code-addstep-code-brian">Add Steps to a Recipe: <code>addStep</code> (Brian)</a></h3>
+<div class="paragraph">
+<p>Adds more steps to an existing recipe.<br>
+Format: <code>addStep [recipe index] [s/step] &lt;s/next step&gt;&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>addStep 1 s/New step s/Another new step</code><br>
+Adds 2 new steps to recipe 1.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can add multiple steps at a time (at least one step must be added).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-a-step-in-a-recipe-code-editstep-code-brian"><a class="link" href="#edit-a-step-in-a-recipe-code-editstep-code-brian">Edit a Step in a Recipe: <code>editStep</code> (Brian)</a></h3>
+<div class="paragraph">
+<p>Edits the specified step in an existing recipe.<br>
+Format: <code>editStep [recipe index] [step index] [s/new step]</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>editStep 3 4 s/Edited new step</code><br>
+Replaces step 4 of recipe 3 with “Edited new step”. If you specify more than one step, only the first one will be used
+to replace the old step.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-steps-in-a-recipe-code-deletestep-code-brian"><a class="link" href="#delete-steps-in-a-recipe-code-deletestep-code-brian">Delete Steps in a Recipe: <code>deleteStep</code> (Brian)</a></h3>
+<div class="paragraph">
+<p>Deletes the specified step(s) from an existing recipe.<br>
+Format: <code>deleteStep [recipe index] [step index] &lt;step index&gt;&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>deleteStep 3 2 3 5</code><br>
+Deletes steps 2, 3, and 5 of recipe 3.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can delete multiple steps at a time (at least one step must be deleted).
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="filter-command-brian"><a class="link" href="#filter-command-brian">Filter Command (Brian)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This command is not to be confused with the <code>Find</code> command, which only searches for recipes by their names. The
+<code>Filter</code> command is a more robust search command that allows you to search for recipes using <em>various criteria</em>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can combine the input of the next few subsections to filter the recipes by multiple criteria!
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="filter-by-ingredients-brian"><a class="link" href="#filter-by-ingredients-brian">Filter by ingredients (Brian)</a></h3>
+<div class="paragraph">
+<p>Finds recipes that contains the specified ingredients.<br>
+Format: <code>filter &lt;ig/grain&gt;&#8230;&#8203; &lt;iv/vegetable&gt;&#8230;&#8203; &lt;ip/protein&gt;&#8230;&#8203; &lt;if/fruit&gt;&#8230;&#8203; &lt;io/other&gt;&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Example 1: <code>filter ig/Rice iv/Cabbage</code><br>
+Finds recipes that contains Rice and Cabbage.</p>
+</div>
+<div class="paragraph">
+<p>Example 2: <code>filter ig/exclude Pasta ip/Chicken</code><br>
+Finds recipes that <strong>does not</strong> contain Pasta and contains Chicken.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Notice the use of the keyword "exclude" in Example 2? Use this to exclude ingredients that you do not want!
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filter-by-goals-brian"><a class="link" href="#filter-by-goals-brian">Filter by goals (Brian)</a></h3>
+<div class="paragraph">
+<p>Finds recipes that are tagged with the specified goal.<br>
+Format: <code>filter [g/goal] &lt;g/goal&gt;&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>filter g/Herbivore</code><br>
+Finds recipes that are tagged with the <code>Herbivore</code> goal.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filter-by-favourites-brian"><a class="link" href="#filter-by-favourites-brian">Filter by favourites (Brian)</a></h3>
+<div class="paragraph">
+<p>Finds recipes that are tagged as favourites.<br>
+Format: <code>filter favourites</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filter-by-preparation-time-brian"><a class="link" href="#filter-by-preparation-time-brian">Filter by preparation time (Brian)</a></h3>
+<div class="paragraph">
+<p>Finds recipes that have preparation time less than or equals to the specified time (in minutes).<br>
+Format: <code>filter [t/time] or [t/time range]</code></p>
+</div>
+<div class="paragraph">
+<p>Example 1: <code>filter t/15</code><br>
+Finds recipes that have 15 minutes or less of preparation time.</p>
+</div>
+<div class="paragraph">
+<p>Example 2: <code>filter t/20-30</code><br>
+Finds recipes that have 20 to 30 minutes (inclusive) of preparation time.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -147,18 +452,231 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The following section is a portion of my contributions to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
+<div class="sect3">
+<h4 id="undo-and-redo-commands-brian"><a class="link" href="#undo-and-redo-commands-brian">Undo and Redo commands (Brian)</a></h4>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>The implementation of undo and redo was adapted from AB3. However, HYBB requires more book-keeping because on top
+of the <code>RecipeBook</code>, we have a <code>PlannedBook</code> and a <code>CookedRecordBook</code> to keep track of as well.</p>
+</div>
+<div class="paragraph">
+<p>For brevity, we will only talk about the <code>undo</code> command. Note that the <code>redo</code> command is implemented in the same way.</p>
+</div>
+<div class="sect4">
+<h5 id="implementation-before-undo-is-called"><a class="link" href="#implementation-before-undo-is-called">Implementation (before undo is called)</a></h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Whenever a command that changes the state of any of the books (RecipeBook, PlannedBook, or CookedRecordBook) is
+called, <code>Model#commitBook</code> is called as well.</p>
+</li>
+<li>
+<p><code>Model#commitBook</code> will first purge all redundant states in <code>MultipleBookStateManager</code> (ie. if the user called undo
+before and is now committing a new book, he will not be able to redo the actions of those undos anymore). This is the
+behavior that most modern desktop applications like Microsoft Word adopt.</p>
+</li>
+<li>
+<p><code>Model#commitBook</code> also saves the <code>CommandType</code> and <code>Tab</code> of the command in 2 separate stacks in
+<code>MultipleBookStateManager</code>. Finally, it saves the new state of the affected book(s) in an ArrayList of that book type.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Note #1: <code>CommandType</code> tells you which book(s) the command affects, while <code>Tab</code> tells you which tab should be
+displayed upon execution of the command.</p>
+</div>
+<div class="paragraph">
+<p>Note #2: All 3 ArrayLists of the 3 book types have a "current pointer" each, which points to the respective states of
+the books that the <code>Model</code> is currently using (ie. what the user is seeing).</p>
+</div>
+<div class="paragraph">
+<p>The following diagram summarizes what happens when the user executes a command that changes the state of any book:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
+</div>
+<div class="title">Figure 1. Activity diagram when a command is executed</div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 13:35:16 UTC</div></div></div></body></html>
+<div class="sect4">
+<h5 id="implementation-when-undo-is-called"><a class="link" href="#implementation-when-undo-is-called">Implementation (when undo is called)</a></h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>Model#canUndo</code> is called to check if there are sufficient actions to be undone. An error is thrown if there are
+insufficient actions to be undone.</p>
+</li>
+<li>
+<p>If able to undo, <code>Model#undoBook</code> is called. The <code>CommandType</code> stack is popped to know which book(s) need undoing.
+At the same time, the "current pointer" of the corresponding book ArrayList(s) is/are shifted backwards. All 3 books
+in <code>Model</code> are then set to the version of the book that each "current pointer" is pointing to.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This class diagram shows the components of <code>MultipleBookStateManager</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/MultipleBookStateManagerClassDiagram.png" alt="MultipleBookStateManagerClassDiagram">
+</div>
+<div class="title">Figure 2. Class diagram for MultipleBookStateManager</div>
+</div>
+<div class="paragraph">
+<p>The following diagrams show what happens after the execution of various commands:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState0.png" alt="UndoRedoState0">
+</div>
+<div class="title">Figure 3. When the app is first opened</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState1.png" alt="UndoRedoState1">
+</div>
+<div class="title">Figure 4. When "delete 5" is called, the state of RecipeBook is changed. This new state is added to ArrayList&lt;RecipeBook&gt;.</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState2.png" alt="UndoRedoState2">
+</div>
+<div class="title">Figure 5. When "favourite 3" is called, the state of RecipeBook is changed. This new state is added to ArrayList&lt;RecipeBook&gt;.</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState3.png" alt="UndoRedoState3">
+</div>
+<div class="title">Figure 6. When "undo" is called, the current state pointer of ArrayList&lt;RecipeBook&gt; is shifted back and the Model&#8217;s RecipeBook is set to this version.</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState4.png" alt="UndoRedoState4">
+</div>
+<div class="title">Figure 7. When a command like "list" (that does not change the state of any book) is called, the current state pointer remains where it is (ie. there is no change of states).</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState5.png" alt="UndoRedoState5">
+</div>
+<div class="title">Figure 8. If a command like "clear" (that changes the state of a book) is called while the current pointer is not pointing to the latest version, all versions after the current pointer will be purged and the newest version will be added to the ArrayList.</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-how-undo-and-redo-executes"><a class="link" href="#aspect-how-undo-and-redo-executes">Aspect: How undo and redo executes</a></h6>
+<div class="paragraph">
+<p>One concern we had while choosing the design of the undo and redo features was the amount of memory that has to be used
+to keep track of the different states of the 3 books.</p>
+</div>
+<div class="paragraph">
+<p>On top of the ArrayLists of different book types, we also needed to have 2 additional stacks to keep track of the
+corresponding <code>CommandType</code> and <code>Tab</code>.</p>
+</div>
+<div class="paragraph">
+<p>We eventually decided on the current implementation because we do not expect the user to make that many changes to the
+books in a single session. We also do not expect the size of any book to grow so huge that a single commit would take
+up all the memory capacity. In other words, we foresee that the "cons" of our current choice will not happen (it would
+take really abnormal user behavior for it to reach that stage).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire recipe book.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: May use up a lot of memory space within a single session 1) if there is a large number of book commits
+and/or 2) if the magnitude of a single commit is large (ie. the book being committed is huge just by itself).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will use less memory.</p>
+</li>
+<li>
+<p>Cons: Tedious to ensure the correctness of the implementation of each individual command. Furthermore, some commands
+affect multiple books, making book-keeping even more complicated (and hence, susceptible to error).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="future-plans"><a class="link" href="#future-plans">Future plans</a></h5>
+<div class="paragraph">
+<p>Currently, the undo and redo command is not compatible with the <code>quote</code> command and the QuoteBook. This will be a
+feature that we plan to work on beyond v1.4 so that users will be able to undo and redo the action of adding a quote!</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="recipe-customisation-commands-brian-2"><a class="link" href="#recipe-customisation-commands-brian-2">Recipe customisation commands (Brian)</a></h3>
+<div class="paragraph">
+<p>The following commands: <code>addingredient</code>, <code>editingredient</code>, <code>deleteingredient</code>, <code>addstep</code>, <code>editstep</code>, and <code>deletestep</code>
+were implemented to overcome the limitations of the <code>edit</code> command. These recipe customisation commands allow the user
+to make targeted changes to the ingredient or step fields instead of having to rewrite the entire field using <code>edit</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The commands listed above make use of <code>EditRecipeDescriptor</code> (ERD) to add, edit, or delete ingredients or steps.
+This is done by comparing the contents of the ERD to the contents of the field to be edited and making the necessary
+changes described below (note that at this point of time, the ERD is already populated with the user&#8217;s input):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If the command is <code>addingredient</code> or <code>addstep</code>, the existing ingredients or steps from the recipe will be added to
+the ERD.</p>
+</li>
+<li>
+<p>If the command is <code>editingredient</code> or <code>editstep</code>, the ERD will be checked against the recipe to see if the
+ingredients or step exists in the recipe. If it exists, the remaining ingredients or steps that were not changed
+will be added to the ERD. Otherwise, an exception is thrown.</p>
+</li>
+<li>
+<p>If the command is <code>deleteingredient</code> or <code>deletestep</code>, the ERD will be checked against the recipe to see if the
+ingredients or step exists in the recipe. If it exists, the ERD will be re-populated with the existing ingredients or
+steps from the recipe, less the ones that were specified by the user. Otherwise, an exception is thrown.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>With the ERD fields set, the specified recipe is edited by <code>EditCommand#createEditedRecipe</code> using the ERD.</p>
+</li>
+<li>
+<p>Finally, <code>Model#setRecipe</code> will replace the old version of the recipe in RecipeBook with the newly edited one.
+<code>Model#commitBook</code> will commit the new state of the RecipeBook to the <code>MultipleBookStateManager</code> so that the user will
+be able to undo this command if he wishes to.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RecipeCustomisationCommandsActivityDiagram.png" alt="RecipeCustomisationCommandsActivityDiagram">
+</div>
+<div class="title">Figure 9. General activity diagram for recipe customisation commands</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 13:39:02 UTC</div></div></div></body></html>
