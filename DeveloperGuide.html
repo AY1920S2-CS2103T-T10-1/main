@@ -28,8 +28,10 @@ By: <code>Team HYBB</code>      Since: <code>Mar 2020</code>      Licenc
 <li><a href="#filter-command-brian">3.3. Filter command (Brian)</a></li>
 <li><a href="#add-plan-command-beatrice">3.4. Add plan command (Beatrice)</a></li>
 <li><a href="#goals-feature">3.5. Goals feature</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
+<li><a href="#quote-command-yue-tong">3.6. Quote Command (Yue Tong)</a></li>
+<li><a href="#streak-feature-yue-tong">3.7. Streak feature(Yue Tong)</a></li>
+<li><a href="#logging">3.8. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -1205,14 +1207,223 @@ be updated in the particular instance of <code>Recipe r</code> and <code>Model#a
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="quote-command-yue-tong"><a class="link" href="#quote-command-yue-tong">3.6. Quote Command (Yue Tong)</a></h3>
+<div class="paragraph">
+<p>The quote command feature uses the <code>quote</code> command for users to input their own quotes to add on to the existing set of
+quotes that is already in the database. This allows the users to add in customised quotes that would suit their preferance
+more if the current list of quotes is not to their liking.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram illustrates how the <code>QuoteCommand</code> is used.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/QuoteSequenceDiagram.png" alt="QuoteSequenceDiagram">
+</div>
+<div class="title">Figure 21. Quote command sequence diagram</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for EditCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>Undo</code> button currently does not work for adding of quotes as there is no remove function currently implemented for quote
+==== Implementation</p>
+</div>
+<div class="paragraph">
+<p>This section explains how the <code>quote</code> command is implemented.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User specified arguments are passed to the <code>QuoteCommandParser#parse</code> which will then parse the user input to verify if the
+quote field is empty. An error is thrown if the user had keyed in an empty field for quote.</p>
+</li>
+<li>
+<p>A new <code>QuoteCommand</code> object will be created with a <code>Content</code> field to store the quote and returned to the <code>LogicManager</code></p>
+</li>
+<li>
+<p>The <code>QuoteCommand#execute</code> method is executed and <code>Model#addQuote</code> is called. This attempts to add the quote to the
+database and verify if any duplicate quote exists in the database via <code>Model#hasQuote</code>. If a duplicate quote is detected
+in the database, an error will be thrown to indicate that the quote already exists in the database.</p>
+</li>
+<li>
+<p>Once the quote has been successfully updated to the database, the result window informs the user that the quote has
+been successfully added.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following activity diagram further illustrates how the <code>QuoteCommand</code> is used.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/QuoteActivityDiagram.png" alt="QuoteActivityDiagram">
+</div>
+<div class="title">Figure 22. Quote command activity diagram</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.6.1. Design Considerations</a></h4>
+<div class="sect5">
+<h6 id="aspect-how-quote-command-executes"><a class="link" href="#aspect-how-quote-command-executes">Aspect: How quote command executes</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> The <code>QuoteCommand</code> only accepts adding of quotes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Maintaining the database for quotes is easier</p>
+</li>
+<li>
+<p>Cons: Users will not be able to remove a quote if it is not to their liking and undo function does not work for quote command</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> The <code>QuoteCommand</code> accepts both adding and removal of quotes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Users can customize whicher quotes they want to be displayed</p>
+</li>
+<li>
+<p>Cons: If they user deletes the quote that is on display for Quote of the Day in the Achievement tab, this could cause
+display problems and as <code>UniqueQuotesList</code> is a hidden list, users will have to type out the quote completely similar in order to locate it</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="streak-feature-yue-tong"><a class="link" href="#streak-feature-yue-tong">3.7. Streak feature(Yue Tong)</a></h3>
+<div class="paragraph">
+<p>The Streak feature mainly deals with keeping track of the cooked meals that the user has logged into the system. The command
+that Streak is associated with is <code>CookedCommand</code> as every user input of <code>cooked</code> will result in the streak log  to be reflected when <code>cooked</code> is executed. The changes are reflected in two main attributes, Current streak and
+High streak.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram illustrates how the <code>QuoteCommand</code> is used.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StreakActivityDiagram.png" alt="StreakActivityDiagram">
+</div>
+<div class="title">Figure 23. Quote command sequence diagram</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-7"><a class="link" href="#implementation-7">3.7.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The streak feature uses data from the <code>UniqueRecordList</code> to parse through the recipes that the user has already cooked
+and extract the dates from these recipes to determine the current streak for the user and the highest streak score the
+user has attained as of yet.</p>
+</div>
+<div class="paragraph">
+<p>The <code>UniqueRecordList</code> provides Streak with an observableList so that a listener could be added to it to make sure that
+the streak always auto-updates whenever a new <code>CookedRecord</code> is added in to the database. Via the addListener, whenever
+a new record is detected, the streaks are calculated again through parsing of the <code>CookedRecords</code> list and updated in
+real time in the achievement tab.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.7.2. Design Considerations</a></h4>
+<div class="sect5">
+<h6 id="aspect-how-streak-is-stored"><a class="link" href="#aspect-how-streak-is-stored">Aspect: How streak is stored</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Streak is calculated and updated via access to <code>UniqueRecordList</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to access <code>CookedRecord</code> list when there is direct access to <code>UniqueRecordList</code> and to update in real time</p>
+</li>
+<li>
+<p>Cons: There is more co-dependency among classes and there may be performance issues if <code>UniqueRecordList</code> is too large</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Streak has its own database and json file to keep track of streaks</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Lesser time is required to re-calculate streaks every time a cookedRecord is updated as streak can just be
+added and subtracted from its recorded data in the database</p>
+</li>
+<li>
+<p>Cons: A database section will be dedicated to just storing one number and without access to the <code>UniqueRecordsList</code>
+it is harder for Streak to be updated realtime when cookedRecord is updated.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="aspect-how-streak-is-calculated"><a class="link" href="#aspect-how-streak-is-calculated">Aspect: How streak is calculated</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Accumulative streaks is calculated based on whether there is a 1-day difference
+between 2 consecutive cooked recipes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to compute compared to implementing via a midnight deadline basis to calculate accumulative streaks</p>
+</li>
+<li>
+<p>Cons: Streaks are not necessarily accounted for within a 24-hour period</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Accumulative streaks is calculated based on a stricter within 24-hour new logged cooked recipes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The accountability is higher for users to actually accomplish their streaks by having to cook recipes within a
+24-hour period and not be able to go for more than a day without cooking new recipes without having their streaks
+jeopardised.</p>
+</li>
+<li>
+<p>Cons: It is easier for users to lose their streaks and more difficult for users to ascertain when is the deadline to
+maintain their streaks</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1243,7 +1454,7 @@ be updated in the particular instance of <code>Recipe r</code> and <code>Model#a
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2089,4 +2300,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 07:34:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:22:10 UTC</div></div></div></body></html>
